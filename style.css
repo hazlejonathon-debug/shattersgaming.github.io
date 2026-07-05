@@ -57,7 +57,7 @@ nav a:hover{
 .hero{
     min-height: 100vh;
     text-align:center;
-    padding:120px 20px;
+    padding:70px 20px;
     background:
             linear-gradient(135deg, rgba(0,0,0,.85), rgba(168,85,247,.15)),
         url("background.jpg");
@@ -78,20 +78,20 @@ nav a:hover{
 }
 
 .hero h1{
-    font-size:70px;
+    font-size:52px;
     color:#39ff14;
     text-shadow:0 0 20px #39ff14;
 }
 
 .hero p{
     margin-top:20px;
-    font-size:22px;
+    font-size:18px;
 }
 
 .button{
     display:inline-block;
     margin:15px;
-    padding:15px 35px;
+    padding:12px 28px;
     background:#39ff14;
     color:black;
     font-weight:bold;
@@ -106,7 +106,7 @@ nav a:hover{
 }
 
 section{
-    padding:80px 10%;
+    padding:60px 8%;
 }
 
 h2{
