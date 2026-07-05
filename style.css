@@ -15,12 +15,14 @@ body{
 }
 
 header{
-    background:#0b0b0b;
+   background:rgba(5,5,5,.92);
+    backdrop-filter:blur(10px);
     border-bottom:2px solid #39ff14;
-    padding:20px;
+    padding:18px 40px;
     position:sticky;
     top:0;
     z-index:1000;
+    box-shadow:0 0 15px rgba(57,255,20,.35); 
 }
 
 nav{
@@ -30,9 +32,13 @@ nav{
 }
 
 .logo{
-    font-size:28px;
-    font-weight:bold;
+ font-size:32px;
+    font-weight:900;
+    letter-spacing:2px;
     color:#39ff14;
+    text-shadow:
+        0 0 8px #39ff14,
+        0 0 20px #b026ff;   
 }
 
 nav ul{
@@ -45,13 +51,17 @@ nav li{
 }
 
 nav a{
-    text-decoration:none;
+text-decoration:none;
     color:white;
+    font-weight:600;
     transition:.3s;
+    padding:8px 12px;
+    border-radius:6px;
 }
 
 nav a:hover{
-    color:#39ff14;
+  color:#39ff14;
+    background:rgba(176,38,255,.15);   
 }
 
 .hero{
