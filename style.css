@@ -63,10 +63,10 @@ nav a:hover{
          background-size:cover;
          background-position:center;
          background-repeat:no-repeat;
-         animation:heroZoom20sease-in-outinfinitealternate;  
+         animation:heroZoom 20s ease-in-out infinitea lternate;  
 }    
 
-@keyframesheroZoom{
+@keyframes heroZoom {
     from{
         background-size:100%;
 }
@@ -78,7 +78,7 @@ to{
     color:#39ff14;
     text-shadow:0 0 20px #39ff14;
 }
-{
+
 .hero p{
     margin-top:20px;
     font-size:22px;
