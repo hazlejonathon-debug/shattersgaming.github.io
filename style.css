@@ -55,24 +55,26 @@ nav a:hover{
 }
 
 .hero{
-  text-align:center;
+    text-align:center;
     padding:120px 20px;
     background:
-        linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85));
-         url("background.jpg");
-         background-size:cover;
-         background-position:center;
-         background-repeat:no-repeat;
-         animation:heroZoom 20s ease-in-out infinitea lternate;  
-}    
+        linear-gradient(rgba(0,0,0,.75),rgba(0,0,0,.85)),
+        url("background.jpg");
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    animation: heroZoom 20s ease-in-out infinite alternate;
+}
 
 @keyframes heroZoom {
     from{
         background-size:100%;
+    }
+    to{
+        background-size:110%;
+    }
 }
-to{
-    background-size:110%;
-}
+
 .hero h1{
     font-size:70px;
     color:#39ff14;
