@@ -127,9 +127,9 @@ h2{
 }
 
 .card:hover{
-    border-color:#39ff14;
+    border-color:#b026ff;
     transform:translateY(-8px);
-    box-shadow:0 0 20px #39ff14;
+    box-shadow:0 0 20px #b026ff;
 }
 
 .socials{
