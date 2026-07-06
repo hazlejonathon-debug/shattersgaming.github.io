@@ -1,0 +1,6 @@
+const twitchAPI = "https://shattersgamingapi.hazlejonathon.workers.dev/";
+
+const twitchConfig = {
+    clientId: "b0iixvofqk109tpb1hn2wikkscgm29"
+};
+
