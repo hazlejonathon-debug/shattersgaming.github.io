@@ -583,3 +583,58 @@ nav a{
     box-shadow:
         0 0 30px rgba(176,38,255,.5);
 }
+/* ==========================
+   Coming Soon Modal
+========================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.8);
+}
+
+.modal-content{
+
+    background:#111;
+
+    width:90%;
+    max-width:500px;
+
+    margin:10% auto;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    border:2px solid #39ff14;
+
+    box-shadow:0 0 30px #b026ff;
+}
+
+.modal-content h2{
+    margin-bottom:20px;
+}
+
+.modal-content p{
+    margin:15px 0;
+    color:#ddd;
+    line-height:1.8;
+}
+
+.close{
+    float:right;
+    font-size:34px;
+    cursor:pointer;
+    color:#39ff14;
+}
+
+.close:hover{
+    color:#b026ff;
+}
