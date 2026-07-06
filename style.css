@@ -240,21 +240,28 @@ h2{
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:30px;
-    color:white;
+
     background:#111;
+    color:white;
+
     border:2px solid #39ff14;
     border-radius:50%;
+
+    text-decoration:none;
+    font-size:30px;
+
     transition:.35s;
 }
 
 .socials a:hover{
     background:#39ff14;
     color:black;
+
     transform:translateY(-8px) scale(1.1);
+
     box-shadow:0 0 20px #39ff14;
 }
-
+  
 footer{
     text-align:center;
     padding:30px;
