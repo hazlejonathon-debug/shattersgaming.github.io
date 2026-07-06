@@ -801,3 +801,23 @@ nav a{
     }
 
 }
+.stream-preview{
+
+    height:250px;
+    background:#050505;
+
+    border-radius:15px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#777;
+
+    margin:20px 0;
+
+    border:1px solid #333;
+
+    font-size:24px;
+
+}
