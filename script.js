@@ -79,7 +79,7 @@ sections.forEach(section=>observer.observe(section));
 // ===============================
 
 async function updateLiveStatus(){
-
+const twitchAPI = "https://shattersgamingapi.hazlejonathon.workers.dev/";
     try {
 
         const response = await fetch(twitchAPI);
