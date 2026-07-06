@@ -1,10 +1,12 @@
+// ===============================
+// Merchandise Popup
+// ===============================
+
 const modal = document.getElementById("comingSoonModal");
-
-const buttons = document.querySelectorAll(".notify-btn");
-
+const notifyButtons = document.querySelectorAll(".notify-btn");
 const closeBtn = document.querySelector(".close");
 
-buttons.forEach(button => {
+notifyButtons.forEach(button => {
 
     button.addEventListener("click", function(e){
 
@@ -31,3 +33,28 @@ window.addEventListener("click", function(e){
     }
 
 });
+
+
+// ===============================
+// Scroll Animations
+// ===============================
+
+const observer = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+const hiddenElements = document.querySelectorAll(".hidden");
+
+hiddenElements.forEach((el)=>observer.observe(el));
