@@ -391,7 +391,6 @@ nav a{
   text-align: center;
   overflow: hidden; 
 }
-}
 
 .contact h2 {
   margin-bottom: 10px;
@@ -413,7 +412,6 @@ nav a{
   align-items: stretch;
 }
 
-}
 /* base button */
 .btn {
   display: flex;
@@ -441,7 +439,11 @@ nav a{
   white-space: nowrap;
   overflow: hidden;
 }
-    
+.btn i {
+  font-size: 18px;
+ flex-shrink: 0;
+}
+
 }   
   display: flex;
   align-items: center;
@@ -469,11 +471,8 @@ nav a{
   overflow: hidden;
 }
 
-/* ICON SIZE */
-.btn i {
-  font-size: 18px;
- flex-shrink: 0;
-}
+
+
 
 /* 🔮 TWITCH */
 .twitch {
