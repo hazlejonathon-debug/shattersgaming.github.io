@@ -385,10 +385,12 @@ nav a{
     margin:15px 0;
 }
 .contact {
-  padding: 60px 20px;
+  padding: 70px 20px;
   background: #0a0a0a;
   color: white;
   text-align: center;
+  overflow: hidden; 
+}
 }
 
 .contact h2 {
@@ -402,22 +404,16 @@ nav a{
 
 .social-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 15px;
+
   max-width: 650px;
-  margin: 0 auto;
+  margin: 30px auto 0 auto;
+
+  align-items: stretch;
 }
 
 }
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  max-width: 650px;
-  margin: 0 auto;
- align-items: stretch;
-}
-
 /* base button */
 .btn {
   display: flex;
@@ -425,10 +421,10 @@ nav a{
   justify-content: center;
   gap: 10px;
 
-  padding: 14px 12px;
+  padding: 14px 10px;
   border-radius: 12px;
 
-  font-size: 14px;        /* fixes text size issue */
+  font-size: 14px;
   font-weight: 600;
 
   color: white;
@@ -437,16 +433,13 @@ nav a{
 
   text-decoration: none;
 
-  transition: 0.25s ease;
-
   box-sizing: border-box;
 
-  min-width: 0;           /* 🔥 critical fix */
+  min-width: 0;
+  width: 100%;
+
   white-space: nowrap;
   overflow: hidden;
-  .btn i {
-  font-size: 18px;
-  flex-shrink: 0;
 }
     
 }   
@@ -479,6 +472,7 @@ nav a{
 /* ICON SIZE */
 .btn i {
   font-size: 18px;
+ flex-shrink: 0;
 }
 
 /* 🔮 TWITCH */
