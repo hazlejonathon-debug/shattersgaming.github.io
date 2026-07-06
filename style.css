@@ -407,27 +407,28 @@ nav a{
   line-height: 1.6;
 }
 .social-links {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .social-links a {
-  display: inline-block;
-  padding: 12px 18px;
+  display: block !important;
+  width: 100%;
+  padding: 14px 10px;
   background: #111;
   border: 1px solid #222;
   border-radius: 10px;
   color: white;
   text-decoration: none;
-  min-width: 100px;
   text-align: center;
-  transition: 0.25s;
+  box-sizing: border-box;
+  position: relative !important;
+  float: none !important;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
 }
-
-.social-links a:hover {
-  border-color: #00ff66;
-  box-shadow: 0 0 12px rgba(0, 255, 100, 0.3);
-  transform: translateY(-2px);
 }
