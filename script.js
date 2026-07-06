@@ -34,10 +34,11 @@ window.addEventListener("click", function(e){
 
 });
 
-
 // ===============================
 // Scroll Animations
 // ===============================
+
+const sections = document.querySelectorAll("section");
 
 const observer = new IntersectionObserver((entries)=>{
 
@@ -45,16 +46,24 @@ const observer = new IntersectionObserver((entries)=>{
 
         if(entry.isIntersecting){
 
+            // Animate the section
             entry.target.classList.add("show");
+
+            // Animate each card
+            const cards = entry.target.querySelectorAll(".card");
+
+            cards.forEach(card=>{
+
+                card.classList.add("show");
+
+            });
 
         }
 
     });
 
 },{
-    threshold:0.2
+    threshold:.2
 });
 
-const hiddenElements = document.querySelectorAll(".hidden");
-
-hiddenElements.forEach((el)=>observer.observe(el));
+sections.forEach(section=>observer.observe(section));
