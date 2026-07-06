@@ -156,8 +156,13 @@ animation:titleGlow 3s ease-in-out infinite;
     border:2px solid transparent;  
 }
 
-.btn:hover {
-  transform: translateY(-3px);
+.button:hover{
+    background:#b026ff;
+    color:white;
+    box-shadow:
+        0 0 15px #b026ff,
+        0 0 30px #b026ff;
+    transform:translateY(-3px);
 }
 
     background:#b026ff;
@@ -275,10 +280,10 @@ h2{
 }
 
 .socials a[href*="tiktok.com"]:hover {
-  border-color: #fe2c55;
-  box-shadow: 0 0 10px rgba(254, 44, 85, 0.5);
+    border-color:#fe2c55;
+    box-shadow:0 0 10px rgba(254,44,85,.5);
+}
 
-  
 footer{
     text-align:center;
     padding:30px;
