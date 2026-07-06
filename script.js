@@ -74,3 +74,61 @@ const observer = new IntersectionObserver((entries)=>{
 });
 
 sections.forEach(section=>observer.observe(section));
+// ===============================
+// Twitch Live Stream Hub Connection
+// ===============================
+
+const twitchAPI = "https://shattersgamingapi.hazlejonathon.workers.dev/";
+
+async function updateLiveStatus(){
+
+    try {
+
+        const response = await fetch(twitchAPI);
+        const data = await response.json();
+
+        const liveCard = document.querySelector(".live-card");
+        const status = document.querySelector(".live-status p");
+        const title = document.querySelector(".live-card h3");
+        const game = document.querySelector(".game-playing");
+        const statBoxes = document.querySelectorAll(".stat-box p");
+
+        if(data.live){
+
+            liveCard.classList.add("live");
+
+            status.innerHTML = "🟢 LIVE NOW";
+
+            title.innerHTML = "Shatter is currently LIVE!";
+
+            game.innerHTML = "Playing: " + data.game;
+
+            statBoxes[0].innerHTML = data.game;
+            statBoxes[1].innerHTML = data.viewers;
+
+        } else {
+
+            liveCard.classList.remove("live");
+
+            status.innerHTML = "🔴 OFFLINE";
+
+            title.innerHTML = "Shatter is currently offline";
+
+            game.innerHTML = "Last played: Call of Duty";
+
+            statBoxes[0].innerHTML = "—";
+            statBoxes[1].innerHTML = "0";
+
+        }
+
+    } catch(error){
+
+        console.log("Twitch Connection Error:", error);
+
+    }
+
+}
+
+updateLiveStatus();
+
+setInterval(updateLiveStatus, 60000);
