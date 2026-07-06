@@ -186,27 +186,45 @@ h2{
 }
 
 .card{
-  background:rgba(20,20,20,.92);
+   background:
+        linear-gradient(
+            rgba(0,0,0,.75),
+            rgba(0,0,0,.85)
+        );
 
-    border:2px solid rgba(57,255,20,.25);
+    border:2px solid rgba(57,255,20,.2);
 
     border-radius:20px;
 
-    padding:30px;
+    overflow:hidden;
 
     transition:.35s;
 
-    backdrop-filter:blur(8px); 
+    min-height:280px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:30px;
+
 }
 
 .card:hover{
-   transform:translateY(-10px);
+   transform:
+        translateY(-10px)
+        scale(1.03);
 
     border-color:#b026ff;
 
     box-shadow:
-        0 0 20px #b026ff,
-        0 0 35px rgba(176,38,255,.4);  
+        0 0 25px #b026ff; 
 }
 
 .socials{
@@ -242,4 +260,40 @@ nav a{
 
     cursor:pointer;
 
+}
+/* Hero Stats */
+
+.hero-stats{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    margin-top:60px;
+    flex-wrap:wrap;
+}
+
+.stat{
+    width:220px;
+    padding:25px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(57,255,20,.25);
+    border-radius:18px;
+    backdrop-filter:blur(8px);
+    transition:.35s;
+}
+
+.stat:hover{
+    transform:translateY(-8px);
+    border-color:#b026ff;
+    box-shadow:
+        0 0 20px rgba(176,38,255,.5);
+}
+
+.stat h3{
+    color:#39ff14;
+    margin-bottom:10px;
+}
+
+.stat p{
+    color:#ddd;
+    font-size:16px;
 }
