@@ -702,3 +702,68 @@ nav a{
 .games .card:nth-child(2) { transition-delay: 0.2s; }
 .games .card:nth-child(3) { transition-delay: 0.3s; }
 .games .card:nth-child(4) { transition-delay: 0.4s; }
+.live-hub {
+    text-align: center;
+}
+
+.live-card {
+    background: #111;
+    border: 2px solid #b026ff;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 800px;
+    margin: auto;
+    box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
+}
+
+.live-status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.live-status .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: red;
+    box-shadow: 0 0 10px red;
+}
+
+.live-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.game-playing {
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.live-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.stat-box {
+    background: #1a1a1a;
+    padding: 15px;
+    border-radius: 10px;
+    width: 150px;
+    border: 1px solid #333;
+}
+
+.stat-box h4 {
+    font-size: 14px;
+    color: #b026ff;
+}
+
+.stat-box p {
+    font-size: 18px;
+    margin-top: 5px;
+}
