@@ -400,11 +400,14 @@ nav a{
   color: #00ff66;
 }
 
-.contact p {
-  max-width: 600px;
-  margin: 0 auto 25px auto;
-  opacity: 0.85;
-  line-height: 1.6;
+.social-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  max-width: 650px;
+  margin: 0 auto;
+}
+
 }
 .social-links {
   display: grid;
@@ -412,6 +415,7 @@ nav a{
   gap: 15px;
   max-width: 650px;
   margin: 0 auto;
+ align-items: stretch;
 }
 
 /* base button */
@@ -421,18 +425,55 @@ nav a{
   justify-content: center;
   gap: 10px;
 
-  padding: 14px 18px;
+  padding: 14px 12px;
   border-radius: 12px;
 
-  text-decoration: none;
+  font-size: 14px;        /* fixes text size issue */
   font-weight: 600;
-  font-size: 15px;
 
   color: white;
   background: #111;
   border: 1px solid #222;
 
+  text-decoration: none;
+
   transition: 0.25s ease;
+
+  box-sizing: border-box;
+
+  min-width: 0;           /* 🔥 critical fix */
+  white-space: nowrap;
+  overflow: hidden;
+  .btn i {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+    
+}   
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  padding: 14px 12px;
+  border-radius: 12px;
+
+  font-size: 14px;        
+  font-weight: 600;
+
+  color: white;
+  background: #111;
+  border: 1px solid #222;
+
+  text-decoration: none;
+
+  transition: 0.25s ease;
+
+  box-sizing: border-box;
+
+  min-width: 0;           
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* ICON SIZE */
