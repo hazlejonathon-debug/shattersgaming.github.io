@@ -228,40 +228,56 @@ h2{
         0 0 25px #b026ff; 
 }
 
-.socials{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-top:25px;
+.socials {
+  display: flex;
+  flex-wrap: wrap; 
+  gap: 15px;      
+  justify-content: center;
+  margin-top: 25px;
+  width: 100%;
 }
 
-.socials a{
-    width:65px;
-    height:65px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:#111;
-    color:white;
-
-    border:2px solid #39ff14;
-    border-radius:50%;
-
-    text-decoration:none;
-    font-size:30px;
-
-    transition:.35s;
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;       /* Spacing between the icon and the text */
+  padding: 12px 24px;
+  background-color: #111111;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  border: 1px solid #333333;
+  min-width: 130px; /* Ensures all buttons maintain a matching base size */
+  transition: all 0.2s ease-in-out;
 }
 
-.socials a:hover{
-    background:#39ff14;
-    color:black;
-
-    transform:translateY(-8px) scale(1.1);
-
-    box-shadow:0 0 20px #39ff14;
+/* 3. Adds the neon brand hover borders to match the rest of your site */
+.socials a:hover {
+  background-color: #1a1a1a;
+  transform: translateY(-2px); /* Subtle lift effect when hovered */
 }
+
+.socials a[href*="twitch.tv"]:hover {
+  border-color: #9146ff;
+  box-shadow: 0 0 10px rgba(145, 70, 255, 0.5);
+}
+
+.socials a[href*="youtube.com"]:hover {
+  border-color: #ff0000;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.socials a[href*="discord.gg"]:hover {
+  border-color: #5865f2;
+  box-shadow: 0 0 10px rgba(88, 101, 242, 0.5);
+}
+
+.socials a[href*="tiktok.com"]:hover {
+  border-color: #fe2c55;
+  box-shadow: 0 0 10px rgba(254, 44, 85, 0.5);
+
   
 footer{
     text-align:center;
