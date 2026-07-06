@@ -518,4 +518,68 @@ nav a{
   box-shadow: 0 0 20px rgba(255, 0, 80, 0.6);
   transform: translateY(-3px);
 }
+/* ==========================
+   Squad Cards V2
+========================== */
 
+.squad-card{
+    position:relative;
+    text-align:center;
+    overflow:hidden;
+}
+
+.squad-card img{
+    width:150px;
+    height:150px;
+    border-radius:50%;
+    object-fit:cover;
+    border:4px solid #39ff14;
+    margin:20px auto;
+    transition:.35s;
+    box-shadow:0 0 20px rgba(57,255,20,.45);
+}
+
+.squad-card:hover img{
+    transform:scale(1.08);
+    border-color:#b026ff;
+    box-shadow:0 0 30px #b026ff;
+}
+
+.role{
+    display:inline-block;
+    padding:6px 14px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:bold;
+    letter-spacing:1px;
+    margin-bottom:15px;
+}
+
+.founder{
+    background:#39ff14;
+    color:black;
+}
+
+.member{
+    background:#b026ff;
+    color:white;
+}
+
+.games-played{
+    color:#39ff14;
+    font-weight:bold;
+    margin:15px 0;
+    line-height:1.6;
+}
+
+.bio{
+    color:#ccc;
+    line-height:1.7;
+    font-size:15px;
+}
+
+.squad-card:hover{
+    transform:translateY(-10px);
+    box-shadow:
+        0 0 30px rgba(176,38,255,.5);
+}
