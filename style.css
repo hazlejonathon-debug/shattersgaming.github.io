@@ -638,3 +638,17 @@ nav a{
 .close:hover{
     color:#b026ff;
 }
+/* ==========================
+   Scroll Animations
+========================== */
+
+.hidden{
+    opacity:0;
+    transform:translateY(60px);
+    transition:all .8s ease;
+}
+
+.show{
+    opacity:1;
+    transform:translateY(0);
+}
