@@ -156,8 +156,9 @@ animation:titleGlow 3s ease-in-out infinite;
     border:2px solid transparent;  
 }
 
-.button:hover{
-  transform:translateY(-4px);
+.btn:hover {
+  transform: translateY(-3px);
+}
 
     background:#b026ff;
 
@@ -403,13 +404,11 @@ nav a{
 
 .social-links {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 15px;
 
   max-width: 650px;
   margin: 30px auto 0 auto;
-
-  align-items: stretch;
 }
 
 /* base button */
@@ -417,33 +416,29 @@ nav a{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
 
-  padding: 14px 10px;
+  padding: 16px;
   border-radius: 12px;
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
+
+  text-decoration: none;
 
   color: white;
   background: #111;
   border: 1px solid #222;
 
-  text-decoration: none;
+  transition: 0.25s ease;
 
-  box-sizing: border-box;
-
-  min-width: 0;
   width: 100%;
-
-  white-space: nowrap;
-  overflow: hidden;
+    
 }
 .btn i {
   font-size: 18px;
  flex-shrink: 0;
 
-}   
+   
   display: flex;
   align-items: center;
   justify-content: center;
@@ -471,16 +466,9 @@ nav a{
 }
 
 
-
-
-/* 🔮 TWITCH */
-.twitch {
-  border-color: #9146FF;
-}
-.twitch:hover {
-  box-shadow: 0 0 18px #9146FF;
-  transform: translateY(-3px);
-}
+/* Twitch */
+.twitch { border-color: #9146FF; }
+.twitch:hover { box-shadow: 0 0 18px #9146FF; }
 
 /* 🔴 YOUTUBE */
 .youtube {
@@ -509,3 +497,4 @@ nav a{
   box-shadow: 0 0 20px rgba(255, 0, 80, 0.6);
   transform: translateY(-3px);
 }
+
