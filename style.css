@@ -65,17 +65,25 @@ nav a:hover{
 }
 
 .hero{
-    min-height: 100vh;
+ min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    padding:70px 20px;
+    padding:80px 20px;
+
     background:
-            linear-gradient(135deg, rgba(0,0,0,.85), rgba(168,85,247,.15)),
+        linear-gradient(
+            rgba(0,0,0,.75),
+            rgba(0,0,0,.90)
+        ),
         url("background.jpg");
+
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
-    background-attachment: fixed;
-    animation: heroZoom 20s ease-in-out infinite alternate;
+ 
 }
 
 @keyframes heroZoom {
@@ -88,31 +96,61 @@ nav a:hover{
 }
 
 .hero h1{
-    font-size:52px;
+ font-size:72px;
+    font-weight:900;
+    letter-spacing:4px;
+
     color:#39ff14;
-    text-shadow:0 0 20px #39ff14;
+
+    text-shadow:
+        0 0 10px #39ff14,
+        0 0 25px #39ff14,
+        0 0 40px #b026ff;
+
+    margin-top:25px;   
 }
 
 .hero p{
-    margin-top:20px;
-    font-size:18px;
+  margin-top:20px;
+    font-size:22px;
+    max-width:750px;
+    line-height:1.8;
+    color:#ddd;    
 }
 
 .button{
-    display:inline-block;
-    margin:15px;
-    padding:12px 28px;
+  display:inline-block;
+
+    margin:18px 10px;
+
+    padding:15px 40px;
+
     background:#39ff14;
+
     color:black;
+
     font-weight:bold;
+
     text-decoration:none;
-    border-radius:8px;
-    transition:.3s;
+
+    border-radius:50px;
+
+    transition:.35s;
+
+    border:2px solid transparent;  
 }
 
 .button:hover{
-    transform:scale(1.08);
-    box-shadow:0 0 25px #b026ff;
+  transform:translateY(-4px);
+
+    background:#b026ff;
+
+    color:white;
+
+    box-shadow:
+        0 0 15px #b026ff,
+        0 0 30px #b026ff;
+  
 }
 
 section{
@@ -131,17 +169,27 @@ h2{
 }
 
 .card{
-    background:#111;
-    padding:25px;
-    border:2px solid #222;
-    border-radius:15px;
-    transition:.3s;
+  background:rgba(20,20,20,.92);
+
+    border:2px solid rgba(57,255,20,.25);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    transition:.35s;
+
+    backdrop-filter:blur(8px); 
 }
 
 .card:hover{
+   transform:translateY(-10px);
+
     border-color:#b026ff;
-    transform:translateY(-8px);
-    box-shadow:0 0 20px #b026ff;
+
+    box-shadow:
+        0 0 20px #b026ff,
+        0 0 35px rgba(176,38,255,.4);  
 }
 
 .socials{
