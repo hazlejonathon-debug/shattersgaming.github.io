@@ -230,22 +230,29 @@ h2{
 .socials{
     display:flex;
     justify-content:center;
-    flex-wrap:wrap;
-    gap:15px;
+    gap:25px;
+    margin-top:25px;
 }
 
 .socials a{
-    background:#111;
+    width:65px;
+    height:65px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:30px;
     color:white;
-    padding:15px 30px;
-    border-radius:10px;
-    text-decoration:none;
-    transition:.3s;
+    background:#111;
+    border:2px solid #39ff14;
+    border-radius:50%;
+    transition:.35s;
 }
 
 .socials a:hover{
     background:#39ff14;
     color:black;
+    transform:translateY(-8px) scale(1.1);
+    box-shadow:0 0 20px #39ff14;
 }
 
 footer{
