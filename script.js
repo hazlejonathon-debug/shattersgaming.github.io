@@ -78,8 +78,6 @@ sections.forEach(section=>observer.observe(section));
 // Twitch Live Stream Hub Connection
 // ===============================
 
-const twitchAPI = "https://shattersgamingapi.hazlejonathon.workers.dev/";
-
 async function updateLiveStatus(){
 
     try {
