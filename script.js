@@ -12,17 +12,21 @@ notifyButtons.forEach(button => {
 
         e.preventDefault();
 
-        modal.style.display = "block";
+        if(modal){
+            modal.style.display = "block";
+        }
 
     });
 
 });
 
-closeBtn.addEventListener("click", function(){
+if(closeBtn){
+    closeBtn.addEventListener("click", function(){
 
-    modal.style.display = "none";
+        modal.style.display = "none";
 
-});
+    });
+}
 
 window.addEventListener("click", function(e){
 
@@ -33,6 +37,9 @@ window.addEventListener("click", function(e){
     }
 
 });
+
+
+
 
 // ===============================
 // Scroll Animations
@@ -67,16 +74,3 @@ const observer = new IntersectionObserver((entries)=>{
 });
 
 sections.forEach(section=>observer.observe(section));
-const cards = document.querySelectorAll('.card');
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('show');
-        }
-    });
-});
-
-cards.forEach(card => {
-    observer.observe(card);
-});
