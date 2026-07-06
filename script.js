@@ -1,21 +1,33 @@
-console.log("Welcome to Shatter's Gaming!");
+const modal = document.getElementById("comingSoonModal");
 
-const buttons = document.querySelectorAll(".button");
+const buttons = document.querySelectorAll(".notify-btn");
 
-buttons.forEach(button=>{
-    button.addEventListener("mouseenter",()=>{
-        button.style.boxShadow="0 0 25px #39ff14";
+const closeBtn = document.querySelector(".close");
+
+buttons.forEach(button => {
+
+    button.addEventListener("click", function(e){
+
+        e.preventDefault();
+
+        modal.style.display = "block";
+
     });
 
-    button.addEventListener("mouseleave",()=>{
-        button.style.boxShadow="none";
-    });
 });
 
-window.addEventListener("scroll",()=>{
+closeBtn.addEventListener("click", function(){
 
-    const hero=document.querySelector(".hero");
+    modal.style.display = "none";
 
-    hero.style.backgroundPositionY=window.scrollY*0.3+"px";
+});
+
+window.addEventListener("click", function(e){
+
+    if(e.target === modal){
+
+        modal.style.display = "none";
+
+    }
 
 });
