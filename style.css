@@ -1,229 +1,150 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    background:#050505;
-    color:white;
-}
-
-header{
-   background:rgba(5,5,5,.92);
-    backdrop-filter:blur(10px);
-    border-bottom:2px solid #39ff14;
-    padding:18px 40px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-    box-shadow:0 0 15px rgba(57,255,20,.35); 
-}
-
-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
- font-size:32px;
-    font-weight:900;
-    letter-spacing:2px;
-    color:#39ff14;
-    text-shadow:
-        0 0 8px #39ff14,
-        0 0 20px #b026ff;   
-}
-
-nav ul{
-    display:flex;
-    list-style:none;
-}
-
-nav li{
-    margin-left:30px;
-}
-
-nav a{
-text-decoration:none;
-    color:white;
-    font-weight:600;
-    transition:.3s;
-    padding:8px 12px;
-    border-radius:6px;
-}
-
-nav a:hover{
-  color:#39ff14;
-    background:rgba(176,38,255,.15);   
-}
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:80px 20px;
-
-    position:relative;
-    overflow:hidden;
-
-    background:
-        linear-gradient(
-            90deg,
-            rgba(0,0,0,.85),
-            rgba(0,0,0,.65),
-            rgba(0,0,0,.85)
-        ),
-        url("background.jpg");
-
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    box-shadow:
-        inset 0 0 120px black;
-}
-@keyframes titleGlow {
-
-    0%{
-        text-shadow:
-        0 0 10px #39ff14,
-        0 0 25px #39ff14,
-        0 0 40px #b026ff;
-    }
-
-    50%{
-        text-shadow:
-        0 0 20px #39ff14,
-        0 0 35px #39ff14,
-        0 0 60px #b026ff;
-    }
-
-    100%{
-        text-shadow:
-        0 0 10px #39ff14,
-        0 0 25px #39ff14,
-        0 0 40px #b026ff;
-    }
-
-}
-
-.hero h1{
-    font-size:72px;
-    font-weight:900;
-    letter-spacing:4px;
-
-    animation:
-        titleGlow 3s ease-in-out infinite,
-        heroEnter 1s ease forwards;
-}
-.hero > *{
-    animation:
-    titleGlow 3s ease-in-out infinite,
-    heroEnter 1s ease forwards;
-}
+/* ==========================
+   GLOBAL SETTINGS
+========================== */
+/* ==========================
+   HEADER & NAVIGATION
+========================== */
+/* ==========================
+   HERO SECTION
+========================== */
+/* ==========================
+   HERO ANIMATIONS
+========================== */
+/* ==========================
+   BUTTONS
+========================== */
 
 
-@keyframes heroEnter{
-
-    from{
-        opacity:0;
-        transform:translateY(35px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-
-}
-
-.hero p{
-  margin-top:20px;
-    font-size:22px;
-    max-width:750px;
-    line-height:1.8;
-    color:#ddd;    
-}
-
-.button{
-    display:inline-block;
-    padding:15px 38px;
-    margin:18px 10px;
-
-    background:#39ff14;
-    color:#000;
-
-    font-size:16px;
-    font-weight:700;
-
-    text-decoration:none;
-
-    border:none;
-    border-radius:50px;
-
-    cursor:pointer;
-
-    transition:all .3s ease;
-
-    box-shadow:
-        0 0 10px rgba(57,255,20,.25);
-}
-
-.button:hover{
-
-    background:#b026ff;
-    color:#fff;
-
-    transform:
-        translateY(-4px)
-        scale(1.04);
-
-    box-shadow:
-        0 0 15px #b026ff,
-        0 0 35px rgba(176,38,255,.6);
-
-}
-
-.button:active{
-
-    transform:scale(.97);
-
-}
+/* ==========================
+   SECTIONS
+========================== */
 
 section{
+
     padding:70px 8%;
-    transition:.4s;
+
 }
+
 
 h2{
+
     color:#39ff14;
+
     margin-bottom:30px;
+
+    font-size:36px;
+
+    text-align:center;
+
 }
 
-.games{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+/* ==========================
+   HERO STATS
+========================== */
+
+
+.hero-stats{
+
+    display:flex;
+
+    justify-content:center;
+
     gap:25px;
+
+    margin-top:60px;
+
+    flex-wrap:wrap;
+
 }
+
+
+.stat{
+
+    width:220px;
+
+    padding:25px;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(57,255,20,.25);
+
+    border-radius:18px;
+
+    backdrop-filter:blur(8px);
+
+    transition:.35s;
+
+}
+
+
+.stat:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#b026ff;
+
+    box-shadow:
+
+        0 0 20px rgba(176,38,255,.5);
+
+}
+
+
+.stat h3{
+
+    color:#39ff14;
+
+    margin-bottom:10px;
+
+}
+
+
+.stat p{
+
+    color:#ddd;
+
+    font-size:16px;
+
+}
+
+
+/* ==========================
+   GAME GRID
+========================== */
+
+
+.games{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+/* ==========================
+   CARDS
+========================== */
+
 
 .card{
 
     background:
+
         linear-gradient(
+
             180deg,
+
             rgba(20,20,20,.95),
+
             rgba(10,10,10,.95)
+
         );
+
 
     border:2px solid rgba(57,255,20,.15);
 
@@ -235,148 +156,76 @@ h2{
 
     text-align:center;
 
-    transition:all .35s ease;
-
-    box-shadow:
-        0 10px 25px rgba(0,0,0,.35);
-
     display:flex;
+
     flex-direction:column;
-    justify-content:center;
+
     align-items:center;
 
+
+    transition:
+
+        opacity .7s ease,
+
+        transform .35s ease,
+
+        box-shadow .35s ease;
+
+
+    box-shadow:
+
+        0 10px 25px rgba(0,0,0,.35);
+
 }
+
+
 
 .card:hover{
 
-    transform:
-        translateY(-10px)
-        scale(1.03);
+    transform:translateY(-10px) scale(1.03);
+
 
     border-color:#b026ff;
 
+
     box-shadow:
-        0 0 20px rgba(176,38,255,.5),
-        0 15px 35px rgba(0,0,0,.45);
+
+        0 0 25px rgba(176,38,255,.5);
 
 }
 
-.socials {
-  display: flex;
-  flex-wrap: wrap; 
-  gap: 15px;      
-  justify-content: center;
-  margin-top: 25px;
-  width: 100%;
-}
 
-.socials a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;       /* Spacing between the icon and the text */
-  padding: 12px 24px;
-  background-color: #111111;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 6px;
-  border: 1px solid #333333;
-  min-width: 130px; /* Ensures all buttons maintain a matching base size */
-  transition: all 0.2s ease-in-out;
-}
 
-/* 3. Adds the neon brand hover borders to match the rest of your site */
-.socials a:hover {
-  background-color: #1a1a1a;
-  transform: translateY(-2px); /* Subtle lift effect when hovered */
-}
+/* ==========================
+   CARD IMAGES
+========================== */
 
-.socials a[href*="twitch.tv"]:hover {
-  border-color: #9146ff;
-  box-shadow: 0 0 10px rgba(145, 70, 255, 0.5);
-}
 
-.socials a[href*="youtube.com"]:hover {
-  border-color: #ff0000;
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-}
-
-.socials a[href*="discord.gg"]:hover {
-  border-color: #5865f2;
-  box-shadow: 0 0 10px rgba(88, 101, 242, 0.5);
-}
-
-.socials a[href*="tiktok.com"]:hover {
-    border-color:#fe2c55;
-    box-shadow:0 0 10px rgba(254,44,85,.5);
-}
-
-footer{
-    text-align:center;
-    padding:30px;
-    border-top:2px solid #39ff14;
-    margin-top:40px;
-}
-.button,
-.card,
-nav a{
-
-    cursor:pointer;
-
-}
-/* Hero Stats */
-
-.hero-stats{
-    display:flex;
-    justify-content:center;
-    gap:25px;
-    margin-top:60px;
-    flex-wrap:wrap;
-}
-
-.stat{
-    width:220px;
-    padding:25px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(57,255,20,.25);
-    border-radius:18px;
-    backdrop-filter:blur(8px);
-    transition:.35s;
-}
-
-.stat:hover{
-    transform:translateY(-8px);
-    border-color:#b026ff;
-    box-shadow:
-        0 0 20px rgba(176,38,255,.5);
-}
-
-.stat h3{
-    color:#39ff14;
-    margin-bottom:10px;
-}
-
-.stat p{
-    color:#ddd;
-    font-size:16px;
-}
 .card img{
 
     width:100%;
+
     height:180px;
+
     object-fit:cover;
-    border-radius:10px;
+
+    border-radius:12px;
+
     margin-bottom:15px;
-    transition:.35s ease;
+
+    transition:.35s;
 
 }
+
 
 .card:hover img{
 
     transform:scale(1.05);
 
 }
+
+
+
 .card h3{
 
     color:#39ff14;
@@ -387,6 +236,8 @@ nav a{
 
 }
 
+
+
 .card p{
 
     color:#d6d6d6;
@@ -394,546 +245,1199 @@ nav a{
     line-height:1.7;
 
 }
-/* ---------- Squad Cards ---------- */
 
-.squad-card{
-    text-align:center;
-}
 
-.squad-card img{
-    width:140px;
-    height:140px;
-    object-fit:cover;
-    border-radius:50%;
-    border:3px solid #39ff14;
-    margin-bottom:20px;
-    transition:.35s;
-}
 
-.squad-card:hover img{
-    border-color:#b026ff;
-    transform:scale(1.08);
-}
-
-.squad-card h4{
-    color:#39ff14;
-    margin:10px 0;
-}
-
-.quote{
-    display:block;
-    margin-top:20px;
-    color:#b026ff;
-    font-style:italic;
-}
 /* ==========================
-   Merchandise
+   SQUAD CARDS
 ========================== */
 
-.merch-intro{
-    text-align:center;
-    color:#ddd;
-    font-size:18px;
-    margin-bottom:40px;
-}
-
-.merch-card{
-    text-align:center;
-}
-
-.merch-card img{
-    width:100%;
-    height:220px;
-    object-fit:cover;
-    border-radius:12px;
-    margin-bottom:20px;
-    transition:.3s;
-}
-
-.merch-card:hover img{
-    transform:scale(1.05);
-}
-
-.price{
-    color:#b026ff;
-    font-size:22px;
-    font-weight:bold;
-    margin:15px 0;
-}
-.contact {
-  padding: 70px 20px;
-  background: #0a0a0a;
-  color: white;
-  text-align: center;
-  overflow: hidden; 
-}
-
-.contact h2 {
-  margin-bottom: 10px;
-}
-
-.contact h3 {
-  margin-bottom: 10px;
-  color: #00ff66;
-}
-
-.social-links {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-
-  max-width: 650px;
-  margin: 30px auto 0 auto;
-}
-
-/* base button */
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 16px;
-  border-radius: 12px;
-
-  font-size: 16px;
-  font-weight: 700;
-
-  text-decoration: none;
-
-  color: white;
-  background: #111;
-  border: 1px solid #222;
-
-  transition: 0.25s ease;
-
-  width: 100%;
-    
-}
-
-.btn i {
-
-    font-size:18px;
-    flex-shrink:0;
-
-}
-
-
-/* Twitch */
-.twitch { border-color: #9146FF; }
-.twitch:hover { box-shadow: 0 0 18px #9146FF; }
-
-/* 🔴 YOUTUBE */
-.youtube {
-  border-color: #FF0000;
-}
-.youtube:hover {
-  box-shadow: 0 0 18px #FF0000;
-  transform: translateY(-3px);
-}
-
-/* 🔵 DISCORD */
-.discord {
-  border-color: #5865F2;
-}
-.discord:hover {
-  box-shadow: 0 0 18px #5865F2;
-  transform: translateY(-3px);
-}
-
-/* 🎵 TIKTOK (gradient + glow) */
-.tiktok {
-  border: none;
-  background: linear-gradient(90deg, #00f2ea, #ff0050);
-}
-.tiktok:hover {
-  box-shadow: 0 0 20px rgba(255, 0, 80, 0.6);
-  transform: translateY(-3px);
-}
-/* ==========================
-   Squad Cards V2
-========================== */
 
 .squad-card{
+
     position:relative;
+
     text-align:center;
-    overflow:hidden;
+
 }
+
 
 .squad-card img{
+
     width:150px;
+
     height:150px;
+
     border-radius:50%;
+
     object-fit:cover;
+
     border:4px solid #39ff14;
+
     margin:20px auto;
-    transition:.35s;
-    box-shadow:0 0 20px rgba(57,255,20,.45);
+
+    box-shadow:
+
+        0 0 20px rgba(57,255,20,.45);
+
 }
 
+
+
 .squad-card:hover img{
-    transform:scale(1.08);
+
     border-color:#b026ff;
-    box-shadow:0 0 30px #b026ff;
+
+    transform:scale(1.08);
+
 }
+
+
 
 .role{
+
     display:inline-block;
+
     padding:6px 14px;
+
     border-radius:30px;
+
     font-size:12px;
+
     font-weight:bold;
+
     letter-spacing:1px;
-    margin-bottom:15px;
+
 }
+
 
 .founder{
+
     background:#39ff14;
+
     color:black;
+
 }
+
 
 .member{
+
     background:#b026ff;
+
     color:white;
+
 }
+
+
+.cofounder{
+
+    background:#b026ff;
+
+    color:white;
+
+}
+
+
 
 .games-played{
+
     color:#39ff14;
+
     font-weight:bold;
+
     margin:15px 0;
-    line-height:1.6;
-}
-.cofounder{
-    background:#b026ff;
-    color:white;
-    box-shadow:0 0 15px #b026ff;
-}
-.bio{
-    color:#ccc;
-    line-height:1.7;
-    font-size:15px;
+
 }
 
-.squad-card:hover{
-    transform:translateY(-10px);
-    box-shadow:
-        0 0 30px rgba(176,38,255,.5);
+
+.bio{
+
+    color:#ccc;
+
+    line-height:1.7;
+
+    font-size:15px;
+
 }
 /* ==========================
-   Coming Soon Modal
+   MERCHANDISE SECTION
 ========================== */
 
-.modal{
-    display:none;
-    position:fixed;
-    z-index:9999;
-    left:0;
-    top:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,.8);
+
+.merch-intro{
+
+    text-align:center;
+
+    color:#ddd;
+
+    font-size:18px;
+
+    margin-bottom:40px;
+
 }
+
+
+
+.merch-card{
+
+    text-align:center;
+
+}
+
+
+
+.merch-card img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+    transition:.35s;
+
+}
+
+
+
+.merch-card:hover img{
+
+    transform:scale(1.05);
+
+}
+
+
+
+.price{
+
+    color:#b026ff;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    margin:15px 0;
+
+}
+
+
+/* ==========================
+   COMMUNITY SECTION
+========================== */
+
+
+#community{
+
+    text-align:center;
+
+}
+
+
+#community .card{
+
+    max-width:800px;
+
+    margin:auto;
+
+}
+
+
+
+#community h3{
+
+    color:#39ff14;
+
+    font-size:28px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/* ==========================
+   LIVE STREAM SECTION
+========================== */
+
+
+#live{
+
+    text-align:center;
+
+}
+
+
+
+.live-card{
+
+    background:#111;
+
+    border:2px solid #b026ff;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    max-width:800px;
+
+    margin:auto;
+
+
+    box-shadow:
+
+        0 0 25px rgba(176,38,255,.3);
+
+}
+
+
+
+.live-card img{
+
+    width:140px;
+
+    height:140px;
+
+    border-radius:50%;
+
+    border:3px solid #39ff14;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.live-status{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.live-status .dot{
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:red;
+
+    animation:pulse 1.5s infinite;
+
+}
+
+
+
+@keyframes pulse{
+
+    0%{
+
+        box-shadow:0 0 5px red;
+
+    }
+
+
+    50%{
+
+        box-shadow:0 0 20px red;
+
+    }
+
+
+    100%{
+
+        box-shadow:0 0 5px red;
+
+    }
+
+}
+
+
+
+/* ==========================
+   CONTACT & SOCIAL BUTTONS
+========================== */
+
+
+.socials{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin-top:25px;
+
+}
+
+
+
+.socials a{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+
+    padding:12px 25px;
+
+
+    background:#111;
+
+    color:white;
+
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+
+    border-radius:8px;
+
+    border:1px solid #333;
+
+
+    transition:.3s;
+
+}
+
+
+
+.socials a:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+.socials a[href*="twitch"]:hover{
+
+    border-color:#9146ff;
+
+    box-shadow:0 0 15px #9146ff;
+
+}
+
+
+
+.socials a[href*="youtube"]:hover{
+
+    border-color:red;
+
+    box-shadow:0 0 15px red;
+
+}
+
+
+
+.socials a[href*="discord"]:hover{
+
+    border-color:#5865f2;
+
+    box-shadow:0 0 15px #5865f2;
+
+}
+
+
+
+.socials a[href*="tiktok"]:hover{
+
+    border-color:#fe2c55;
+
+    box-shadow:0 0 15px #fe2c55;
+
+}
+
+
+
+/* ==========================
+   FOOTER
+========================== */
+
+
+footer{
+
+    text-align:center;
+
+    padding:40px 20px;
+
+    margin-top:50px;
+
+    border-top:2px solid #39ff14;
+
+}
+
+
+
+footer h2{
+
+    color:#39ff14;
+
+    margin-bottom:15px;
+
+}
+
+
+
+footer p{
+
+    color:#aaa;
+
+}
+/* ==========================
+   SCROLL ANIMATIONS
+========================== */
+
+
+.hidden{
+
+    opacity:0;
+
+    transform:translateY(60px);
+
+    transition:
+
+        opacity .7s ease,
+
+        transform .7s ease;
+
+}
+
+
+.hidden.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+/* ==========================
+   CARD STAGGER ANIMATION
+========================== */
+
+
+.card{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+}
+
+
+.card.show{
+
+    opacity:1;
+
+    transform:translateY(0);
+
+}
+
+
+
+.games .card:nth-child(1){
+
+    transition-delay:.1s;
+
+}
+
+
+.games .card:nth-child(2){
+
+    transition-delay:.2s;
+
+}
+
+
+.games .card:nth-child(3){
+
+    transition-delay:.3s;
+
+}
+
+
+.games .card:nth-child(4){
+
+    transition-delay:.4s;
+
+}
+
+
+
+/* ==========================
+   MERCH POPUP MODAL
+========================== */
+
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    z-index:9999;
+
+    left:0;
+
+    top:0;
+
+    width:100%;
+
+    height:100%;
+
+
+    background:rgba(0,0,0,.8);
+
+}
+
+
 
 .modal-content{
 
     background:#111;
 
+
     width:90%;
+
     max-width:500px;
+
 
     margin:10% auto;
 
+
     padding:35px;
+
 
     border-radius:20px;
 
+
     text-align:center;
+
 
     border:2px solid #39ff14;
 
-    box-shadow:0 0 30px #b026ff;
-}
-
-.modal-content h2{
-    margin-bottom:20px;
-}
-
-.modal-content p{
-    margin:15px 0;
-    color:#ddd;
-    line-height:1.8;
-}
-
-.close{
-    float:right;
-    font-size:34px;
-    cursor:pointer;
-    color:#39ff14;
-}
-
-.close:hover{
-    color:#b026ff;
-}
-/* ==========================
-   Scroll Animations
-========================== */
-
-.hidden{
-    opacity:0;
-    transform:translateY(60px);
-}
-
-.show{
-    opacity:1;
-    transform:translateY(0);
-}
-/* ==========================
-   Card Stagger Animation
-========================== */
-
-.card{
-    opacity:0;
-    transform:translateY(40px);
-    transition:
-        opacity .7s ease,
-        transform .7s ease;
-}
-
-.card.show{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* Delay each card */
-
-.games .card:nth-child(1){
-    transition-delay:.1s;
-}
-
-.games .card:nth-child(2){
-    transition-delay:.25s;
-}
-
-.games .card:nth-child(3){
-    transition-delay:.4s;
-}
-
-.games .card:nth-child(4){
-    transition-delay:.55s;
-}
-.card {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.6s ease;
-}
-
-.card.show {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* delay per card */
-.games .card:nth-child(1) { transition-delay: 0.1s; }
-.games .card:nth-child(2) { transition-delay: 0.2s; }
-.games .card:nth-child(3) { transition-delay: 0.3s; }
-.games .card:nth-child(4) { transition-delay: 0.4s; }
-.live-hub {
-    text-align: center;
-}
-
-.live-card {
-    background: #111;
-    border: 2px solid #b026ff;
-    border-radius: 15px;
-    padding: 30px;
-    max-width: 800px;
-    margin: auto;
-    box-shadow: 0 0 20px rgba(176, 38, 255, 0.3);
-}
-
-.live-status {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-}
-
-.live-status .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: red;
-    box-shadow: 0 0 10px red;
-}
-
-.live-card h3 {
-    font-size: 24px;
-    margin-bottom: 10px;
-}
-
-.game-playing {
-    color: #aaa;
-    margin-bottom: 20px;
-}
-
-.live-stats {
-    display: flex;
-    justify-content: space-around;
-    margin: 20px 0;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.stat-box {
-    background: #1a1a1a;
-    padding: 15px;
-    border-radius: 10px;
-    width: 150px;
-    border: 1px solid #333;
-}
-
-.stat-box h4 {
-    font-size: 14px;
-    color: #b026ff;
-}
-
-.stat-box p {
-    font-size: 18px;
-    margin-top: 5px;
-}
-.games .card:nth-child(1){
-    transition-delay:.1s;
-}
-
-.games .card:nth-child(2){
-    transition-delay:.2s;
-}
-
-.games .card:nth-child(3){
-    transition-delay:.3s;
-}
-
-.games .card:nth-child(4){
-    transition-delay:.4s;
-}
-.live-status .dot {
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-
-    0% {
-        box-shadow:0 0 5px red;
-    }
-
-    50% {
-        box-shadow:0 0 20px red;
-    }
-
-    100% {
-        box-shadow:0 0 5px red;
-    }
-
-}
-.stream-preview{
-
-    height:250px;
-    background:#050505;
-
-    border-radius:15px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    color:#777;
-
-    margin:20px 0;
-
-    border:1px solid #333;
-
-    font-size:24px;
-
-}
-.live-card.live{
-
-    border-color:#00ff66;
 
     box-shadow:
-    0 0 25px #00ff66;
+
+        0 0 30px #b026ff;
 
 }
-.live-status .dot {
-    animation: pulse 1.5s infinite;
+
+
+
+.modal-content h2{
+
+    color:#39ff14;
+
+}
+
+
+
+.modal-content p{
+
+    color:#ddd;
+
+    line-height:1.8;
+
+    margin:15px 0;
+
 }
 
 
 
-    0% {
-        box-shadow:0 0 5px red;
-    }
+.close{
 
-    50% {
-        box-shadow:0 0 20px red;
-    }
+    float:right;
 
-    100% {
-        box-shadow:0 0 5px red;
-    }
+    font-size:34px;
+
+    cursor:pointer;
+
+    color:#39ff14;
 
 }
+
+
+
+.close:hover{
+
+    color:#b026ff;
+
+}
+
+
+
 /* ==========================
-   Back To Top Button
+   BACK TO TOP BUTTON
 ========================== */
+
 
 #backToTop{
 
     position:fixed;
 
+
     bottom:30px;
+
     right:30px;
 
+
     width:50px;
+
     height:50px;
 
+
     border:none;
+
     border-radius:50%;
 
+
     background:#39ff14;
-    color:#000;
+
+    color:black;
+
 
     font-size:22px;
 
+
     cursor:pointer;
+
 
     display:none;
 
+
     z-index:9999;
 
+
     box-shadow:
+
         0 0 15px rgba(57,255,20,.6);
+
 
     transition:.3s;
 
 }
 
 
+
 #backToTop:hover{
 
     background:#b026ff;
+
     color:white;
+
 
     transform:translateY(-5px);
 
+
     box-shadow:
+
         0 0 20px #b026ff;
 
 }
-.hidden{
-    opacity:1 !important;
-    transform:none !important;
+
+
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+
+
+@media(max-width:900px){
+
+
+    header{
+
+        padding:15px 20px;
+
+    }
+
+
+
+    nav{
+
+        flex-direction:column;
+
+        gap:20px;
+
+    }
+
+
+
+    nav ul{
+
+        flex-wrap:wrap;
+
+        justify-content:center;
+
+        gap:10px;
+
+    }
+
+
+
+    nav li{
+
+        margin-left:0;
+
+    }
+
+
+
+    .logo{
+
+        font-size:26px;
+
+    }
+
+
+
+    .hero h1{
+
+        font-size:45px;
+
+    }
+
+
+
+    .hero p{
+
+        font-size:18px;
+
+    }
+
+
 }
+
+
+
+@media(max-width:600px){
+
+
+    section{
+
+        padding:50px 5%;
+
+    }
+
+
+
+    h2{
+
+        font-size:28px;
+
+    }
+
+
+
+    .button{
+
+        width:90%;
+
+        margin:10px auto;
+
+    }
+
+
+
+    .hero-stats{
+
+        gap:15px;
+
+    }
+
+
+
+    .stat{
+
+        width:100%;
+
+    }
+
+
+
+    .games{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+
+    .socials{
+
+        flex-direction:column;
+
+    }
+
+
+
+    .socials a{
+
+        width:100%;
+
+    }
+
+
+
+    #backToTop{
+
+        right:20px;
+
+        bottom:20px;
+
+    }
+
+}
+/* ==========================
+   FINAL POLISH EFFECTS
+========================== */
+
+
+/* ==========================
+   SECTION TITLE GLOW
+========================== */
+
+section h2{
+
+    text-shadow:
+
+        0 0 10px #39ff14,
+
+        0 0 20px rgba(176,38,255,.7);
+
+}
+
+
+
+/* ==========================
+   NEON SECTION DIVIDER
+========================== */
+
+section{
+
+    position:relative;
+
+}
+
+
+section::before{
+
+    content:"";
+
+    display:block;
+
+    width:80%;
+
+    height:2px;
+
+    margin:0 auto 40px;
+
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            transparent,
+
+            #39ff14,
+
+            #b026ff,
+
+            transparent
+
+        );
+
+
+    opacity:.6;
+
+}
+
+
+
+/* ==========================
+   CARD LIGHT EFFECT
+========================== */
+
+
 .card{
-    opacity:1 !important;
-    transform:none !important;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-50%;
+
+    left:-50%;
+
+
+    width:200%;
+
+    height:200%;
+
+
+    background:
+
+        radial-gradient(
+
+            circle,
+
+            rgba(57,255,20,.15),
+
+            transparent 40%
+
+        );
+
+
+    opacity:0;
+
+    transition:.4s;
+
+}
+
+
+
+.card:hover::before{
+
+    opacity:1;
+
+}
+
+
+
+/* ==========================
+   IMAGE LOADING EFFECT
+========================== */
+
+
+.card img{
+
+    filter:brightness(.85);
+
+}
+
+
+
+.card:hover img{
+
+    filter:brightness(1);
+
+}
+
+
+
+/* ==========================
+   BETTER BUTTON GLOW
+========================== */
+
+
+.button{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.button::after{
+
+    content:"";
+
+    position:absolute;
+
+
+    top:0;
+
+    left:-100%;
+
+
+    width:100%;
+
+    height:100%;
+
+
+    background:
+
+        linear-gradient(
+
+            120deg,
+
+            transparent,
+
+            rgba(255,255,255,.5),
+
+            transparent
+
+        );
+
+
+    transition:.5s;
+
+}
+
+
+
+.button:hover::after{
+
+    left:100%;
+
+}
+
+
+
+/* ==========================
+   CUSTOM SCROLLBAR
+========================== */
+
+
+::-webkit-scrollbar{
+
+    width:12px;
+
+}
+
+
+
+::-webkit-scrollbar-track{
+
+    background:#050505;
+
+}
+
+
+
+::-webkit-scrollbar-thumb{
+
+    background:
+
+        linear-gradient(
+
+            #39ff14,
+
+            #b026ff
+
+        );
+
+
+    border-radius:20px;
+
+}
+
+
+
+/* ==========================
+   TEXT SELECTION
+========================== */
+
+
+::selection{
+
+    background:#39ff14;
+
+    color:#000;
+
+}
+
+
+
+/* ==========================
+   HERO ATMOSPHERE
+========================== */
+
+
+.hero::after{
+
+    content:"";
+
+    position:absolute;
+
+
+    inset:0;
+
+
+    background:
+
+        radial-gradient(
+
+            circle at top,
+
+            rgba(176,38,255,.15),
+
+            transparent 45%
+
+        );
+
+
+    pointer-events:none;
+
+}
+
+
+
+/* ==========================
+   MOBILE FINAL TOUCHES
+========================== */
+
+
+@media(max-width:600px){
+
+    .hero{
+
+        padding-top:120px;
+
+    }
+
+
+    .hero h1{
+
+        letter-spacing:2px;
+
+    }
+
+
+    .logo{
+
+        text-align:center;
+
+    }
+
 }
