@@ -1,104 +1,29 @@
 /* ==========================================
-   SHATTER'S GAMING STORE JAVASCRIPT
-   Version 1.0 - Basic Store Functions
+   SHATTER'S GAMING STORE.JS
+   Version 1.0
+
+   Handles:
+   - Add to cart
+   - Remove items
+   - Clear cart
+   - Cart count
+   - Cart sidebar
+   - Checkout popup
+   - Payment success popup
 ========================================== */
 
 
 /* ==========================================
-   CART STORAGE
-   This keeps the cart saved even if the page
-   refreshes.
+   LOAD SAVED CART
+   Keeps items after refresh
 ========================================== */
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
-/* ==========================================
-   STORE PRODUCTS
-
-   Add your products here later.
-   Each product needs:
-   id
-   name
-   price
-========================================== */
-
-const products = [
-    {
-        id: 1,
-        name: "Shatter's Gaming Hoodie",
-        price: 40
-    },
-
-    {
-        id: 2,
-        name: "Shatter's Gaming T-Shirt",
-        price: 25
-    }
-];
-
-
-
-/* ==========================================
-   ADD ITEM TO CART
-========================================== */
-
-function addToCart(productID){
-
-    const product = products.find(item => item.id === productID);
-
-    if(!product){
-        console.log("Product not found");
-        return;
-    }
-
-
-    cart.push(product);
-
-
-    saveCart();
-
-    updateCartDisplay();
-
-}
-
-
-
-/* ==========================================
-   REMOVE ITEM FROM CART
-========================================== */
-
-function removeFromCart(index){
-
-    cart.splice(index,1);
-
-    saveCart();
-
-    updateCartDisplay();
-
-}
-
-
-
-/* ==========================================
-   CLEAR ENTIRE CART
-========================================== */
-
-function clearCart(){
-
-    cart = [];
-
-    saveCart();
-
-    updateCartDisplay();
-
-}
-
-
 
 /* ==========================================
    SAVE CART
-   Saves cart to browser memory
 ========================================== */
 
 function saveCart(){
@@ -113,11 +38,85 @@ function saveCart(){
 
 
 /* ==========================================
-   UPDATE CART DISPLAY
-   Changes the shopping sidebar contents
+   ADD ITEM TO CART
+
+   Matches your HTML:
+   addToCart('Classic Tee',25)
 ========================================== */
 
-function updateCartDisplay(){
+function addToCart(name, price){
+
+
+    const item = {
+
+        name: name,
+        price: price
+
+    };
+
+
+    cart.push(item);
+
+
+    saveCart();
+
+
+    updateCart();
+
+
+
+    showNotification(
+        name + " added!"
+    );
+
+}
+
+
+
+/* ==========================================
+   REMOVE ITEM
+========================================== */
+
+function removeFromCart(index){
+
+
+    cart.splice(index,1);
+
+
+    saveCart();
+
+
+    updateCart();
+
+}
+
+
+
+/* ==========================================
+   CLEAR CART BUTTON
+========================================== */
+
+function clearCart(){
+
+
+    cart = [];
+
+
+    saveCart();
+
+
+    updateCart();
+
+}
+
+
+
+/* ==========================================
+   UPDATE CART DISPLAY
+========================================== */
+
+function updateCart(){
+
 
     const cartItems =
     document.getElementById("cart-items");
@@ -127,14 +126,18 @@ function updateCartDisplay(){
     document.getElementById("cart-total");
 
 
+    const cartCount =
+    document.getElementById("cart-count");
 
-    if(!cartItems){
-        return;
-    }
+
+
+    if(!cartItems) return;
 
 
 
     cartItems.innerHTML = "";
+
+
 
     let total = 0;
 
@@ -155,14 +158,16 @@ function updateCartDisplay(){
             ${item.name}
             </span>
 
+
             <span>
-            $${item.price}
+            $${item.price.toFixed(2)}
             </span>
 
 
             <button onclick="removeFromCart(${index})">
-            Remove
+            ❌
             </button>
+
 
         </div>
 
@@ -173,10 +178,126 @@ function updateCartDisplay(){
 
 
 
-    if(cartTotal){
+    if(cart.length === 0){
 
-        cartTotal.innerHTML =
-        "Total: $" + total;
+        cartItems.innerHTML =
+        "Your cart is empty";
+
+    }
+
+
+
+    cartTotal.innerHTML =
+    total.toFixed(2);
+
+
+
+    cartCount.innerHTML =
+    cart.length;
+
+
+}
+
+
+
+/* ==========================================
+   CART SIDEBAR OPEN/CLOSE
+========================================== */
+
+
+const cartButton =
+document.getElementById("open-cart");
+
+
+const cartSidebar =
+document.querySelector(".cart-sidebar");
+
+
+const cartOverlay =
+document.getElementById("cart-overlay");
+
+
+const closeCart =
+document.getElementById("close-cart");
+
+
+
+if(cartButton){
+
+cartButton.onclick = function(){
+
+    cartSidebar.classList.add("active");
+
+    cartOverlay.classList.add("active");
+
+};
+
+}
+
+
+
+if(closeCart){
+
+closeCart.onclick = function(){
+
+    cartSidebar.classList.remove("active");
+
+    cartOverlay.classList.remove("active");
+
+};
+
+}
+
+
+
+if(cartOverlay){
+
+cartOverlay.onclick = function(){
+
+    cartSidebar.classList.remove("active");
+
+    cartOverlay.classList.remove("active");
+
+};
+
+}
+
+
+
+/* ==========================================
+   CART NOTIFICATION
+========================================== */
+
+function showNotification(message){
+
+
+    const notification =
+    document.getElementById("cart-notification");
+
+
+    const text =
+    document.getElementById("notification-text");
+
+
+
+    if(notification){
+
+
+        text.innerHTML = message;
+
+
+        notification.classList.add("show");
+
+
+
+        setTimeout(()=>{
+
+
+            notification.classList.remove("show");
+
+
+        },2000);
+
 
     }
 
@@ -186,23 +307,32 @@ function updateCartDisplay(){
 
 
 /* ==========================================
-   OPEN CHECKOUT POPUP
+   CHECKOUT BUTTON
 
-   This replaces the ugly PayPal popup.
+   Opens your custom checkout popup
 ========================================== */
 
-function openCheckout(){
+
+const checkoutButton =
+document.querySelector(".checkout-btn");
 
 
-    const popup =
-    document.getElementById("checkout-popup");
+const checkoutPopup =
+document.getElementById("checkout-popup");
 
 
-    if(popup){
 
-        popup.style.display = "flex";
+if(checkoutButton){
 
-    }
+
+checkoutButton.onclick = function(){
+
+
+    checkoutPopup.style.display="flex";
+
+
+};
+
 
 }
 
@@ -212,62 +342,81 @@ function openCheckout(){
    CLOSE CHECKOUT POPUP
 ========================================== */
 
-function closeCheckout(){
+
+const cancelCheckout =
+document.getElementById("cancel-checkout");
 
 
-    const popup =
-    document.getElementById("checkout-popup");
-
-
-    if(popup){
-
-        popup.style.display = "none";
-
-    }
-
-}
+const closeCheckout =
+document.getElementById("close-checkout-popup");
 
 
 
-/* ==========================================
-   PAYMENT COMPLETE BUTTON
-
-   For now this only closes the popup.
-   Later we connect PayPal here.
-========================================== */
-
-function paymentComplete(){
+function closeCheckoutWindow(){
 
 
-    alert(
-        "Payment Complete! Thank you for supporting Shatter's Gaming!"
-    );
-
-
-    cart = [];
-
-
-    saveCart();
-
-
-    updateCartDisplay();
-
-
-    closeCheckout();
+    checkoutPopup.style.display="none";
 
 
 }
 
 
 
+if(cancelCheckout){
+
+cancelCheckout.onclick =
+closeCheckoutWindow;
+
+}
+
+
+
+if(closeCheckout){
+
+closeCheckout.onclick =
+closeCheckoutWindow;
+
+}
+
+
+
 /* ==========================================
-   LOAD STORE WHEN PAGE OPENS
+   PAYMENT SUCCESS CONTINUE BUTTON
+
 ========================================== */
+
+
+const paymentContinue =
+document.getElementById("close-payment-success");
+
+
+if(paymentContinue){
+
+
+paymentContinue.onclick=function(){
+
+
+document.getElementById(
+"payment-success-popup"
+).style.display="none";
+
+
+};
+
+
+}
+
+
+
+/* ==========================================
+   START STORE
+========================================== */
+
 
 document.addEventListener(
 "DOMContentLoaded",
-()=>{
+function(){
 
-    updateCartDisplay();
+    updateCart();
 
 });
