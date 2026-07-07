@@ -1,101 +1,72 @@
-// ==========================
-// SHATTER'S GAMING STORE
-// ==========================
+/* ==========================================
+   SHATTER'S GAMING STORE JAVASCRIPT
+   Version 1.0 - Basic Store Functions
+========================================== */
 
 
-// ==========================
-// CART DATA
-// ==========================
+/* ==========================================
+   CART STORAGE
+   This keeps the cart saved even if the page
+   refreshes.
+========================================== */
 
-let cart = JSON.parse(localStorage.getItem("shatterCart")) || [];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
 
-// ==========================
-// ADD TO CART
-// ==========================
+/* ==========================================
+   STORE PRODUCTS
 
-function addToCart(productName, productPrice){
+   Add your products here later.
+   Each product needs:
+   id
+   name
+   price
+========================================== */
 
-    cart.push({
+const products = [
+    {
+        id: 1,
+        name: "Shatter's Gaming Hoodie",
+        price: 40
+    },
 
-        name: productName,
-        price: productPrice
+    {
+        id: 2,
+        name: "Shatter's Gaming T-Shirt",
+        price: 25
+    }
+];
 
-    });
+
+
+/* ==========================================
+   ADD ITEM TO CART
+========================================== */
+
+function addToCart(productID){
+
+    const product = products.find(item => item.id === productID);
+
+    if(!product){
+        console.log("Product not found");
+        return;
+    }
+
+
+    cart.push(product);
+
 
     saveCart();
 
-    updateCart();
-
-    showNotification(productName);
+    updateCartDisplay();
 
 }
 
 
-// ==========================
-// UPDATE CART
-// ==========================
 
-function updateCart(){
-
-    const cartItems = document.getElementById("cart-items");
-    const cartTotal = document.getElementById("cart-total");
-    const cartCount = document.getElementById("cart-count");
-
-    if(cartCount){
-
-        cartCount.textContent = cart.length;
-
-    }
-
-    if(!cartItems || !cartTotal){
-
-        return;
-
-    }
-
-    if(cart.length === 0){
-
-        cartItems.innerHTML = "Your cart is empty";
-
-        cartTotal.textContent = "0.00";
-
-        return;
-
-    }
-
-    let total = 0;
-
-    cartItems.innerHTML = "";
-
-    cart.forEach((item,index)=>{
-
-        total += item.price;
-
-        cartItems.innerHTML += `
-
-        <div class="cart-item">
-
-            <span>${item.name} - $${item.price.toFixed(2)}</span>
-
-            <button onclick="removeFromCart(${index})">
-                ❌
-            </button>
-
-        </div>
-
-        `;
-
-    });
-
-    cartTotal.textContent = total.toFixed(2);
-
-}
-
-
-// ==========================
-// REMOVE FROM CART
-// ==========================
+/* ==========================================
+   REMOVE ITEM FROM CART
+========================================== */
 
 function removeFromCart(index){
 
@@ -103,13 +74,15 @@ function removeFromCart(index){
 
     saveCart();
 
-    updateCart();
+    updateCartDisplay();
 
 }
 
-// ==========================
-// CLEAR CART
-// ==========================
+
+
+/* ==========================================
+   CLEAR ENTIRE CART
+========================================== */
 
 function clearCart(){
 
@@ -117,240 +90,184 @@ function clearCart(){
 
     saveCart();
 
-    updateCart();
+    updateCartDisplay();
 
 }
-// ==========================
-// SAVE CART
-// ==========================
+
+
+
+/* ==========================================
+   SAVE CART
+   Saves cart to browser memory
+========================================== */
 
 function saveCart(){
 
     localStorage.setItem(
-
-        "shatterCart",
-
+        "cart",
         JSON.stringify(cart)
-
     );
 
 }
 
 
-// ==========================
-// SHOW NOTIFICATION
-// ==========================
 
-function showNotification(productName){
+/* ==========================================
+   UPDATE CART DISPLAY
+   Changes the shopping sidebar contents
+========================================== */
 
-    const notification =
-        document.getElementById("cart-notification");
+function updateCartDisplay(){
 
-    const text =
-        document.getElementById("notification-text");
+    const cartItems =
+    document.getElementById("cart-items");
 
-    if(!notification || !text){
 
+    const cartTotal =
+    document.getElementById("cart-total");
+
+
+
+    if(!cartItems){
         return;
+    }
+
+
+
+    cartItems.innerHTML = "";
+
+    let total = 0;
+
+
+
+    cart.forEach((item,index)=>{
+
+
+        total += item.price;
+
+
+
+        cartItems.innerHTML += `
+
+        <div class="cart-item">
+
+            <span>
+            ${item.name}
+            </span>
+
+            <span>
+            $${item.price}
+            </span>
+
+
+            <button onclick="removeFromCart(${index})">
+            Remove
+            </button>
+
+        </div>
+
+        `;
+
+
+    });
+
+
+
+    if(cartTotal){
+
+        cartTotal.innerHTML =
+        "Total: $" + total;
 
     }
 
-    text.textContent = `${productName} added to your cart!`;
-
-    notification.classList.add("show");
-
-    setTimeout(function(){
-
-        notification.classList.remove("show");
-
-    },2000);
 
 }
 
 
-// ==========================
-// CART OPEN / CLOSE
-// ==========================
 
-const openCart = document.getElementById("open-cart");
+/* ==========================================
+   OPEN CHECKOUT POPUP
 
-const closeCart = document.getElementById("close-cart");
+   This replaces the ugly PayPal popup.
+========================================== */
 
-const cartSidebar = document.querySelector(".cart-sidebar");
-
-const cartOverlay = document.getElementById("cart-overlay");
+function openCheckout(){
 
 
-if(openCart){
+    const popup =
+    document.getElementById("checkout-popup");
 
-    openCart.onclick = function(e){
 
-        e.preventDefault();
+    if(popup){
 
-        cartSidebar.classList.add("active");
+        popup.style.display = "flex";
 
-        cartOverlay.classList.add("active");
-
-    };
+    }
 
 }
 
 
-if(closeCart){
 
-    closeCart.onclick = function(){
+/* ==========================================
+   CLOSE CHECKOUT POPUP
+========================================== */
 
-        cartSidebar.classList.remove("active");
-
-        cartOverlay.classList.remove("active");
-
-    };
-
-}
+function closeCheckout(){
 
 
-if(cartOverlay){
-
-    cartOverlay.onclick = function(){
-
-        cartSidebar.classList.remove("active");
-
-        cartOverlay.classList.remove("active");
-
-    };
-
-}
-// ==========================
-// CHECKOUT BUTTON
-// ==========================
-
-const checkoutButton = document.querySelector(".checkout-btn");
-
-const checkoutPopup = document.getElementById("checkout-popup");
-
-const closeCheckoutPopup = document.getElementById("close-checkout-popup");
-
-const cancelCheckout = document.getElementById("cancel-checkout");
-
-const confirmCheckout = document.getElementById("confirm-checkout");
+    const popup =
+    document.getElementById("checkout-popup");
 
 
-if(checkoutButton){
+    if(popup){
 
-    checkoutButton.onclick = function(){
+        popup.style.display = "none";
 
-        if(cart.length === 0){
-
-            alert("Your cart is empty!");
-
-        } else {
-
-            checkoutPopup.classList.add("active");
-
-        }
-
-    };
+    }
 
 }
 
 
-// CLOSE POPUP
 
-if(closeCheckoutPopup){
+/* ==========================================
+   PAYMENT COMPLETE BUTTON
 
-    closeCheckoutPopup.onclick = function(){
+   For now this only closes the popup.
+   Later we connect PayPal here.
+========================================== */
 
-        checkoutPopup.classList.remove("active");
+function paymentComplete(){
 
-    };
+
+    alert(
+        "Payment Complete! Thank you for supporting Shatter's Gaming!"
+    );
+
+
+    cart = [];
+
+
+    saveCart();
+
+
+    updateCartDisplay();
+
+
+    closeCheckout();
+
 
 }
 
 
-if(cancelCheckout){
 
-    cancelCheckout.onclick = function(){
+/* ==========================================
+   LOAD STORE WHEN PAGE OPENS
+========================================== */
 
-        checkoutPopup.classList.remove("active");
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
 
-    };
+    updateCartDisplay();
 
-}
-
-
-// CONTINUE CHECKOUT
-
-if(confirmCheckout){
-
-    confirmCheckout.onclick = function(){
-
-        alert("Checkout coming soon!");
-
-        checkoutPopup.classList.remove("active");
-
-        cartSidebar.classList.remove("active");
-
-        cartOverlay.classList.remove("active");
-
-    };
-
-}
-
-
-// ==========================
-// INITIALIZE STORE
-// ==========================
-
-updateCart();
-// ==========================
-// PAYPAL CHECKOUT BUTTON
-// ==========================
-
- if(window.paypal){
-
-    paypal.Buttons({
-
-        style: {
-            color: "gold",
-            shape: "pill",
-            label: "paypal"
-        },
-
-        createOrder: function(data, actions){
-
-            return actions.order.create({
-
-                purchase_units: [{
-
-                    amount: {
-
-                        value: cart.reduce((total, item) => total + item.price, 0).toFixed(2)
-
-                    }
-
-                }]
-
-            });
-
-        },
-
-        onApprove: function(data, actions){
-
-            return actions.order.capture().then(function(details){
-
-                const paymentPopup = document.getElementById("payment-success-popup");
-
-                const paymentMessage = document.getElementById("payment-success-message");
-
-                paymentMessage.textContent =
-                "Thanks " + details.payer.name.given_name + "! Your order is complete.";
-
-                paymentPopup.classList.add("active");
-
-            });
-
-        }
-
-    }).render("#paypal-button-container");
-
-}  
+});
