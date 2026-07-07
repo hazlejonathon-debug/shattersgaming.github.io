@@ -1950,3 +1950,22 @@ footer .tiktok:hover{
     0 0 20px #fe2c55;
 
 }
+/* ==========================
+   CONTACT SOCIAL BUTTON FIX
+========================== */
+
+.socials{
+    position:relative;
+    z-index:5;
+}
+
+
+.socials a{
+
+    position:relative;
+
+    z-index:10;
+
+    pointer-events:auto;
+
+}
