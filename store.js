@@ -329,29 +329,13 @@ function(){
     // Opens custom checkout popup
     // ==========================
 
-    const checkoutButton =
-    document.querySelector(".checkout-btn");
+  const checkoutButton = document.querySelector(".checkout-btn");
 
+checkoutButton.onclick = function(){
 
-    const checkoutPopup =
-    document.getElementById("checkout-popup");
+    alert("Checkout button works!");
 
-
-
-    if(checkoutButton && checkoutPopup){
-
-
-        checkoutButton.onclick = function(){
-
-
-            checkoutPopup.style.display = "flex";
-
-
-        };
-
-
-    }
-
+};
 
 
     // ==========================
