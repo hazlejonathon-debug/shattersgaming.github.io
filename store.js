@@ -5,7 +5,7 @@
 
 let cart = [];
 
-let cartCount = document.getElementById("cart-count");
+
 
 
 // ==========================
@@ -100,7 +100,13 @@ function updateCart(){
 
 
 }
+const cartCount = document.getElementById("cart-count");
 
+if(cartCount){
+
+    cartCount.innerHTML = cart.length;
+
+}
 
 
 // ==========================
