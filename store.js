@@ -225,5 +225,27 @@ if(cartOverlay){
 // ==========================
 // INITIALIZE STORE
 // ==========================
+// ==========================
+// CHECKOUT BUTTON
+// ==========================
 
+const checkoutButton = document.querySelector(".checkout-btn");
+
+if(checkoutButton){
+
+    checkoutButton.onclick = function(){
+
+        if(cart.length === 0){
+
+            alert("Your cart is empty!");
+
+        } else {
+
+            alert("Checkout coming soon!");
+
+        }
+
+    };
+
+}
 updateCart();
