@@ -1951,3 +1951,49 @@ section::before{
     left:100%;
 
 }
+/* ==========================
+   FOOTER BUTTON TEST
+========================== */
+
+footer .social-links{
+    display:flex !important;
+    justify-content:center !important;
+    gap:20px !important;
+    flex-wrap:wrap !important;
+}
+
+
+footer .social-links .btn{
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    width:160px !important;
+
+    padding:15px !important;
+
+    background:#111 !important;
+
+    color:white !important;
+
+    text-decoration:none !important;
+
+    border-radius:12px !important;
+
+    font-weight:bold !important;
+
+    border:2px solid #39ff14 !important;
+
+}
+
+
+footer .social-links .btn:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:0 0 20px #39ff14;
+
+}
