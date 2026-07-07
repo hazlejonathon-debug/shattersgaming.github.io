@@ -21,77 +21,13 @@ notifyButtons.forEach(button => {
 });
 
 if(closeBtn){
+
     closeBtn.addEventListener("click", function(){
 
         modal.style.display = "none";
 
     });
-});
 
-
-
-// ===============================
-// Scroll Animations
-// ===============================
-
-const sections = document.querySelectorAll("section");
-
-const observer = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            // Animate the section
-            entry.target.classList.add("show");
-
-            // Animate each card
-            const cards = entry.target.querySelectorAll(".card");
-
-            cards.forEach(card=>{
-
-                card.classList.add("show");
-
-            });
-
-        }
-
-    });
-
-},{
-    threshold:.2
-});
-
-sections.forEach(section=>observer.observe(section));
-
-// ===============================
-// Merchandise Popup
-// ===============================
-
-const modal = document.getElementById("comingSoonModal");
-const notifyButtons = document.querySelectorAll(".notify-btn");
-const closeBtn = document.querySelector(".close");
-
-notifyButtons.forEach(button => {
-
-    button.addEventListener("click", function(e){
-
-        e.preventDefault();
-
-        if(modal){
-            modal.style.display = "block";
-        }
-
-    });
-
-});
-
-if(closeBtn){
-    closeBtn.addEventListener("click", function(){
-
-        modal.style.display = "none";
-
-    });
 }
 
 window.addEventListener("click", function(e){
@@ -105,8 +41,6 @@ window.addEventListener("click", function(e){
 });
 
 
-
-
 // ===============================
 // Scroll Animations
 // ===============================
@@ -119,10 +53,8 @@ const observer = new IntersectionObserver((entries)=>{
 
         if(entry.isIntersecting){
 
-            // Animate the section
             entry.target.classList.add("show");
 
-            // Animate each card
             const cards = entry.target.querySelectorAll(".card");
 
             cards.forEach(card=>{
@@ -139,7 +71,9 @@ const observer = new IntersectionObserver((entries)=>{
     threshold:.2
 });
 
+
 sections.forEach(section=>observer.observe(section));
+
 
 // ===============================
 // Back To Top Button
