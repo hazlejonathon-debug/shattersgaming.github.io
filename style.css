@@ -1969,3 +1969,27 @@ footer .tiktok:hover{
     pointer-events:auto;
 
 }
+/* Contact Button Styling */
+
+.socials a{
+
+    background:#111;
+
+    color:white;
+
+    border:2px solid #333;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    transition:.3s ease;
+
+}
+
+
+.socials a:hover{
+
+    transform:translateY(-5px);
+
+}
