@@ -107,7 +107,19 @@ function removeFromCart(index){
 
 }
 
+// ==========================
+// CLEAR CART
+// ==========================
 
+function clearCart(){
+
+    cart = [];
+
+    saveCart();
+
+    updateCart();
+
+}
 // ==========================
 // SAVE CART
 // ==========================
