@@ -71,7 +71,6 @@ const observer = new IntersectionObserver((entries)=>{
     threshold:.2
 });
 
-
 sections.forEach(section=>observer.observe(section));
 
 
