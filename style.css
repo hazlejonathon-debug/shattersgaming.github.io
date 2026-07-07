@@ -134,7 +134,9 @@ animation:titleGlow 3s ease-in-out infinite;
     
 }
 .hero > *{
-    animation: heroEnter 1s ease forwards;
+    animation:
+    titleGlow 3s ease-in-out infinite,
+    heroEnter 1s ease forwards;
 }
 
 
@@ -198,19 +200,11 @@ animation:titleGlow 3s ease-in-out infinite;
         0 0 35px rgba(176,38,255,.6);
 
 }
+
 .button:active{
 
     transform:scale(.97);
 
-}
-    background:#b026ff;
-
-    color:white;
-
-    box-shadow:
-        0 0 15px #b026ff,
-        0 0 30px #b026ff;
-  
 }
 
 section{
@@ -924,5 +918,51 @@ nav a{
     100% {
         box-shadow:0 0 5px red;
     }
+/* ==========================
+   Back To Top Button
+========================== */
 
+#backToTop{
+
+    position:fixed;
+
+    bottom:30px;
+    right:30px;
+
+    width:50px;
+    height:50px;
+
+    border:none;
+    border-radius:50%;
+
+    background:#39ff14;
+    color:#000;
+
+    font-size:22px;
+
+    cursor:pointer;
+
+    display:none;
+
+    z-index:9999;
+
+    box-shadow:
+        0 0 15px rgba(57,255,20,.6);
+
+    transition:.3s;
+
+}
+
+
+#backToTop:hover{
+
+    background:#b026ff;
+    color:white;
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 0 20px #b026ff;
+
+}
 }
