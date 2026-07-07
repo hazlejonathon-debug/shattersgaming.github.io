@@ -562,3 +562,52 @@ nav a:hover{
     font-size:24px;
 
 }
+/* ==========================
+   CLEAR CART BUTTON
+========================== */
+
+.clear-cart-btn{
+
+    width:100%;
+
+    margin:15px 0;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#222;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    border:2px solid #b026ff;
+
+}
+
+.clear-cart-btn:hover{
+
+    background:linear-gradient(
+        135deg,
+        #39ff14,
+        #b026ff
+    );
+
+    color:#fff;
+
+    box-shadow:
+        0 0 20px rgba(57,255,20,.5),
+        0 0 20px rgba(176,38,255,.5);
+
+    transform:translateY(-2px);
+
+}
