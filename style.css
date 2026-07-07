@@ -937,3 +937,8 @@ nav a{
     opacity:1 !important;
     transform:none !important;
 }
+*{
+    opacity:1 !important;
+    transform:none !important;
+    visibility:visible !important;
+}
