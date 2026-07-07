@@ -306,65 +306,51 @@ updateCart();
 // PAYPAL CHECKOUT BUTTON
 // ==========================
 
-paypal.Buttons({
+ if(window.paypal){
 
-    style: {
+    paypal.Buttons({
 
-        color: "gold",
-        shape: "pill",
-        label: "paypal"
+        style: {
+            color: "gold",
+            shape: "pill",
+            label: "paypal"
+        },
 
-    },
+        createOrder: function(data, actions){
 
-    createOrder: function(data, actions){
+            return actions.order.create({
 
-        return actions.order.create({
+                purchase_units: [{
 
-            purchase_units: [{
+                    amount: {
 
-                amount: {
+                        value: cart.reduce((total, item) => total + item.price, 0).toFixed(2)
 
-                    value: cart.reduce((total, item) => total + item.price, 0).toFixed(2)
+                    }
 
-                }
+                }]
 
-            }]
+            });
 
-        });
+        },
 
-    },
+        onApprove: function(data, actions){
 
-   onApprove: function(data, actions){
+            return actions.order.capture().then(function(details){
 
-    return actions.order.capture().then(function(details){
+                const paymentPopup = document.getElementById("payment-success-popup");
 
-        const paymentPopup = document.getElementById("payment-success-popup");
+                const paymentMessage = document.getElementById("payment-success-message");
 
-        const paymentMessage = document.getElementById("payment-success-message");
+                paymentMessage.textContent =
+                "Thanks " + details.payer.name.given_name + "! Your order is complete.";
 
-        paymentMessage.textContent =
-        "Thanks " + details.payer.name.given_name + "! Your order is complete.";
+                paymentPopup.classList.add("active");
 
-        paymentPopup.classList.add("active");
+            });
 
-    });
+        }
 
-}, 
+    }).render("#paypal-button-container");
 
-}).render("#paypal-button-container");
-const closePaymentSuccess =
-document.getElementById("close-payment-success");
-
-const paymentSuccessPopup =
-document.getElementById("payment-success-popup");
-
-
-if(closePaymentSuccess){
-
-    closePaymentSuccess.onclick = function(){
-
-        paymentSuccessPopup.classList.remove("active");
-
-    };
-
-}
+}  
