@@ -1756,3 +1756,198 @@ section::before{
     }
 
 }
+/* ==========================
+   FOOTER SOCIAL BUTTONS
+========================== */
+
+
+.social-links{
+
+    display:flex;
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+    margin:30px auto;
+
+}
+
+
+
+.btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+    min-width:150px;
+
+    padding:15px 30px;
+
+
+    border-radius:12px;
+
+
+    background:#111;
+
+
+    color:white;
+
+
+    text-decoration:none;
+
+
+    font-weight:700;
+
+
+    border:2px solid #333;
+
+
+    transition:.35s ease;
+
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+/* Twitch */
+
+.btn.twitch{
+
+    border-color:#9146ff;
+
+}
+
+
+
+.btn.twitch:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 0 20px #9146ff;
+
+}
+
+
+
+/* YouTube */
+
+.btn.youtube{
+
+    border-color:#ff0000;
+
+}
+
+
+
+.btn.youtube:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 0 20px #ff0000;
+
+}
+
+
+
+/* Discord */
+
+.btn.discord{
+
+    border-color:#5865f2;
+
+}
+
+
+
+.btn.discord:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 0 20px #5865f2;
+
+}
+
+
+
+/* TikTok */
+
+.btn.tiktok{
+
+    border-color:#fe2c55;
+
+}
+
+
+
+.btn.tiktok:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+
+    0 0 20px #fe2c55;
+
+}
+
+
+
+/* Shine animation */
+
+.btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:-100%;
+
+    width:100%;
+
+    height:100%;
+
+
+    background:
+
+    linear-gradient(
+
+        120deg,
+
+        transparent,
+
+        rgba(255,255,255,.5),
+
+        transparent
+
+    );
+
+
+    transition:.5s;
+
+}
+
+
+
+.btn:hover::after{
+
+    left:100%;
+
+}
