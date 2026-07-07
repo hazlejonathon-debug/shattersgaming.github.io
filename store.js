@@ -304,8 +304,6 @@ function showNotification(message){
 
 }
 
-
-
 /* ==========================================
    CHECKOUT + POPUP CONTROLS
 ========================================== */
@@ -316,26 +314,38 @@ document.addEventListener(
 function(){
 
 
-    // ==========================
-    // UPDATE CART ON LOAD
-    // ==========================
-
+    // Update cart when page loads
     updateCart();
 
 
 
     // ==========================
     // CHECKOUT BUTTON
-    // Opens custom checkout popup
     // ==========================
 
-  const checkoutButton = document.querySelector(".checkout-btn");
+    const checkoutButton =
+    document.querySelector(".checkout-btn");
 
-checkoutButton.onclick = function(){
 
-    alert("Checkout button works!");
+    const checkoutPopup =
+    document.getElementById("checkout-popup");
 
-};
+
+
+    if(checkoutButton && checkoutPopup){
+
+
+        checkoutButton.onclick = function(){
+
+
+            checkoutPopup.style.display = "flex";
+
+
+        };
+
+
+    }
+
 
 
     // ==========================
@@ -383,7 +393,6 @@ checkoutButton.onclick = function(){
 
 
 
-
     // ==========================
     // PAYMENT SUCCESS CONTINUE
     // ==========================
@@ -414,3 +423,4 @@ checkoutButton.onclick = function(){
 
 
 });
+
