@@ -1761,7 +1761,7 @@ section::before{
 ========================== */
 
 
-.social-links{
+footer .social-links{
 
     display:flex;
 
@@ -1769,7 +1769,7 @@ section::before{
 
     flex-wrap:wrap;
 
-    gap:15px;
+    gap:20px;
 
     margin:30px auto;
 
@@ -1777,7 +1777,7 @@ section::before{
 
 
 
-.btn{
+footer .social-links .btn{
 
     display:flex;
 
@@ -1786,25 +1786,22 @@ section::before{
     justify-content:center;
 
 
-    min-width:150px;
+    min-width:160px;
 
-    padding:15px 30px;
-
-
-    border-radius:12px;
+    padding:15px 25px;
 
 
     background:#111;
-
 
     color:white;
 
 
     text-decoration:none;
 
-
     font-weight:700;
 
+
+    border-radius:12px;
 
     border:2px solid #333;
 
@@ -1820,19 +1817,24 @@ section::before{
 
 
 
+footer .social-links .btn:hover{
+
+    transform:translateY(-5px);
+
+}
+
+
+
 /* Twitch */
 
-.btn.twitch{
+footer .twitch{
 
     border-color:#9146ff;
 
 }
 
 
-
-.btn.twitch:hover{
-
-    transform:translateY(-5px);
+footer .twitch:hover{
 
     box-shadow:
 
@@ -1844,17 +1846,14 @@ section::before{
 
 /* YouTube */
 
-.btn.youtube{
+footer .youtube{
 
     border-color:#ff0000;
 
 }
 
 
-
-.btn.youtube:hover{
-
-    transform:translateY(-5px);
+footer .youtube:hover{
 
     box-shadow:
 
@@ -1866,17 +1865,14 @@ section::before{
 
 /* Discord */
 
-.btn.discord{
+footer .discord{
 
     border-color:#5865f2;
 
 }
 
 
-
-.btn.discord:hover{
-
-    transform:translateY(-5px);
+footer .discord:hover{
 
     box-shadow:
 
@@ -1888,112 +1884,17 @@ section::before{
 
 /* TikTok */
 
-.btn.tiktok{
+footer .tiktok{
 
     border-color:#fe2c55;
 
 }
 
 
-
-.btn.tiktok:hover{
-
-    transform:translateY(-5px);
+footer .tiktok:hover{
 
     box-shadow:
 
     0 0 20px #fe2c55;
-
-}
-
-
-
-/* Shine animation */
-
-.btn::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:-100%;
-
-    width:100%;
-
-    height:100%;
-
-
-    background:
-
-    linear-gradient(
-
-        120deg,
-
-        transparent,
-
-        rgba(255,255,255,.5),
-
-        transparent
-
-    );
-
-
-    transition:.5s;
-
-}
-
-
-
-.btn:hover::after{
-
-    left:100%;
-
-}
-/* ==========================
-   FOOTER BUTTON TEST
-========================== */
-
-footer .social-links{
-    display:flex !important;
-    justify-content:center !important;
-    gap:20px !important;
-    flex-wrap:wrap !important;
-}
-
-
-footer .social-links .btn{
-
-    display:flex !important;
-
-    align-items:center !important;
-
-    justify-content:center !important;
-
-    width:160px !important;
-
-    padding:15px !important;
-
-    background:#111 !important;
-
-    color:white !important;
-
-    text-decoration:none !important;
-
-    border-radius:12px !important;
-
-    font-weight:bold !important;
-
-    border:2px solid #39ff14 !important;
-
-}
-
-
-footer .social-links .btn:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:0 0 20px #39ff14;
 
 }
