@@ -307,120 +307,26 @@ function showNotification(message){
 
 
 /* ==========================================
-   CHECKOUT BUTTON
-
-   Opens your custom checkout popup
+   CHECKOUT + POPUP CONTROLS
 ========================================== */
 
-
-const checkoutButton =
-document.querySelector(".checkout-btn");
-
-
-const checkoutPopup =
-document.getElementById("checkout-popup");
-
-
-
-if(checkoutButton){
-
-
-checkoutButton.onclick = function(){
-
-
-    checkoutPopup.style.display="flex";
-
-
-};
-
-
-}
-
-
-
-/* ==========================================
-   CLOSE CHECKOUT POPUP
-========================================== */
-
-
-const cancelCheckout =
-document.getElementById("cancel-checkout");
-
-
-const closeCheckout =
-document.getElementById("close-checkout-popup");
-
-
-
-function closeCheckoutWindow(){
-
-
-    checkoutPopup.style.display="none";
-
-
-}
-
-
-
-if(cancelCheckout){
-
-cancelCheckout.onclick =
-closeCheckoutWindow;
-
-}
-
-
-
-if(closeCheckout){
-
-closeCheckout.onclick =
-closeCheckoutWindow;
-
-}
-
-
-
-/* ==========================================
-   PAYMENT SUCCESS CONTINUE BUTTON
-
-========================================== */
-
-
-const paymentContinue =
-document.getElementById("close-payment-success");
-
-
-if(paymentContinue){
-
-
-paymentContinue.onclick=function(){
-
-
-document.getElementById(
-"payment-success-popup"
-).style.display="none";
-
-
-};
-
-
-}
-
-
-
-/* ==========================================
-   START STORE
-========================================== */
 
 document.addEventListener(
 "DOMContentLoaded",
 function(){
 
+
+    // ==========================
+    // UPDATE CART ON LOAD
+    // ==========================
+
     updateCart();
+
 
 
     // ==========================
     // CHECKOUT BUTTON
+    // Opens custom checkout popup
     // ==========================
 
     const checkoutButton =
@@ -431,12 +337,90 @@ function(){
     document.getElementById("checkout-popup");
 
 
+
     if(checkoutButton && checkoutPopup){
 
 
         checkoutButton.onclick = function(){
 
+
             checkoutPopup.style.display = "flex";
+
+
+        };
+
+
+    }
+
+
+
+    // ==========================
+    // CLOSE CHECKOUT POPUP
+    // ==========================
+
+    const cancelCheckout =
+    document.getElementById("cancel-checkout");
+
+
+    const closeCheckout =
+    document.getElementById("close-checkout-popup");
+
+
+
+    function closeCheckoutWindow(){
+
+
+        checkoutPopup.style.display = "none";
+
+
+    }
+
+
+
+    if(cancelCheckout){
+
+
+        cancelCheckout.onclick =
+        closeCheckoutWindow;
+
+
+    }
+
+
+
+    if(closeCheckout){
+
+
+        closeCheckout.onclick =
+        closeCheckoutWindow;
+
+
+    }
+
+
+
+
+    // ==========================
+    // PAYMENT SUCCESS CONTINUE
+    // ==========================
+
+    const paymentContinue =
+    document.getElementById("close-payment-success");
+
+
+    const paymentPopup =
+    document.getElementById("payment-success-popup");
+
+
+
+    if(paymentContinue && paymentPopup){
+
+
+        paymentContinue.onclick = function(){
+
+
+            paymentPopup.style.display = "none";
+
 
         };
 
@@ -446,4 +430,3 @@ function(){
 
 
 });
- 
