@@ -855,3 +855,50 @@ nav a:hover{
 .checkout-actions button {
     pointer-events: auto;
 }
+/* ==========================
+   PAYMENT SUCCESS BUTTON
+========================== */
+
+#close-payment-success {
+
+    background: linear-gradient(
+        135deg,
+        #39ff14,
+        #b026ff
+    );
+
+    color:white;
+
+    padding:14px 35px;
+
+    border-radius:50px;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    border:2px solid #39ff14;
+
+    cursor:pointer;
+
+    text-shadow:
+        0 0 8px black;
+
+    box-shadow:
+        0 0 15px rgba(57,255,20,.5),
+        0 0 25px rgba(176,38,255,.5);
+
+    transition:.3s ease;
+
+}
+
+
+#close-payment-success:hover {
+
+    transform:translateY(-4px) scale(1.05);
+
+    box-shadow:
+        0 0 20px #39ff14,
+        0 0 40px #b026ff;
+
+}
