@@ -986,7 +986,92 @@ h2{
 
 }
 
+/* ==========================
+   CONTACT SOCIAL BUTTON COLORS
+========================== */
 
+.socials a{
+
+    background:#111;
+
+    color:white;
+
+    border:2px solid #333;
+
+    padding:15px 30px;
+
+    border-radius:12px;
+
+    transition:.35s ease;
+
+}
+
+
+/* Twitch */
+
+.socials a[href*="twitch"]{
+
+    border-color:#9146ff;
+
+}
+
+
+.socials a[href*="twitch"]:hover{
+
+    box-shadow:0 0 20px #9146ff;
+
+}
+
+
+
+/* YouTube */
+
+.socials a[href*="youtube"]{
+
+    border-color:#ff0000;
+
+}
+
+
+.socials a[href*="youtube"]:hover{
+
+    box-shadow:0 0 20px #ff0000;
+
+}
+
+
+
+/* Discord */
+
+.socials a[href*="discord"]{
+
+    border-color:#5865f2;
+
+}
+
+
+.socials a[href*="discord"]:hover{
+
+    box-shadow:0 0 20px #5865f2;
+
+}
+
+
+
+/* TikTok */
+
+.socials a[href*="tiktok"]{
+
+    border-color:#fe2c55;
+
+}
+
+
+.socials a[href*="tiktok"]:hover{
+
+    box-shadow:0 0 20px #fe2c55;
+
+}
 
 /* ==========================
    FOOTER
