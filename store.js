@@ -316,22 +316,23 @@ paypal.Buttons({
 
     },
 
-  createOrder: function(data, actions){
+    createOrder: function(data, actions){
 
-    return actions.order.create({
+        return actions.order.create({
 
-        purchase_units: [{
+            purchase_units: [{
 
-            amount: {
+                amount: {
 
-                value: cart.reduce((total, item) => total + item.price, 0).toFixed(2)
+                    value: cart.reduce((total, item) => total + item.price, 0).toFixed(2)
 
-            }
+                }
 
-        }]
+            }]
 
-    });
+        });
 
+    },
 
     onApprove: function(data, actions){
 
