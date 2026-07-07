@@ -352,3 +352,19 @@ paypal.Buttons({
 }, 
 
 }).render("#paypal-button-container");
+const closePaymentSuccess =
+document.getElementById("close-payment-success");
+
+const paymentSuccessPopup =
+document.getElementById("payment-success-popup");
+
+
+if(closePaymentSuccess){
+
+    closePaymentSuccess.onclick = function(){
+
+        paymentSuccessPopup.classList.remove("active");
+
+    };
+
+}
