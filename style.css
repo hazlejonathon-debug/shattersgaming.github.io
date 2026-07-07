@@ -643,7 +643,11 @@ nav a{
     margin:15px 0;
     line-height:1.6;
 }
-
+.cofounder{
+    background:#b026ff;
+    color:white;
+    box-shadow:0 0 15px #b026ff;
+}
 .bio{
     color:#ccc;
     line-height:1.7;
