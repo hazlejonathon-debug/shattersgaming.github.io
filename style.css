@@ -135,36 +135,48 @@ animation:titleGlow 3s ease-in-out infinite;
 }
 
 .button{
-  display:inline-block;
-
+    display:inline-block;
+    padding:15px 38px;
     margin:18px 10px;
 
-    padding:15px 40px;
-
     background:#39ff14;
+    color:#000;
 
-    color:black;
-
-    font-weight:bold;
+    font-size:16px;
+    font-weight:700;
 
     text-decoration:none;
 
+    border:none;
     border-radius:50px;
 
-    transition:.35s;
+    cursor:pointer;
 
-    border:2px solid transparent;  
+    transition:all .3s ease;
+
+    box-shadow:
+        0 0 10px rgba(57,255,20,.25);
 }
 
 .button:hover{
+
     background:#b026ff;
-    color:white;
+    color:#fff;
+
+    transform:
+        translateY(-4px)
+        scale(1.04);
+
     box-shadow:
         0 0 15px #b026ff,
-        0 0 30px #b026ff;
-    transform:translateY(-3px);
-}
+        0 0 35px rgba(176,38,255,.6);
 
+}
+.button:active{
+
+    transform:scale(.97);
+
+}
     background:#b026ff;
 
     color:white;
