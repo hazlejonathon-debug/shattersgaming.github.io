@@ -122,6 +122,7 @@ nav a:hover{
     font-weight:900;
     letter-spacing:4px;
 animation:titleGlow 3s ease-in-out infinite;
+     heroEnter 1s ease forwards;
     color:#39ff14;
 
     text-shadow:
@@ -130,6 +131,25 @@ animation:titleGlow 3s ease-in-out infinite;
         0 0 40px #b026ff;
 
     margin-top:25px;   
+    
+}
+.hero > *{
+    animation: heroEnter 1s ease forwards;
+}
+
+
+@keyframes heroEnter{
+
+    from{
+        opacity:0;
+        transform:translateY(35px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
 }
 
 .hero p{
