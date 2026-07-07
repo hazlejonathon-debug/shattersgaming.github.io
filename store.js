@@ -147,3 +147,59 @@ function saveCart(){
 // ==========================
 
 updateCart();
+// ==========================
+// CART OPEN / CLOSE
+// ==========================
+
+
+const openCart = document.getElementById("open-cart");
+
+const closeCart = document.getElementById("close-cart");
+
+const cartSidebar = document.querySelector(".cart-sidebar");
+
+const cartOverlay = document.getElementById("cart-overlay");
+
+
+
+if(openCart){
+
+    openCart.onclick = function(e){
+
+        e.preventDefault();
+
+        cartSidebar.classList.add("active");
+
+        cartOverlay.classList.add("active");
+
+    };
+
+}
+
+
+
+if(closeCart){
+
+    closeCart.onclick = function(){
+
+        cartSidebar.classList.remove("active");
+
+        cartOverlay.classList.remove("active");
+
+    };
+
+}
+
+
+
+if(cartOverlay){
+
+    cartOverlay.onclick = function(){
+
+        cartSidebar.classList.remove("active");
+
+        cartOverlay.classList.remove("active");
+
+    };
+
+}
