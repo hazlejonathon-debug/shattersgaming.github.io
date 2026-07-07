@@ -335,13 +335,11 @@ function(){
     if(checkoutButton && checkoutPopup){
 
 
-        checkoutButton.onclick = function(){
+     checkoutButton.onclick = function(){
 
+    checkoutPopup.classList.add("active");
 
-            checkoutPopup.style.display = "flex";
-
-
-        };
+};
 
 
     }
@@ -361,13 +359,11 @@ function(){
 
 
 
-    function closeCheckoutWindow(){
+   function closeCheckoutWindow(){
 
+    checkoutPopup.classList.remove("active");
 
-        checkoutPopup.style.display = "none";
-
-
-    }
+}
 
 
 
