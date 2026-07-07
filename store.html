@@ -234,18 +234,18 @@ onclick="clearCart()">
     </span>
 </div>
 <!-- ==========================
-     CHECKOUT CONFIRMATION POPUP
+     CUSTOM CHECKOUT POPUP
 ========================== -->
 
-<div id="checkout-popup">
+<div id="checkout-popup" class="hidden">
 
     <div class="checkout-box">
 
-        <h2 id="checkout-title">
+        <h2>
             💳 Checkout
         </h2>
 
-        <p id="checkout-message">
+        <p id="checkout-popup-message">
             Are you ready to checkout?
         </p>
 
@@ -255,7 +255,7 @@ onclick="clearCart()">
                 ✅ Continue
             </button>
 
-            <button id="cancel-checkout">
+            <button id="close-checkout-popup">
                 ❌ Cancel
             </button>
 
