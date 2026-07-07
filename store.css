@@ -640,7 +640,7 @@ nav a:hover{
     visibility: hidden;
     transition: 0.3s ease;
 
-    z-index: 9999;
+    z-index: 100000;
 }
 
 
@@ -671,6 +671,7 @@ nav a:hover{
         0 0 35px rgba(128, 0, 255, 0.8);
 
     position: relative;
+    z-index: 100001;
 
     transform: scale(0.8);
     transition: 0.3s ease;
@@ -807,9 +808,6 @@ nav a:hover{
 .checkout-actions {
     position: relative;
     z-index: 10;
-}
-#paypal-button-container {
-    pointer-events: none;
 }
 
 .checkout-actions,
