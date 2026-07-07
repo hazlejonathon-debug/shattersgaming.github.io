@@ -19,14 +19,38 @@ function addToCart(productName, productPrice){
 
     });
 
+saveCart();
 
-    saveCart();
+updateCart();
 
-    updateCart();
-
+showNotification(productName);
+   
 }
 
+// ==========================
+// SHOW NOTIFICATION
+// ==========================
 
+function showNotification(productName){
+
+    const notification =
+        document.getElementById("cart-notification");
+
+    const text =
+        document.getElementById("notification-text");
+
+    text.innerHTML =
+        productName + " added to cart!";
+
+    notification.classList.add("show");
+
+    setTimeout(function(){
+
+        notification.classList.remove("show");
+
+    },2000);
+
+}
 
 // ==========================
 // UPDATE CART DISPLAY
