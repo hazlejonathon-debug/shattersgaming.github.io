@@ -32,9 +32,13 @@ SHATTER'S GAMING
 <li><a href="index.html">🏠 Home</a></li>
 
 <li>
-<a href="store.html">
+
+<a href="#" id="open-cart">
+
 🛒 Cart (<span id="cart-count">0</span>)
+
 </a>
+
 </li>
 
 </ul>
@@ -175,10 +179,24 @@ onclick="addToCart('Streamer Mug',15)">
 
 
 
-<div class="cart">
+<!-- ==========================
+     CART SIDEBAR
+========================== -->
+
+
+<div id="cart-overlay"></div>
+
+
+<div class="cart-sidebar">
+
+
+<button id="close-cart">
+❌
+</button>
+
 
 <h2>
-🛒 Cart
+🛒 Your Cart
 </h2>
 
 
@@ -190,8 +208,13 @@ Your cart is empty
 
 
 <h3>
-Total: $<span id="cart-total">0</span>
+Total: $<span id="cart-total">0.00</span>
 </h3>
+
+
+<button class="checkout-btn">
+💳 Checkout
+</button>
 
 
 </div>
