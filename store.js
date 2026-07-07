@@ -3,13 +3,11 @@
 // ==========================
 
 
-let cart = [];
-
-
+let cart = JSON.parse(localStorage.getItem("shatterCart")) || [];
 
 
 // ==========================
-// ADD ITEM TO CART
+// ADD TO CART
 // ==========================
 
 function addToCart(productName, productPrice){
@@ -21,6 +19,8 @@ function addToCart(productName, productPrice){
 
     });
 
+
+    saveCart();
 
     updateCart();
 
@@ -36,22 +36,32 @@ function updateCart(){
 
     const cartItems = document.getElementById("cart-items");
     const cartTotal = document.getElementById("cart-total");
+    const cartCount = document.getElementById("cart-count");
+
+
+    // Update counter
+
+    if(cartCount){
+
+        cartCount.innerHTML = cart.length;
+
+    }
+
 
 
     if(!cartItems || !cartTotal){
+
         return;
+
     }
+
 
 
     if(cart.length === 0){
 
         cartItems.innerHTML = "Your cart is empty";
 
-     if(cartCount){
-
-    cartCount.innerHTML = cart.length;
-
-}
+        cartTotal.innerHTML = "0.00";
 
         return;
 
@@ -72,19 +82,17 @@ function updateCart(){
         total += item.price;
 
 
-
         cartItems.innerHTML += `
 
         <div class="cart-item">
 
             <span>
-                ${item.name}
-                - $${item.price.toFixed(2)}
+            ${item.name} - $${item.price.toFixed(2)}
             </span>
 
 
             <button onclick="removeFromCart(${index})">
-                ❌
+            ❌
             </button>
 
         </div>
@@ -100,24 +108,35 @@ function updateCart(){
 
 
 }
-const cartCount = document.getElementById("cart-count");
 
-if(cartCount){
-
-    cartCount.innerHTML = cart.length;
-
-}
 
 
 // ==========================
-// REMOVE ITEM FROM CART
+// REMOVE FROM CART
 // ==========================
 
 function removeFromCart(index){
 
     cart.splice(index,1);
 
+    saveCart();
+
     updateCart();
+
+}
+
+
+
+// ==========================
+// SAVE CART
+// ==========================
+
+function saveCart(){
+
+    localStorage.setItem(
+        "shatterCart",
+        JSON.stringify(cart)
+    );
 
 }
 
