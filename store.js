@@ -322,9 +322,11 @@ paypal.Buttons({
 
             purchase_units: [{
 
-                amount: {
+               amount: {
 
-                    value: "10.00"
+    value: cart.reduce((total, item) => total + item.price, 0).toFixed(2)
+
+}
 
                 }
 
