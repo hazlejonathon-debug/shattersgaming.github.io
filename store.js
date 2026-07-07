@@ -231,21 +231,23 @@ if(cartOverlay){
 
 const checkoutButton = document.querySelector(".checkout-btn");
 
-if(checkoutButton){
+checkoutButton.onclick = function(){
 
-    checkoutButton.onclick = function(){
+    if(cart.length === 0){
 
-        if(cart.length === 0){
+        alert("Your cart is empty!");
 
-            alert("Your cart is empty!");
+    } else {
 
-        } else {
+        alert("Checkout coming soon!");
 
-            alert("Checkout coming soon!");
+        cartSidebar.classList.remove("active");
 
-        }
+        cartOverlay.classList.remove("active");
 
-    };
+    }
+
+};
 
 }
 updateCart();
