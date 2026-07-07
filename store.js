@@ -1,7 +1,11 @@
 // ==========================
-// SHATTER'S GAMING STORE CART
+// SHATTER'S GAMING STORE
 // ==========================
 
+
+// ==========================
+// CART DATA
+// ==========================
 
 let cart = JSON.parse(localStorage.getItem("shatterCart")) || [];
 
@@ -19,41 +23,17 @@ function addToCart(productName, productPrice){
 
     });
 
-saveCart();
+    saveCart();
 
-updateCart();
+    updateCart();
 
-showNotification(productName);
-   
-}
-
-// ==========================
-// SHOW NOTIFICATION
-// ==========================
-
-function showNotification(productName){
-
-    const notification =
-        document.getElementById("cart-notification");
-
-    const text =
-        document.getElementById("notification-text");
-
-    text.innerHTML =
-        productName + " added to cart!";
-
-    notification.classList.add("show");
-
-    setTimeout(function(){
-
-        notification.classList.remove("show");
-
-    },2000);
+    showNotification(productName);
 
 }
 
+
 // ==========================
-// UPDATE CART DISPLAY
+// UPDATE CART
 // ==========================
 
 function updateCart(){
@@ -62,16 +42,11 @@ function updateCart(){
     const cartTotal = document.getElementById("cart-total");
     const cartCount = document.getElementById("cart-count");
 
-
-    // Update counter
-
     if(cartCount){
 
-        cartCount.innerHTML = cart.length;
+        cartCount.textContent = cart.length;
 
     }
-
-
 
     if(!cartItems || !cartTotal){
 
@@ -79,60 +54,43 @@ function updateCart(){
 
     }
 
-
-
     if(cart.length === 0){
 
         cartItems.innerHTML = "Your cart is empty";
 
-        cartTotal.innerHTML = "0.00";
+        cartTotal.textContent = "0.00";
 
         return;
 
     }
 
-
-
     let total = 0;
-
 
     cartItems.innerHTML = "";
 
-
-
     cart.forEach((item,index)=>{
 
-
         total += item.price;
-
 
         cartItems.innerHTML += `
 
         <div class="cart-item">
 
-            <span>
-            ${item.name} - $${item.price.toFixed(2)}
-            </span>
-
+            <span>${item.name} - $${item.price.toFixed(2)}</span>
 
             <button onclick="removeFromCart(${index})">
-            ❌
+                ❌
             </button>
 
         </div>
 
         `;
 
-
     });
 
-
-
-    cartTotal.innerHTML = total.toFixed(2);
-
+    cartTotal.textContent = total.toFixed(2);
 
 }
-
 
 
 // ==========================
@@ -150,7 +108,6 @@ function removeFromCart(index){
 }
 
 
-
 // ==========================
 // SAVE CART
 // ==========================
@@ -158,23 +115,50 @@ function removeFromCart(index){
 function saveCart(){
 
     localStorage.setItem(
+
         "shatterCart",
+
         JSON.stringify(cart)
+
     );
 
 }
 
 
-
 // ==========================
-// LOAD CART
+// SHOW NOTIFICATION
 // ==========================
 
-updateCart();
+function showNotification(productName){
+
+    const notification =
+        document.getElementById("cart-notification");
+
+    const text =
+        document.getElementById("notification-text");
+
+    if(!notification || !text){
+
+        return;
+
+    }
+
+    text.textContent = `${productName} added to your cart!`;
+
+    notification.classList.add("show");
+
+    setTimeout(function(){
+
+        notification.classList.remove("show");
+
+    },2000);
+
+}
+
+
 // ==========================
 // CART OPEN / CLOSE
 // ==========================
-
 
 const openCart = document.getElementById("open-cart");
 
@@ -183,7 +167,6 @@ const closeCart = document.getElementById("close-cart");
 const cartSidebar = document.querySelector(".cart-sidebar");
 
 const cartOverlay = document.getElementById("cart-overlay");
-
 
 
 if(openCart){
@@ -201,7 +184,6 @@ if(openCart){
 }
 
 
-
 if(closeCart){
 
     closeCart.onclick = function(){
@@ -215,7 +197,6 @@ if(closeCart){
 }
 
 
-
 if(cartOverlay){
 
     cartOverlay.onclick = function(){
@@ -227,3 +208,10 @@ if(cartOverlay){
     };
 
 }
+
+
+// ==========================
+// INITIALIZE STORE
+// ==========================
+
+updateCart();
