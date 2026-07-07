@@ -929,3 +929,7 @@ nav a{
         0 0 20px #b026ff;
 
 }
+.hidden{
+    opacity:1 !important;
+    transform:none !important;
+}
