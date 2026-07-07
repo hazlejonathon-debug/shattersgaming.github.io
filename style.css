@@ -1430,8 +1430,60 @@ footer p{
 
 }
 /* ==========================
+   FOOTER SOCIAL BUTTONS
+========================== */
+
+footer .social-links{
+    ...
+}
+
+
+/* ==========================
    FINAL POLISH EFFECTS
 ========================== */
+
+section h2{
+
+    text-shadow:
+        0 0 10px #39ff14,
+        0 0 20px rgba(176,38,255,.7);
+
+}
+
+
+::-webkit-scrollbar{
+
+    width:12px;
+
+}
+
+
+::-webkit-scrollbar-track{
+
+    background:#050505;
+
+}
+
+
+::-webkit-scrollbar-thumb{
+
+    background:linear-gradient(
+        #39ff14,
+        #b026ff
+    );
+
+    border-radius:20px;
+
+}
+
+
+::selection{
+
+    background:#39ff14;
+
+    color:#000;
+
+}
 
 
 /* ==========================
