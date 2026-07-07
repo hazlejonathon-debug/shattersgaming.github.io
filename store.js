@@ -412,11 +412,38 @@ document.getElementById(
    START STORE
 ========================================== */
 
-
 document.addEventListener(
 "DOMContentLoaded",
 function(){
 
     updateCart();
 
+
+    // ==========================
+    // CHECKOUT BUTTON
+    // ==========================
+
+    const checkoutButton =
+    document.querySelector(".checkout-btn");
+
+
+    const checkoutPopup =
+    document.getElementById("checkout-popup");
+
+
+    if(checkoutButton && checkoutPopup){
+
+
+        checkoutButton.onclick = function(){
+
+            checkoutPopup.style.display = "flex";
+
+        };
+
+
+    }
+
+
+
 });
+
