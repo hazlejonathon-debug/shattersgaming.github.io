@@ -902,3 +902,20 @@ nav a:hover{
         0 0 40px #b026ff;
 
 }
+/* PAYMENT SUCCESS POPUP FIX */
+
+#payment-success-popup {
+    z-index: 200000;
+}
+
+
+#payment-success-popup .checkout-box {
+    z-index: 200001;
+}
+
+
+#close-payment-success {
+    position: relative;
+    z-index: 200002;
+    pointer-events: auto;
+}
