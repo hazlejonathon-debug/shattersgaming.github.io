@@ -334,16 +334,21 @@ paypal.Buttons({
 
     },
 
-    onApprove: function(data, actions){
+   onApprove: function(data, actions){
 
-        return actions.order.capture().then(function(details){
+    return actions.order.capture().then(function(details){
 
-            alert(
-                "Payment completed by " + details.payer.name.given_name
-            );
+        const paymentPopup = document.getElementById("payment-success-popup");
 
-        });
+        const paymentMessage = document.getElementById("payment-success-message");
 
-    }
+        paymentMessage.textContent =
+        "Thanks " + details.payer.name.given_name + "! Your order is complete.";
+
+        paymentPopup.classList.add("active");
+
+    });
+
+}, 
 
 }).render("#paypal-button-container");
