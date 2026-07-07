@@ -226,23 +226,75 @@ if(cartOverlay){
 
 const checkoutButton = document.querySelector(".checkout-btn");
 
-checkoutButton.onclick = function(){
+const checkoutPopup = document.getElementById("checkout-popup");
 
-    if(cart.length === 0){
+const closeCheckoutPopup = document.getElementById("close-checkout-popup");
 
-        alert("Your cart is empty!");
+const cancelCheckout = document.getElementById("cancel-checkout");
 
-    } else {
+const confirmCheckout = document.getElementById("confirm-checkout");
+
+
+if(checkoutButton){
+
+    checkoutButton.onclick = function(){
+
+        if(cart.length === 0){
+
+            alert("Your cart is empty!");
+
+        } else {
+
+            checkoutPopup.classList.add("active");
+
+        }
+
+    };
+
+}
+
+
+// CLOSE POPUP
+
+if(closeCheckoutPopup){
+
+    closeCheckoutPopup.onclick = function(){
+
+        checkoutPopup.classList.remove("active");
+
+    };
+
+}
+
+
+if(cancelCheckout){
+
+    cancelCheckout.onclick = function(){
+
+        checkoutPopup.classList.remove("active");
+
+    };
+
+}
+
+
+// CONTINUE CHECKOUT
+
+if(confirmCheckout){
+
+    confirmCheckout.onclick = function(){
 
         alert("Checkout coming soon!");
+
+        checkoutPopup.classList.remove("active");
 
         cartSidebar.classList.remove("active");
 
         cartOverlay.classList.remove("active");
 
-    }
+    };
 
-};
+}
 
 
 // ==========================
