@@ -808,3 +808,11 @@ nav a:hover{
     position: relative;
     z-index: 10;
 }
+#paypal-button-container {
+    pointer-events: none;
+}
+
+.checkout-actions,
+.checkout-actions button {
+    pointer-events: auto;
+}
