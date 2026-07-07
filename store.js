@@ -5,6 +5,8 @@
 
 let cart = [];
 
+let cartCount = document.getElementById("cart-count");
+
 
 // ==========================
 // ADD ITEM TO CART
@@ -45,7 +47,11 @@ function updateCart(){
 
         cartItems.innerHTML = "Your cart is empty";
 
-        cartTotal.innerHTML = "0.00";
+     if(cartCount){
+
+    cartCount.innerHTML = cart.length;
+
+}
 
         return;
 
