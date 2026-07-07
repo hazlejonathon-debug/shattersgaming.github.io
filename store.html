@@ -237,26 +237,37 @@ onclick="clearCart()">
      CUSTOM CHECKOUT POPUP
 ========================== -->
 
-<div id="checkout-popup" class="hidden">
+
+     
+<script src="store.js"></script>
+<!-- ==========================
+     CUSTOM CHECKOUT POPUP
+========================== -->
+
+<div id="checkout-popup" class="checkout-overlay">
 
     <div class="checkout-box">
 
+        <button id="close-checkout-popup" class="popup-close">
+            ✕
+        </button>
+
         <h2>
-            💳 Checkout
+            💳 Ready to Checkout?
         </h2>
 
-        <p id="checkout-popup-message">
-            Are you ready to checkout?
+        <p>
+            Are you sure you want to continue?
         </p>
 
         <div class="checkout-actions">
 
             <button id="confirm-checkout">
-                ✅ Continue
+                Continue
             </button>
 
-            <button id="close-checkout-popup">
-                ❌ Cancel
+            <button id="cancel-checkout">
+                Cancel
             </button>
 
         </div>
@@ -264,9 +275,6 @@ onclick="clearCart()">
     </div>
 
 </div>
-     
-<script src="store.js"></script>
-
 
 </body>
 </html>
