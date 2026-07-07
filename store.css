@@ -510,3 +510,55 @@ nav a:hover{
     color:white;
 
 }
+/* ==========================
+   ADD TO CART NOTIFICATION
+========================== */
+
+#cart-notification{
+
+    position:fixed;
+
+    top:30px;
+    right:-450px;
+
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    padding:18px 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #39ff14,
+            #b026ff
+        );
+
+    color:white;
+
+    font-weight:bold;
+    font-size:17px;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 0 25px rgba(57,255,20,.5),
+        0 0 35px rgba(176,38,255,.5);
+
+    z-index:99999;
+
+    transition:.45s ease;
+
+}
+
+#cart-notification.show{
+
+    right:30px;
+
+}
+
+#cart-notification i{
+
+    font-size:24px;
+
+}
