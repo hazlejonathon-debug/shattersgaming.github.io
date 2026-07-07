@@ -799,3 +799,12 @@ nav a:hover{
     color: #39ff14;
 
 }
+#paypal-button-container {
+    position: relative;
+    z-index: 1;
+}
+
+.checkout-actions {
+    position: relative;
+    z-index: 10;
+}
