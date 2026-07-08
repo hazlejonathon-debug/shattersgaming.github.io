@@ -607,66 +607,56 @@ value:getCartTotal()
 },
 
 
-
 onApprove:function(data,actions){
 
 
-    return actions.order.capture()
+return actions.order.capture()
 
-    .then(async function(details){
-
-
-        console.log(
-            "Payment completed",
-            details
-        );
+.then(async function(details){
 
 
-        /* FIREBASE SAVE */
-
-        if(
-            window.db &&
-            window.addDoc &&
-            window.collection
-        ){
+console.log(
+"Payment completed",
+details
+);
 
 
-            await window.addDoc(
+/* FIREBASE SAVE */
 
-                window.collection(
-                    window.db,
-                    "orders"
-                ),
-
-                {
-
-                    customerName:"Test Customer",
-
-                    email:"test@email.com",
-
-                    items:cart,
-
-                    total:cartTotal,
-
-                    paypalOrderID:data.orderID,
-
-                    status:"Ready for Printify",
-
-                    createdAt:
-                    window.serverTimestamp()
-
-                }
-
-            );
+if(
+window.db &&
+window.addDoc &&
+window.collection
+){
 
 
-        }
+await window.addDoc(
 
+window.collection(
+window.db,
+"orders"
+),
 
-    });
+{
 
+customerName:"Test Customer",
+
+email:"test@email.com",
+
+items:cart,
+
+total:getCartTotal(),
+
+paypalOrderID:data.orderID,
+
+status:"Ready for Printify",
+
+createdAt:
+window.serverTimestamp()
 
 }
+
+);
 
 
 console.log(
@@ -674,6 +664,51 @@ console.log(
 );
 
 
+}
+
+
+
+/* SUCCESS POPUP */
+
+
+document
+.getElementById(
+"checkout-popup"
+)
+.classList.remove("active");
+
+
+
+document
+.getElementById(
+"payment-success-popup"
+)
+.classList.add("active");
+
+
+
+cart=[];
+
+
+saveCart();
+
+updateCart();
+
+
+container.innerHTML="";
+
+
+confirmCheckout.disabled=false;
+
+
+confirmCheckout.innerHTML=
+"Continue";
+
+
+});
+
+
+},
 }
 
 
