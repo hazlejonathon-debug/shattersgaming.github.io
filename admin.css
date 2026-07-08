@@ -309,3 +309,53 @@ select option{
     0 0 15px #ff3131;
 
 }
+/* ==========================
+   ADMIN SEARCH BAR
+========================== */
+
+
+.admin-search{
+
+    margin-bottom:30px;
+
+}
+
+
+#order-search{
+
+    width:100%;
+
+    max-width:500px;
+
+    padding:15px 20px;
+
+    background:#111;
+
+    color:white;
+
+    border:2px solid #39ff14;
+
+    border-radius:12px;
+
+    font-family:'Orbitron',sans-serif;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+
+#order-search::placeholder{
+
+    color:#888;
+
+}
+
+
+#order-search:focus{
+
+    box-shadow:
+    0 0 15px #39ff14;
+
+}
