@@ -175,32 +175,59 @@ font-weight:bold;
 }
 
 /* ==========================
-   ADMIN CONTROLS
+   REALISTIC STATUS DROPDOWN
 ========================== */
-
 
 select{
 
-    background:#050505;
+    appearance:none;
 
-    color:#39ff14;
+    background:
+    linear-gradient(
+        145deg,
+        #151515,
+        #050505
+    );
 
-    border:2px solid #39ff14;
+    color:white;
 
-    padding:10px;
+    border:1px solid #39ff14;
 
-    border-radius:8px;
+    padding:12px 45px 12px 15px;
+
+    border-radius:10px;
 
     font-family:'Orbitron', sans-serif;
 
+    font-size:14px;
+
     cursor:pointer;
 
-    margin:10px 0;
+    outline:none;
+
+    transition:.3s;
+
+    position:relative;
 
 }
 
 
+/* hover */
+
 select:hover{
+
+    border-color:#8a2be2;
+
+    box-shadow:
+    0 0 10px #8a2be255;
+
+}
+
+
+
+/* focus */
+
+select:focus{
 
     box-shadow:
     0 0 15px #39ff14;
@@ -209,35 +236,42 @@ select:hover{
 
 
 
+/* dropdown options */
+
 select option{
 
     background:#111;
 
     color:white;
 
+    padding:10px;
+
 }
-
-
+/* ==========================
+   ADMIN ORDER BUTTONS
+========================== */
 
 .order-card button{
 
+    margin-top:15px;
+
     background:#39ff14;
 
-    color:black;
+    color:#050505;
 
     border:none;
 
-    padding:12px 18px;
+    padding:12px 20px;
 
     border-radius:8px;
-
-    font-family:'Orbitron', sans-serif;
 
     font-weight:bold;
 
     cursor:pointer;
 
     transition:.3s;
+
+    font-family:'Orbitron', sans-serif;
 
 }
 
@@ -249,17 +283,8 @@ select option{
 
     color:white;
 
-    box-shadow:
-    0 0 15px #8a2be2;
+    transform:translateY(-2px);
 
-}
-
-
-
-.status{
-
-    color:#39ff14;
-
-    font-weight:bold;
+    box-shadow:0 0 15px #8a2be2;
 
 }
