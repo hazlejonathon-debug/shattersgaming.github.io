@@ -240,15 +240,16 @@ async function loadOrders(){
 
                 </select>
 
+<button onclick="updateOrderStatus('${orderID}')">
+    💾 Save Status
+</button>
 
 
-                <button onclick="updateOrderStatus('${orderID}')">
-                
-                🗑️ Delete Order
+<button onclick="deleteOrder('${orderID}')">
+    🗑️ Delete Order
+</button>
 
-                💾 Save Status
-
-                </button>
+              
 
 
 
