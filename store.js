@@ -181,9 +181,22 @@ cart.forEach((item,index)=>{
 
     <div class="cart-item">
 
-        <span>
-        ${item.name}
-        </span>
+      <span>
+${item.name}
+
+${
+item.size 
+? `<br>Size: ${item.size}` 
+: ""
+}
+
+${
+item.color 
+? `<br>Color: ${item.color}` 
+: ""
+}
+
+</span>
 
 
         <span>
