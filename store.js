@@ -608,78 +608,65 @@ value:getCartTotal()
 
 
 
-
 onApprove:function(data,actions){
 
 
-return actions.order.capture()
-.then(async function(details){
+    return actions.order.capture()
+
+    .then(async function(details){
 
 
-
-console.log(
-"Payment completed",
-details
-);
-
+        console.log(
+            "Payment completed",
+            details
+        );
 
 
-/* FIREBASE SAVE */
+        /* FIREBASE SAVE */
+
+        if(
+            window.db &&
+            window.addDoc &&
+            window.collection
+        ){
 
 
-if(
-window.db &&
-window.addDoc &&
-window.collection
-){
+            await window.addDoc(
+
+                window.collection(
+                    window.db,
+                    "orders"
+                ),
+
+                {
+
+                    customerName:"Test Customer",
+
+                    email:"test@email.com",
+
+                    items:cart,
+
+                    total:cartTotal,
+
+                    paypalOrderID:data.orderID,
+
+                    status:"Ready for Printify",
+
+                    createdAt:
+                    window.serverTimestamp()
+
+                }
+
+            );
 
 
-await window.addDoc(
-
-window.collection(
-window.db,
-"orders"
-),
-
-{
+        }
 
 
-customerName:
-details.payer.name.given_name
-+
-" "
-+
-details.payer.name.surname,
-
-
-email:
-details.payer.email_address,
-
-
-items:cart,
-
-
-total:Number(
-getCartTotal()
-),
-
-
-paypalOrderID:
-data.orderID,
-
-
-status:
-"Ready for Printify",
-
-
-createdAt:
-window.serverTimestamp()
+    });
 
 
 }
-
-
-);
 
 
 console.log(
