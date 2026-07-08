@@ -408,7 +408,7 @@ function(){
         paymentContinue.onclick = function(){
 
 
-            paymentPopup.style.display = "none";
+          paymentPopup.classList.remove("active");  
 
 
         };
