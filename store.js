@@ -469,31 +469,24 @@ function(){
 
 });
 
-// ==========================
-// CONFIRM CHECKOUT BUTTON
-// LOAD PAYPAL
-// ==========================
+/* ==========================
+   CONFIRM CHECKOUT BUTTON
+========================== */
 
 const confirmCheckout =
 document.getElementById("confirm-checkout");
 
-
 if(confirmCheckout){
-
 
     confirmCheckout.onclick = function(){
 
+        // Disable button while PayPal loads
+        confirmCheckout.disabled = true;
+        confirmCheckout.innerHTML = "Loading...";
 
-        // Hide the Continue / Cancel buttons
-        document.querySelector(".checkout-actions").style.display = "none";
-
-
-        // Load PayPal
         loadPayPal();
 
-
     };
-
 
 }
 
@@ -506,11 +499,14 @@ function loadPayPal() {
     const paypalContainer =
         document.getElementById("paypal-button-container");
 
+    const checkoutActions =
+        document.querySelector(".checkout-actions");
+
     paypalContainer.innerHTML = "";
 
     paypal.Buttons({
 
-        createOrder: function (data, actions) {
+        createOrder: function(data, actions){
 
             return actions.order.create({
 
@@ -523,142 +519,86 @@ function loadPayPal() {
             });
 
         },
-onApprove: function (data, actions) {
 
-    return actions.order.capture().then(function (details) {
+        onApprove: function(data, actions){
 
-        console.log("Payment Complete");
-       
-// SAVE ORDER TO FIREBASE
-console.log("Firebase test:", db, collection, addDoc);
+            return actions.order.capture().then(function(details){
 
-        
-addDoc(
-    collection(db, "orders"),
-    {
+                // Hide popup
+                document
+                    .getElementById("checkout-popup")
+                    .classList.remove("active");
 
-        customerName:
-        details.payer.name.given_name +
-        " " +
-        details.payer.name.surname,
+                // Show success popup
+                document
+                    .getElementById("payment-success-popup")
+                    .classList.add("active");
 
-        email:
-        details.payer.email_address,
+                paypalContainer.innerHTML = "";
 
-        items:
-        cart,
+                checkoutActions.style.display = "flex";
 
-        total:
-        getCartTotal(),
+                confirmCheckout.disabled = false;
+                confirmCheckout.innerHTML = "Continue";
 
-        paypalOrderID:
-        data.orderID,
+                cart = [];
 
-        status:
-        "Ready for Printify",
+                saveCart();
+                updateCart();
 
-        createdAt:
-        serverTimestamp()
-
-    }
-)
-.then(() => {
-
-    console.log("🔥 Order saved to Firebase");
-
-})
-.catch((error)=>{
-
-    console.error(
-        "Firebase order error:",
-        error
-    );
-
-});
-        // Customer information
-        console.log("Customer:", details.payer.name.given_name + " " + details.payer.name.surname);
-        console.log("Email:", details.payer.email_address);
-
-        if (details.purchase_units[0].shipping) {
-
-            const shipping = details.purchase_units[0].shipping;
-
-            console.log("Ship To:", shipping.name.full_name);
-            console.log("Address:", shipping.address.address_line_1);
-            console.log("City:", shipping.address.admin_area_2);
-            console.log("State:", shipping.address.admin_area_1);
-            console.log("ZIP:", shipping.address.postal_code);
-            console.log("Country:", shipping.address.country_code);
-
-        }
-
-        console.log("Items Ordered:", cart);
-
-        // Close checkout popup
-        document
-            .getElementById("checkout-popup")
-            .classList.remove("active");
-
-        // Show success popup
-        document
-            .getElementById("payment-success-popup")
-            .classList.add("active");
-
-        // Reset PayPal area
-        document
-            .getElementById("paypal-button-container")
-            .innerHTML = "";
-
-        // Show buttons again
-        document
-            .querySelector(".checkout-actions")
-            .style.display = "flex";
-
-        // Empty cart
-        cart = [];
-
-        saveCart();
-        updateCart();
-
-    });
-
-},
-
-        onCancel: function () {
-
-            alert("Payment cancelled.");
-
-            document
-                .querySelector(".checkout-actions")
-                .style.display = "flex";
-
-            document
-                .getElementById("paypal-button-container")
-                .innerHTML = "";
+            });
 
         },
 
-        onError: function (err) {
+        onCancel: function(){
+
+            paypalContainer.innerHTML = "";
+
+            checkoutActions.style.display = "flex";
+
+            confirmCheckout.disabled = false;
+            confirmCheckout.innerHTML = "Continue";
+
+        },
+
+        onError: function(err){
 
             console.error(err);
 
             alert("PayPal encountered an error.");
 
-            document
-                .querySelector(".checkout-actions")
-                .style.display = "flex";
+            paypalContainer.innerHTML = "";
 
-            document
-                .getElementById("paypal-button-container")
-                .innerHTML = "";
+            checkoutActions.style.display = "flex";
+
+            confirmCheckout.disabled = false;
+            confirmCheckout.innerHTML = "Continue";
 
         }
 
-    }).render("#paypal-button-container");
+    }).render("#paypal-button-container")
+
+    .then(function(){
+
+        // Only hide the buttons AFTER PayPal successfully renders
+        checkoutActions.style.display = "none";
+
+    })
+
+    .catch(function(error){
+
+        console.error("PayPal failed to load:", error);
+
+        paypalContainer.innerHTML = "";
+
+        checkoutActions.style.display = "flex";
+
+        confirmCheckout.disabled = false;
+        confirmCheckout.innerHTML = "Continue";
+
+    });
 
 }
-
-
 
 /* ==========================
    GET CART TOTAL
