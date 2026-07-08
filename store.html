@@ -93,10 +93,6 @@ onclick="addToCart('Classic Tee',25)">
 
 </div>
 
-
-
-
-
 <div class="product-card">
 
 <img src="images/shattersweatshirt.jpg" alt="Elite Hoodie">
@@ -105,16 +101,58 @@ onclick="addToCart('Classic Tee',25)">
 Elite Hoodie
 </h3>
 
-
 <p class="price">
 $45.00
 </p>
 
 
+<label>
+Size:
+</label>
+
+<select id="hoodie-size">
+    <option value="Small">Small</option>
+    <option value="Medium" selected>Medium</option>
+    <option value="Large">Large</option>
+    <option value="XL">XL</option>
+    <option value="2XL">2XL</option>
+</select>
+
+
+<br><br>
+
+
+<label>
+Color:
+</label>
+
+<select id="hoodie-color">
+
+    <option value="Black" selected>
+        Black
+    </option>
+
+</select>
+
+
+
 <button class="add-cart"
-onclick="addToCart('Elite Hoodie',45)"> 
+onclick="addHoodieToCart()">
+
 🛒 Add To Cart
+
 </button>
+
+
+</div>
+
+
+
+<div class="product-card">
+
+<img src="images/shattersweatshirt.jpg" alt="Elite Hoodie">
+
+
 
 
 </div>
