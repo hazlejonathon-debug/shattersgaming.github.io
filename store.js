@@ -428,6 +428,15 @@ const confirmCheckout =
 document.getElementById("confirm-checkout");
 
 
+const checkoutPopup =
+document.getElementById("checkout-popup");
+
+
+const paymentPopup =
+document.getElementById("payment-success-popup");
+
+
+
 if(confirmCheckout){
 
 
@@ -438,11 +447,8 @@ if(confirmCheckout){
         checkoutPopup.classList.remove("active");
 
 
-        // Open payment success popup
-        const paymentPopup =
-        document.getElementById("payment-success-popup");
 
-
+        // Open payment complete popup
         if(paymentPopup){
 
             paymentPopup.classList.add("active");
