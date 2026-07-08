@@ -1,10 +1,6 @@
 /* ==========================================
    SHATTER'S GAMING STORE.JS
 ========================================== */
-const db = window.db;
-const collection = window.collection;
-const addDoc = window.addDoc;
-const serverTimestamp = window.serverTimestamp;
 
 console.log("Firebase Objects:", {
     db,
@@ -530,7 +526,46 @@ function loadPayPal() {
         onApprove: function(data, actions){
 
             return actions.order.capture().then(function(details){
+               
+const db = window.db;
+const collection = window.collection;
+const addDoc = window.addDoc;
+const serverTimestamp = window.serverTimestamp;
 
+               addDoc(
+    collection(db, "orders"),
+    {
+
+        customerName:
+            details.payer.name.given_name +
+            " " +
+            details.payer.name.surname,
+
+        email:
+            details.payer.email_address,
+
+        items: cart,
+
+        total: getCartTotal(),
+
+        paypalOrderID: data.orderID,
+
+        status: "Ready for Printify",
+
+        createdAt: serverTimestamp()
+
+    }
+)
+.then(() => {
+
+    console.log("🔥 Order saved to Firebase");
+
+})
+.catch((error) => {
+
+    console.error("Firebase Error:", error);
+
+});
                 // Hide popup
                 document
                     .getElementById("checkout-popup")
