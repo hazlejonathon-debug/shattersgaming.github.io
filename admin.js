@@ -60,118 +60,59 @@ async function loadOrders(){
 
             ordersDiv.innerHTML = `
 
-            <div class="product-card">
-
-                <h3>
-                No Orders Yet
-                </h3>
-
-                <p>
-                Orders will appear here after payment.
-                </p>
-
-            </div>
-
-            `;
+       <div class="order-card">
 
 
-            return;
-
-        }
-
-
-
-        snapshot.forEach((doc)=>{
+<h2>
+🎮 ${order.customerName || "Unknown Customer"}
+</h2>
 
 
-            const order = doc.data();
+<p>
+📧 ${order.email || "No Email"}
+</p>
 
 
-
-            ordersDiv.innerHTML += `
-
-
-            <div class="product-card">
-
-
-                <h3>
-                🎮 ${order.customerName || "Unknown"}
-                </h3>
+<p>
+💰 Total:
+$${order.total}
+</p>
 
 
-                <p>
-                📧 ${order.email || "No Email"}
-                </p>
+<p>
+📦 Status:
+<span class="status">
+${order.status}
+</span>
+</p>
 
 
-                <p>
-                💰 Total:
-                $${order.total}
-                </p>
+<h3>
+Items
+</h3>
 
 
-                <p>
-                📦 Status:
-                ${order.status}
-                </p>
+${order.items.map(item=>`
+
+<div class="item">
+
+${item.name}
+
+<br>
+
+Quantity:
+${item.quantity}
 
 
-                <h4>
-                Items:
-                </h4>
+${item.size ? `<br>Size: ${item.size}` : ""}
 
 
-                ${order.items.map(item => `
-
-                    <p>
-                    ${item.name}
-                    x${item.quantity}
-
-                    ${
-                    item.size 
-                    ? " | Size: " + item.size 
-                    : ""
-                    }
-
-                    ${
-                    item.color 
-                    ? " | Color: " + item.color 
-                    : ""
-                    }
-
-                    </p>
-
-                `).join("")}
+${item.color ? `<br>Color: ${item.color}` : ""}
 
 
-            </div>
+</div>
+
+`).join("")}
 
 
-            `;
-
-
-        });
-
-
-
-    }
-    catch(error){
-
-
-        console.error(
-            "❌ Admin Firebase Error:",
-            error
-        );
-
-
-        ordersDiv.innerHTML =
-        "Error loading orders.";
-
-    }
-
-
-}
-
-
-
-loadOrders();
+</div>   
