@@ -522,7 +522,51 @@ onApprove: function (data, actions) {
     return actions.order.capture().then(function (details) {
 
         console.log("Payment Complete");
+       
+// SAVE ORDER TO FIREBASE
 
+addDoc(
+    collection(db, "orders"),
+    {
+
+        customerName:
+        details.payer.name.given_name +
+        " " +
+        details.payer.name.surname,
+
+        email:
+        details.payer.email_address,
+
+        items:
+        cart,
+
+        total:
+        getCartTotal(),
+
+        paypalOrderID:
+        data.orderID,
+
+        status:
+        "Ready for Printify",
+
+        createdAt:
+        serverTimestamp()
+
+    }
+)
+.then(() => {
+
+    console.log("🔥 Order saved to Firebase");
+
+})
+.catch((error)=>{
+
+    console.error(
+        "Firebase order error:",
+        error
+    );
+
+});
         // Customer information
         console.log("Customer:", details.payer.name.given_name + " " + details.payer.name.surname);
         console.log("Email:", details.payer.email_address);
