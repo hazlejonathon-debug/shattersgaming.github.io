@@ -1,14 +1,12 @@
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
-
-import { 
+import {
     getFirestore,
     collection,
     getDocs
-} 
+}
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
-
 
 
 const firebaseConfig = {
@@ -28,15 +26,13 @@ const firebaseConfig = {
 };
 
 
-
 const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
 
 
-const ordersDiv = 
-document.getElementById("orders");
+const ordersDiv = document.getElementById("orders");
 
 
 
@@ -60,59 +56,136 @@ async function loadOrders(){
 
             ordersDiv.innerHTML = `
 
-       <div class="order-card">
+            <div class="order-card">
+
+                <h2>
+                No Orders Yet
+                </h2>
+
+                <p>
+                Orders will appear here after payment.
+                </p>
+
+            </div>
+
+            `;
 
 
-<h2>
-🎮 ${order.customerName || "Unknown Customer"}
-</h2>
+            return;
+
+        }
 
 
-<p>
-📧 ${order.email || "No Email"}
-</p>
+
+        snapshot.forEach((doc)=>{
 
 
-<p>
-💰 Total:
-$${order.total}
-</p>
+            const order = doc.data();
 
 
-<p>
-📦 Status:
-<span class="status">
-${order.status}
-</span>
-</p>
+
+            ordersDiv.innerHTML += `
 
 
-<h3>
-Items
-</h3>
+            <div class="order-card">
 
 
-${order.items.map(item=>`
-
-<div class="item">
-
-${item.name}
-
-<br>
-
-Quantity:
-${item.quantity}
+                <h2>
+                🎮 ${order.customerName || "Unknown"}
+                </h2>
 
 
-${item.size ? `<br>Size: ${item.size}` : ""}
+                <p>
+                📧 ${order.email || "No Email"}
+                </p>
 
 
-${item.color ? `<br>Color: ${item.color}` : ""}
+                <p>
+                💰 Total:
+                $${order.total}
+                </p>
 
 
-</div>
+                <p>
+                📦 Status:
+                <span class="status">
+                ${order.status || "Pending"}
+                </span>
+                </p>
 
-`).join("")}
+
+                <h3>
+                Items
+                </h3>
 
 
-</div>   
+
+                ${
+                    order.items.map(item => `
+
+                    <div class="item">
+
+                        ${item.name}
+
+                        <br>
+
+                        Quantity:
+                        ${item.quantity}
+
+
+                        ${
+                            item.size
+                            ? `<br>Size: ${item.size}`
+                            : ""
+                        }
+
+
+                        ${
+                            item.color
+                            ? `<br>Color: ${item.color}`
+                            : ""
+                        }
+
+
+                    </div>
+
+
+                    `).join("")
+                }
+
+
+
+            </div>
+
+
+            `;
+
+
+        });
+
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Admin Firebase Error:",
+            error
+        );
+
+
+        ordersDiv.innerHTML =
+        "Error loading orders.";
+
+
+    }
+
+
+}
+
+
+
+loadOrders();
