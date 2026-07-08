@@ -672,13 +672,33 @@ function addHoodieToCart(){
     document.getElementById("hoodie-color").value;
 
 
-    const hoodieName =
-    "Elite Hoodie - " + size + " / " + color;
+    cart.push({
 
-addToCart(
-"Elite Hoodie",
-59.99,
-"Gildan 18000",
-"Printify Hoodie ID"
-)
+        name: "Elite Hoodie",
+
+        size: size,
+
+        color: color,
+
+        price: 59.99,
+
+        quantity: 1,
+
+        provider: "Printify",
+
+        product: "Gildan 18000"
+
+    });
+
+
+    saveCart();
+
+    updateCart();
+
+
+    showNotification(
+        "Elite Hoodie added!"
+    );
+
+}
   
