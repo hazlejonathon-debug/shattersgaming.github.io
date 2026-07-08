@@ -492,11 +492,30 @@ function loadPayPal(){
 
 
 
-        onApprove:function(data, actions){
+     onApprove:function(data, actions){
 
+    return actions.order.capture().then(function(details){
 
-            return actions.order.capture().then(function(details){
+        console.log("PAYMENT APPROVED");
 
+        alert("Payment Approved!");
+
+        // Close checkout popup
+        checkoutPopup.classList.remove("active");
+
+        // Show success popup
+        document
+            .getElementById("payment-success-popup")
+            .classList.add("active");
+
+        // Clear cart
+        cart = [];
+        saveCart();
+        updateCart();
+
+    });
+
+}
 
                 // Close checkout popup
                 checkoutPopup.classList.remove("active");
