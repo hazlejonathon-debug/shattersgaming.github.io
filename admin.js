@@ -1,5 +1,11 @@
+/* ==========================================
+   SHATTER'S GAMING ADMIN DASHBOARD
+========================================== */
+
+
 import { initializeApp } 
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
 
 import {
     getFirestore,
@@ -9,6 +15,12 @@ import {
     updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+
+
+/* ==========================================
+   FIREBASE CONFIG
+========================================== */
 
 
 const firebaseConfig = {
@@ -28,25 +40,35 @@ const firebaseConfig = {
 };
 
 
+
 const app = initializeApp(firebaseConfig);
+
 
 const db = getFirestore(app);
 
 
 
-const ordersDiv = document.getElementById("orders");
+const ordersDiv =
+document.getElementById("orders");
 
+
+
+/* ==========================================
+   LOAD ORDERS
+========================================== */
 
 
 async function loadOrders(){
 
 
-    try {
+    try{
 
 
-        const snapshot = await getDocs(
+        const snapshot =
+        await getDocs(
             collection(db,"orders")
         );
+
 
 
         ordersDiv.innerHTML = "";
@@ -75,150 +97,177 @@ async function loadOrders(){
 
             return;
 
+
         }
 
 
-snapshot.forEach((document)=>{
+
+        snapshot.forEach((document)=>{
 
 
-const order = document.data();
-
-const orderID = document.id;
-
+            const order =
+            document.data();
 
 
-ordersDiv.innerHTML += `
-
-
-<div class="order-card">
-
-
-<h2>
-🎮 ${order.customerName || "Unknown"}
-</h2>
-
-
-<p>
-📧 ${order.email || "No Email"}
-</p>
-
-
-<p>
-💰 Total:
-$${order.total}
-</p>
-
-
-<p>
-PayPal ID:
-${order.paypalOrderID || "N/A"}
-</p>
-
-
-<h3>
-Items
-</h3>
+            const orderID =
+            document.id;
 
 
 
-${
-order.items.map(item=>`
-
-<div class="item">
-
-${item.name}
-
-<br>
-
-Quantity:
-${item.quantity}
+            ordersDiv.innerHTML += `
 
 
-${
-item.size
-?
-`<br>Size: ${item.size}`
-:
-""
-}
+            <div class="order-card">
 
 
-${
-item.color
-?
-`<br>Color: ${item.color}`
-:
-""
-}
+                <h2>
+                🎮 ${order.customerName || "Unknown Customer"}
+                </h2>
 
 
-</div>
+                <p>
+                📧 ${order.email || "No Email"}
+                </p>
 
 
-`).join("")
-}
+                <p>
+                💰 Total:
+                $${order.total}
+                </p>
+
+
+                <p>
+                🆔 PayPal:
+                ${order.paypalOrderID || "N/A"}
+                </p>
 
 
 
-<br>
-
-
-<label>
-Order Status:
-</label>
-
-
-<select id="status-${orderID}">
-
-
-<option ${order.status=="Ready for Printify"?"selected":""}>
-Ready for Printify
-</option>
-
-
-<option ${order.status=="Printing"?"selected":""}>
-Printing
-</option>
-
-
-<option ${order.status=="Shipped"?"selected":""}>
-Shipped
-</option>
-
-
-<option ${order.status=="Complete"?"selected":""}>
-Complete
-</option>
-
-
-</select>
+                <p>
+                📦 Status:
+                <span class="status">
+                ${order.status || "Pending"}
+                </span>
+                </p>
 
 
 
-<button onclick="updateOrderStatus('${orderID}')">
-
-💾 Save Status
-
-</button>
+                <h3>
+                Items
+                </h3>
 
 
 
-</div>
+                ${
+                order.items.map(item=>`
+
+                <div class="item">
+
+                    🎮 ${item.name}
+
+                    <br>
+
+                    Quantity:
+                    ${item.quantity}
 
 
-`;
+                    ${
+                    item.size
+                    ?
+                    `<br>Size: ${item.size}`
+                    :
+                    ""
+                    }
+
+
+                    ${
+                    item.color
+                    ?
+                    `<br>Color: ${item.color}`
+                    :
+                    ""
+                    }
+
+
+                </div>
+
+
+                `).join("")
+                }
 
 
 
-});
-      
+                <br>
+
+
+
+                <label>
+                Update Status:
+                </label>
+
+
+
+                <select id="status-${orderID}">
+
+
+                    <option value="Ready for Printify"
+                    ${order.status==="Ready for Printify"?"selected":""}>
+                    Ready for Printify
+                    </option>
+
+
+
+                    <option value="Printing"
+                    ${order.status==="Printing"?"selected":""}>
+                    Printing
+                    </option>
+
+
+
+                    <option value="Shipped"
+                    ${order.status==="Shipped"?"selected":""}>
+                    Shipped
+                    </option>
+
+
+
+                    <option value="Complete"
+                    ${order.status==="Complete"?"selected":""}>
+                    Complete
+                    </option>
+
+
+                </select>
+
+
+
+                <button onclick="updateOrderStatus('${orderID}')">
+
+                💾 Save Status
+
+                </button>
+
+
+
+            </div>
+
+
+            `;
+
+
+
+        });
+
+
+
+    }
 
 
     catch(error){
 
 
         console.error(
-            "Admin Firebase Error:",
+            "Firebase Admin Error:",
             error
         );
 
@@ -234,60 +283,89 @@ Complete
 
 
 
-loadOrders();
-window.updateOrderStatus = async function(orderID){
+
+/* ==========================================
+   UPDATE ORDER STATUS
+========================================== */
 
 
-const status =
-document.getElementById(
-"status-" + orderID
-).value;
-
-
-
-try{
-
-
-await updateDoc(
-
-doc(db,"orders",orderID),
-
-{
-
-status:status
-
-}
-
-);
+window.updateOrderStatus =
+async function(orderID){
 
 
 
-alert(
-"✅ Order updated!"
-);
+    const newStatus =
+    document.getElementById(
+        "status-" + orderID
+    ).value;
 
 
-loadOrders();
+
+    try{
 
 
-}
+        await updateDoc(
+
+            doc(
+                db,
+                "orders",
+                orderID
+            ),
+
+            {
+
+                status:newStatus
+
+            }
+
+        );
 
 
-catch(error){
+
+        alert(
+            "✅ Order Updated"
+        );
 
 
-console.error(
-"Update failed:",
-error
-);
+
+        loadOrders();
 
 
-alert(
-"❌ Failed updating order"
-);
+
+    }
 
 
-}
+    catch(error){
+
+
+        console.error(
+            "Update Error:",
+            error
+        );
+
+
+        alert(
+            "❌ Could not update order"
+        );
+
+
+    }
 
 
 };
+
+
+
+
+
+/* ==========================================
+   START DASHBOARD
+========================================== */
+
+
+loadOrders();
+
+
+console.log(
+"🔥 Admin Dashboard Loaded"
+);
