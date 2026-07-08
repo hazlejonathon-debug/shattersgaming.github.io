@@ -6,6 +6,13 @@ const collection = window.collection;
 const addDoc = window.addDoc;
 const serverTimestamp = window.serverTimestamp;
 
+console.log("Firebase Objects:", {
+    db,
+    collection,
+    addDoc,
+    serverTimestamp
+});
+
 /* ==========================================
    LOAD SAVED CART
    Keeps items after refresh
