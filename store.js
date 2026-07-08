@@ -532,6 +532,13 @@ const collection = window.collection;
 const addDoc = window.addDoc;
 const serverTimestamp = window.serverTimestamp;
 
+               console.log("Saving order...", {
+    db,
+    collection,
+    addDoc,
+    serverTimestamp
+});
+
                addDoc(
     collection(db, "orders"),
     {
