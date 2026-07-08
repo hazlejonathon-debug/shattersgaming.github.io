@@ -521,6 +521,44 @@ function loadPayPal() {
 
             return actions.order.capture().then(function(details){
                
+             // SAVE REAL ORDER TO FIREBASE
+
+await window.addDoc(
+
+    window.collection(
+        window.db,
+        "orders"
+    ),
+
+    {
+
+        customerName:
+        details.payer.name.given_name 
+        + " " +
+        details.payer.name.surname,
+
+        email:
+        details.payer.email_address,
+
+        items:
+        cart,
+
+        total:
+        Number(getCartTotal()),
+
+        paypalOrderID:
+        data.orderID,
+
+        status:
+        "Paid - Ready for Printify",
+
+        createdAt:
+        window.serverTimestamp()
+
+    }
+
+);  
+               
 const db = window.db;
 const collection = window.collection;
 const addDoc = window.addDoc;
