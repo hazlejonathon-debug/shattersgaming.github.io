@@ -944,7 +944,14 @@ if(checkoutPopup){
 
 if(successPopup){
 
+confirmCheckout.disabled=false;
 
+
+
+confirmCheckout.innerHTML =
+"Continue";
+
+   
     successPopup.classList.add(
         "active"
     );
@@ -970,12 +977,7 @@ container.innerHTML="";
 
 
 
-confirmCheckout.disabled=false;
 
-
-
-confirmCheckout.innerHTML =
-"Continue";
 
 
 
