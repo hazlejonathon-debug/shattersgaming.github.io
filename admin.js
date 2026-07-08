@@ -4,7 +4,9 @@ from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 import {
     getFirestore,
     collection,
-    getDocs
+    getDocs,
+    doc,
+    updateDoc
 }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
@@ -76,96 +78,140 @@ async function loadOrders(){
         }
 
 
-
-        snapshot.forEach((doc)=>{
-
-
-            const order = doc.data();
+snapshot.forEach((document)=>{
 
 
+const order = document.data();
 
-            ordersDiv.innerHTML += `
-
-
-            <div class="order-card">
-
-
-                <h2>
-                🎮 ${order.customerName || "Unknown"}
-                </h2>
-
-
-                <p>
-                📧 ${order.email || "No Email"}
-                </p>
-
-
-                <p>
-                💰 Total:
-                $${order.total}
-                </p>
-
-
-                <p>
-                📦 Status:
-                <span class="status">
-                ${order.status || "Pending"}
-                </span>
-                </p>
-
-
-                <h3>
-                Items
-                </h3>
+const orderID = document.id;
 
 
 
-                ${
-                    order.items.map(item => `
-
-                    <div class="item">
-
-                        ${item.name}
-
-                        <br>
-
-                        Quantity:
-                        ${item.quantity}
+ordersDiv.innerHTML += `
 
 
-                        ${
-                            item.size
-                            ? `<br>Size: ${item.size}`
-                            : ""
-                        }
+<div class="order-card">
 
 
-                        ${
-                            item.color
-                            ? `<br>Color: ${item.color}`
-                            : ""
-                        }
+<h2>
+🎮 ${order.customerName || "Unknown"}
+</h2>
 
 
-                    </div>
+<p>
+📧 ${order.email || "No Email"}
+</p>
 
 
-                    `).join("")
-                }
+<p>
+💰 Total:
+$${order.total}
+</p>
 
 
+<p>
+PayPal ID:
+${order.paypalOrderID || "N/A"}
+</p>
 
-            </div>
 
-
-            `;
-
-
-        });
+<h3>
+Items
+</h3>
 
 
 
-    }
+${
+order.items.map(item=>`
+
+<div class="item">
+
+${item.name}
+
+<br>
+
+Quantity:
+${item.quantity}
+
+
+${
+item.size
+?
+`<br>Size: ${item.size}`
+:
+""
+}
+
+
+${
+item.color
+?
+`<br>Color: ${item.color}`
+:
+""
+}
+
+
+</div>
+
+
+`).join("")
+}
+
+
+
+<br>
+
+
+<label>
+Order Status:
+</label>
+
+
+<select id="status-${orderID}">
+
+
+<option ${order.status=="Ready for Printify"?"selected":""}>
+Ready for Printify
+</option>
+
+
+<option ${order.status=="Printing"?"selected":""}>
+Printing
+</option>
+
+
+<option ${order.status=="Shipped"?"selected":""}>
+Shipped
+</option>
+
+
+<option ${order.status=="Complete"?"selected":""}>
+Complete
+</option>
+
+
+</select>
+
+
+
+<button onclick="updateOrderStatus('${orderID}')">
+
+💾 Save Status
+
+</button>
+
+
+
+</div>
+
+
+`;
+
+
+
+});
+      
 
 
     catch(error){
@@ -189,3 +235,59 @@ async function loadOrders(){
 
 
 loadOrders();
+window.updateOrderStatus = async function(orderID){
+
+
+const status =
+document.getElementById(
+"status-" + orderID
+).value;
+
+
+
+try{
+
+
+await updateDoc(
+
+doc(db,"orders",orderID),
+
+{
+
+status:status
+
+}
+
+);
+
+
+
+alert(
+"✅ Order updated!"
+);
+
+
+loadOrders();
+
+
+}
+
+
+catch(error){
+
+
+console.error(
+"Update failed:",
+error
+);
+
+
+alert(
+"❌ Failed updating order"
+);
+
+
+}
+
+
+};
