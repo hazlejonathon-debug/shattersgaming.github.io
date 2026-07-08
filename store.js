@@ -1,17 +1,10 @@
 /* ==========================================
    SHATTER'S GAMING STORE.JS
-   Version 1.0
-
-   Handles:
-   - Add to cart
-   - Remove items
-   - Clear cart
-   - Cart count
-   - Cart sidebar
-   - Checkout popup
-   - Payment success popup
 ========================================== */
-
+const db = window.db;
+const collection = window.collection;
+const addDoc = window.addDoc;
+const serverTimestamp = window.serverTimestamp;
 
 /* ==========================================
    LOAD SAVED CART
