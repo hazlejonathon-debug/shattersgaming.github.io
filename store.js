@@ -1,11 +1,11 @@
 /* ==========================================
    SHATTER'S GAMING STORE.JS
+   CLEAN VERSION
 ========================================== */
 
 
 /* ==========================================
-   LOAD SAVED CART
-   Keeps items after refresh
+   CART DATA
 ========================================== */
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -28,28 +28,28 @@ function saveCart(){
 
 
 /* ==========================================
-   ADD ITEM TO CART
-
-   Matches your HTML:
-   addToCart('Classic Tee',25)
+   ADD NORMAL PRODUCT
 ========================================== */
 
 function addToCart(name, price){
 
-    const existingItem = cart.find(item => item.name === name);
+    let existing = cart.find(
+        item => item.name === name
+    );
 
 
-    if(existingItem){
+    if(existing){
 
-        existingItem.quantity++;
+        existing.quantity++;
 
-    } else {
+    } 
+    else {
 
         cart.push({
 
-            name: name,
-            price: price,
-            quantity: 1
+            name:name,
+            price:price,
+            quantity:1
 
         });
 
@@ -60,9 +60,55 @@ function addToCart(name, price){
 
     updateCart();
 
-
     showNotification(
         name + " added!"
+    );
+
+}
+
+
+
+/* ==========================================
+   ADD HOODIE
+========================================== */
+
+function addHoodieToCart(){
+
+    const size =
+    document.getElementById("hoodie-size").value;
+
+
+    const color =
+    document.getElementById("hoodie-color").value;
+
+
+
+    cart.push({
+
+        name:"Elite Hoodie",
+
+        size:size,
+
+        color:color,
+
+        price:59.99,
+
+        quantity:1,
+
+        provider:"Printify",
+
+        product:"Gildan 18000"
+
+    });
+
+
+    saveCart();
+
+    updateCart();
+
+
+    showNotification(
+        "Elite Hoodie added!"
     );
 
 }
@@ -75,17 +121,22 @@ function addToCart(name, price){
 
 function removeFromCart(index){
 
-
     cart.splice(index,1);
 
-
     saveCart();
-
 
     updateCart();
 
 }
-function changeQuantity(index, amount){
+
+
+
+/* ==========================================
+   CHANGE QUANTITY
+========================================== */
+
+function changeQuantity(index,amount){
+
 
     cart[index].quantity += amount;
 
@@ -104,18 +155,16 @@ function changeQuantity(index, amount){
 }
 
 
+
 /* ==========================================
-   CLEAR CART BUTTON
+   CLEAR CART
 ========================================== */
 
 function clearCart(){
 
-
     cart = [];
 
-
     saveCart();
-
 
     updateCart();
 
@@ -130,129 +179,151 @@ function clearCart(){
 function updateCart(){
 
 
-    const cartItems =
+    const items =
     document.getElementById("cart-items");
 
 
-    const cartTotal =
+    const totalBox =
     document.getElementById("cart-total");
 
 
-    const cartCount =
+    const count =
     document.getElementById("cart-count");
 
 
 
-    if(!cartItems) return;
+    if(!items) return;
 
 
 
-    cartItems.innerHTML = "";
+    items.innerHTML="";
+
+
+    let total = 0;
 
 
 
-  let total = 0;
+    if(cart.length === 0){
 
 
-if(cart.length === 0){
+        items.innerHTML =
+        "Your cart is empty";
 
-    cartItems.innerHTML =
-    "Your cart is empty";
-
-} else {
-
-
-cart.forEach((item,index)=>{
-
-    if(!item.quantity){
-
-        item.quantity = 1;
 
     }
+    else{
 
 
-    total += item.price * item.quantity;
+        cart.forEach((item,index)=>{
 
 
-    cartItems.innerHTML += `
+            total +=
+            item.price * item.quantity;
 
-    <div class="cart-item">
 
-      <span>
+
+            items.innerHTML += `
+
+
+<div class="cart-item">
+
+
+<span>
+
 ${item.name}
 
-${
-item.size 
-? `<br>Size: ${item.size}` 
-: ""
-}
+${item.size ?
+"<br>Size: "+item.size
+:""}
 
-${
-item.color 
-? `<br>Color: ${item.color}` 
-: ""
-}
+${item.color ?
+"<br>Color: "+item.color
+:""}
 
 </span>
 
 
-        <span>
-        $${(item.price * item.quantity).toFixed(2)}
-        </span>
+<span>
+
+$${(
+item.price * item.quantity
+).toFixed(2)}
+
+</span>
 
 
-        <div class="quantity-controls">
 
-            <button onclick="changeQuantity(${index}, -1)">
-                -
-            </button>
+<div class="quantity-controls">
 
 
-            <span>
-                ${item.quantity}
-            </span>
+<button onclick="changeQuantity(${index},-1)">
+-
+</button>
 
 
-            <button onclick="changeQuantity(${index}, 1)">
-                +
-            </button>
-
-        </div>
+<span>
+${item.quantity}
+</span>
 
 
-        <button onclick="removeFromCart(${index})">
-            ❌
-        </button>
+<button onclick="changeQuantity(${index},1)">
++
+</button>
 
 
-    </div>
-
-    `;
+</div>
 
 
-});
+<button onclick="removeFromCart(${index})">
+❌
+</button>
 
-}  
-    cartTotal.innerHTML =
+
+</div>
+
+
+`;
+
+        });
+
+
+    }
+
+
+
+    totalBox.innerHTML =
     total.toFixed(2);
 
 
 
-    cartCount.innerHTML =
-    cart.length;
+    count.innerHTML =
+    cart.reduce(
+        (sum,item)=>sum+item.quantity,
+        0
+    );
 
 
 }
-
-
-
 /* ==========================================
-   CART SIDEBAR OPEN/CLOSE
+   CART SIDEBAR CONTROLS
 ========================================== */
 
 
-const cartButton =
+document.addEventListener(
+"DOMContentLoaded",
+function(){
+
+
+updateCart();
+
+
+
+const openCart =
 document.getElementById("open-cart");
+
+
+const closeCart =
+document.getElementById("close-cart");
 
 
 const cartSidebar =
@@ -263,14 +334,12 @@ const cartOverlay =
 document.getElementById("cart-overlay");
 
 
-const closeCart =
-document.getElementById("close-cart");
 
+if(openCart){
 
+openCart.onclick = function(e){
 
-if(cartButton){
-
-cartButton.onclick = function(){
+    e.preventDefault();
 
     cartSidebar.classList.add("active");
 
@@ -311,47 +380,427 @@ cartOverlay.onclick = function(){
 
 
 /* ==========================================
-   CART NOTIFICATION
+   CHECKOUT POPUP
 ========================================== */
 
-function showNotification(message){
+
+const checkoutButton =
+document.querySelector(".checkout-btn");
 
 
-    const notification =
-    document.getElementById("cart-notification");
-
-
-    const text =
-    document.getElementById("notification-text");
-
-
-
-    if(notification){
-
-
-        text.innerHTML = message;
-
-
-        notification.classList.add("show");
+const checkoutPopup =
+document.getElementById("checkout-popup");
 
 
 
-        setTimeout(()=>{
+if(checkoutButton && checkoutPopup){
 
 
-            notification.classList.remove("show");
+checkoutButton.onclick=function(){
 
 
-        },2000);
+    checkoutPopup.classList.add("active");
 
 
-    }
+};
 
 
 }
 
+
+
+const cancelCheckout =
+document.getElementById("cancel-checkout");
+
+
+const closeCheckout =
+document.getElementById("close-checkout-popup");
+
+
+
+function closeCheckoutPopup(){
+
+    checkoutPopup.classList.remove("active");
+
+}
+
+
+
+if(cancelCheckout){
+
+cancelCheckout.onclick =
+closeCheckoutPopup;
+
+}
+
+
+
+if(closeCheckout){
+
+closeCheckout.onclick =
+closeCheckoutPopup;
+
+}
+
+
+
+});
+
+
+
 /* ==========================================
-   CHECKOUT + POPUP CONTROLS
+   CART NOTIFICATION
+========================================== */
+
+
+function showNotification(message){
+
+
+const box =
+document.getElementById("cart-notification");
+
+
+const text =
+document.getElementById("notification-text");
+
+
+
+if(!box) return;
+
+
+
+text.innerHTML = message;
+
+
+
+box.classList.add("show");
+
+
+
+setTimeout(()=>{
+
+
+box.classList.remove("show");
+
+
+},2000);
+
+
+
+}
+
+
+
+/* ==========================================
+   GET CART TOTAL
+========================================== */
+
+
+function getCartTotal(){
+
+
+let total = 0;
+
+
+
+cart.forEach(item=>{
+
+
+total +=
+item.price * item.quantity;
+
+
+});
+
+
+
+return total.toFixed(2);
+
+
+}
+
+
+
+/* ==========================================
+   PAYPAL CHECKOUT
+========================================== */
+
+
+const confirmCheckout =
+document.getElementById("confirm-checkout");
+
+
+
+if(confirmCheckout){
+
+
+confirmCheckout.onclick=function(){
+
+
+confirmCheckout.disabled=true;
+
+confirmCheckout.innerHTML =
+"Loading...";
+
+
+loadPayPal();
+
+
+};
+
+
+}
+
+
+
+function loadPayPal(){
+
+
+const container =
+document.getElementById(
+"paypal-button-container"
+);
+
+
+const actions =
+document.querySelector(
+".checkout-actions"
+);
+
+
+
+container.innerHTML="";
+
+
+
+paypal.Buttons({
+
+
+
+createOrder:function(data,actions){
+
+
+return actions.order.create({
+
+
+purchase_units:[{
+
+
+amount:{
+
+
+value:getCartTotal()
+
+
+}
+
+
+}]
+
+
+});
+
+
+},
+
+
+
+
+onApprove:function(data,actions){
+
+
+return actions.order.capture()
+.then(async function(details){
+
+
+
+console.log(
+"Payment completed",
+details
+);
+
+
+
+/* FIREBASE SAVE */
+
+
+if(
+window.db &&
+window.addDoc &&
+window.collection
+){
+
+
+await window.addDoc(
+
+window.collection(
+window.db,
+"orders"
+),
+
+{
+
+
+customerName:
+details.payer.name.given_name
++
+" "
++
+details.payer.name.surname,
+
+
+email:
+details.payer.email_address,
+
+
+items:cart,
+
+
+total:Number(
+getCartTotal()
+),
+
+
+paypalOrderID:
+data.orderID,
+
+
+status:
+"Ready for Printify",
+
+
+createdAt:
+window.serverTimestamp()
+
+
+}
+
+
+);
+
+
+console.log(
+"🔥 Order saved to Firebase"
+);
+
+
+}
+
+
+
+
+
+document
+.getElementById(
+"checkout-popup"
+)
+.classList.remove("active");
+
+
+
+document
+.getElementById(
+"payment-success-popup"
+)
+.classList.add("active");
+
+
+
+cart=[];
+
+
+saveCart();
+
+updateCart();
+
+
+
+container.innerHTML="";
+
+
+confirmCheckout.disabled=false;
+
+
+confirmCheckout.innerHTML=
+"Continue";
+
+
+
+});
+
+
+},
+
+
+
+onCancel:function(){
+
+
+container.innerHTML="";
+
+
+actions.style.display="flex";
+
+
+confirmCheckout.disabled=false;
+
+
+confirmCheckout.innerHTML=
+"Continue";
+
+
+},
+
+
+
+onError:function(error){
+
+
+console.error(
+"PayPal Error:",
+error
+);
+
+
+alert(
+"PayPal encountered an error."
+);
+
+
+
+container.innerHTML="";
+
+
+confirmCheckout.disabled=false;
+
+
+confirmCheckout.innerHTML=
+"Continue";
+
+
+}
+
+
+
+})
+
+
+.render(
+"#paypal-button-container"
+)
+
+.then(()=>{
+
+
+actions.style.display="none";
+
+
+});
+
+
+}
+/* ==========================================
+   PAYMENT SUCCESS POPUP
 ========================================== */
 
 
@@ -360,459 +809,89 @@ document.addEventListener(
 function(){
 
 
-    // Update cart when page loads
-    updateCart();
+const successButton =
+document.getElementById(
+"close-payment-success"
+);
+
+
+const successPopup =
+document.getElementById(
+"payment-success-popup"
+);
 
 
 
-    // ==========================
-    // CHECKOUT BUTTON
-    // ==========================
-
-    const checkoutButton =
-    document.querySelector(".checkout-btn");
+if(successButton && successPopup){
 
 
-    const checkoutPopup =
-    document.getElementById("checkout-popup");
+successButton.onclick=function(){
 
 
+successPopup.classList.remove(
+"active"
+);
 
-    if(checkoutButton && checkoutPopup){
-
-
-     checkoutButton.onclick = function(){
-
-    checkoutPopup.classList.add("active");
 
 };
 
 
-    }
-
-
-
-    // ==========================
-    // CLOSE CHECKOUT POPUP
-    // ==========================
-
-    const cancelCheckout =
-    document.getElementById("cancel-checkout");
-
-
-    const closeCheckout =
-    document.getElementById("close-checkout-popup");
-
-
-
-   function closeCheckoutWindow(){
-
-    checkoutPopup.classList.remove("active");
-
 }
-
-
-
-    if(cancelCheckout){
-
-
-        cancelCheckout.onclick =
-        closeCheckoutWindow;
-
-
-    }
-
-
-
-    if(closeCheckout){
-
-
-        closeCheckout.onclick =
-        closeCheckoutWindow;
-
-
-    }
-
-
-
-    // ==========================
-    // PAYMENT SUCCESS CONTINUE
-    // ==========================
-
-    const paymentContinue =
-    document.getElementById("close-payment-success");
-
-
-    const paymentPopup =
-    document.getElementById("payment-success-popup");
-
-
-
-    if(paymentContinue && paymentPopup){
-
-
-        paymentContinue.onclick = function(){
-
-
-          paymentPopup.classList.remove("active");  
-
-
-        };
-
-
-    }
 
 
 
 });
 
-/* ==========================
-   CONFIRM CHECKOUT BUTTON
-========================== */
 
-const confirmCheckout =
-document.getElementById("confirm-checkout");
 
-if(confirmCheckout){
-
-    confirmCheckout.onclick = function(){
-
-        // Disable button while PayPal loads
-        confirmCheckout.disabled = true;
-        confirmCheckout.innerHTML = "Loading...";
-
-        loadPayPal();
-
-    };
-
-}
-
-/* ==========================
-   LOAD PAYPAL
-========================== */
-
-function loadPayPal() {
-
-    const paypalContainer =
-        document.getElementById("paypal-button-container");
-
-    const checkoutActions =
-        document.querySelector(".checkout-actions");
-
-    paypalContainer.innerHTML = "";
-
-    paypal.Buttons({
-
-        createOrder: function(data, actions){
-
-            return actions.order.create({
-
-                purchase_units: [{
-                    amount: {
-                        value: getCartTotal()
-                    }
-                }]
-
-            });
-
-        },
-
-       onApprove: function(data, actions){
-
-    return actions.order.capture().then(async function(details){
-
-        await window.addDoc(
-    window.collection(
-        window.db,
-        "orders"
-    ),
-
-    {
-
-        customerName:
-        details.payer.name.given_name 
-        + " " +
-        details.payer.name.surname,
-
-        email:
-        details.payer.email_address,
-
-        items:
-        cart,
-
-        total:
-        Number(getCartTotal()),
-
-        paypalOrderID:
-        data.orderID,
-
-        status:
-        "Paid - Ready for Printify",
-
-        createdAt:
-        window.serverTimestamp()
-
-    }
-
-);  
-               
-const db = window.db;
-const collection = window.collection;
-const addDoc = window.addDoc;
-const serverTimestamp = window.serverTimestamp;
-
-               console.log("Saving order...", {
-    db,
-    collection,
-    addDoc,
-    serverTimestamp
-});
-
-               addDoc(
-    collection(db, "orders"),
-    {
-
-        customerName:
-            details.payer.name.given_name +
-            " " +
-            details.payer.name.surname,
-
-        email:
-            details.payer.email_address,
-
-        items: cart,
-
-        total: getCartTotal(),
-
-        paypalOrderID: data.orderID,
-
-        status: "Ready for Printify",
-
-        createdAt: serverTimestamp()
-
-    }
-)
-.then(() => {
-
-    console.log("🔥 Order saved to Firebase");
-
-})
-.catch((error) => {
-
-    console.error("Firebase Error:", error);
-
-});
-                // Hide popup
-                document
-                    .getElementById("checkout-popup")
-                    .classList.remove("active");
-
-                // Show success popup
-                document
-                    .getElementById("payment-success-popup")
-                    .classList.add("active");
-
-                paypalContainer.innerHTML = "";
-
-                checkoutActions.style.display = "flex";
-
-                confirmCheckout.disabled = false;
-                confirmCheckout.innerHTML = "Continue";
-
-                cart = [];
-
-                saveCart();
-                updateCart();
-
-            });
-
-        },
-
-        onCancel: function(){
-
-            paypalContainer.innerHTML = "";
-
-            checkoutActions.style.display = "flex";
-
-            confirmCheckout.disabled = false;
-            confirmCheckout.innerHTML = "Continue";
-
-        },
-
-        onError: function(err){
-
-            console.error(err);
-
-            alert("PayPal encountered an error.");
-
-            paypalContainer.innerHTML = "";
-
-            checkoutActions.style.display = "flex";
-
-            confirmCheckout.disabled = false;
-            confirmCheckout.innerHTML = "Continue";
-
-        }
-
-    }).render("#paypal-button-container")
-
-    .then(function(){
-
-        // Only hide the buttons AFTER PayPal successfully renders
-        checkoutActions.style.display = "none";
-
-    })
-
-    .catch(function(error){
-
-        console.error("PayPal failed to load:", error);
-
-        paypalContainer.innerHTML = "";
-
-        checkoutActions.style.display = "flex";
-
-        confirmCheckout.disabled = false;
-        confirmCheckout.innerHTML = "Continue";
-
-    });
-
-}
-
-/* ==========================
-   GET CART TOTAL
-========================== */
-
-function getCartTotal() {
-
-    let total = 0;
-
-    cart.forEach(item => {
-
-        total += item.price * item.quantity;
-
-    });
-
-    return total.toFixed(2);
-
-}
-function addHoodieToCart(){
-
-    const size =
-    document.getElementById("hoodie-size").value;
-
-
-    const color =
-    document.getElementById("hoodie-color").value;
-
-
-    cart.push({
-
-        name: "Elite Hoodie",
-
-        size: size,
-
-        color: color,
-
-        price: 59.99,
-
-        quantity: 1,
-
-        provider: "Printify",
-
-        product: "Gildan 18000"
-
-    });
-
-
-    saveCart();
-
-    updateCart();
-
-
-    showNotification(
-        "Elite Hoodie added!"
-    );
-
-}
 /* ==========================================
-   FIREBASE TEST BUTTON
+   FIREBASE DEBUG CHECK
 ========================================== */
 
-document.addEventListener("DOMContentLoaded", function(){
 
-    const firebaseTest =
-    document.getElementById("firebase-test");
-
-
-   if(firebaseTest){
-
-    firebaseTest.onclick = async function(){
-
-        alert("Button works!");
-
-        // rest of Firebase code below
-
-            try{
-
-                await window.addDoc(
-
-                    window.collection(
-                        window.db,
-                        "orders"
-                    ),
-
-                    {
-
-                        customerName:"Test Customer",
-
-                        email:"test@shattersgaming.com",
-
-                        items:[
-                            {
-                                name:"Elite Hoodie",
-                                size:"Medium",
-                                color:"Black",
-                                quantity:1,
-                                price:59.99
-                            }
-                        ],
-
-                        total:59.99,
-
-                        paypalOrderID:"TEST123",
-
-                        status:"Ready for Printify",
-
-                        createdAt:
-                        window.serverTimestamp()
-
-                    }
-
-                );
+console.log(
+"🔥 Store.js loaded"
+);
 
 
-                alert("🔥 Test order saved!");
+if(window.db){
 
-            }
+console.log(
+"🔥 Firebase connection available"
+);
+
+}
+else{
+
+console.log(
+"⚠️ Waiting for Firebase connection"
+);
+
+}
 
 
-            catch(error){
 
-                console.error(
-                    "Firebase test error:",
-                    error
-                );
+/* ==========================================
+   MAKE FUNCTIONS AVAILABLE TO HTML
+========================================== */
 
 
-                alert(
-                    "Firebase Error: " +
-                    error.message
-                );
+window.addToCart =
+addToCart;
 
-            }
 
-        };
+window.addHoodieToCart =
+addHoodieToCart;
 
-    }
 
-});  
+window.clearCart =
+clearCart;
+
+
+window.changeQuantity =
+changeQuantity;
+
+
+window.removeFromCart =
+removeFromCart;
+
