@@ -12,7 +12,8 @@ import {
     collection,
     getDocs,
     doc,
-    updateDoc
+    updateDoc,
+   deleteDoc
 }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
@@ -242,6 +243,8 @@ async function loadOrders(){
 
 
                 <button onclick="updateOrderStatus('${orderID}')">
+                
+                🗑️ Delete Order
 
                 💾 Save Status
 
@@ -364,7 +367,65 @@ async function(orderID){
 
 
 loadOrders();
+   
+window.deleteOrder = async function(orderID){
 
+
+    const confirmDelete =
+    confirm(
+        "Are you sure you want to delete this order?"
+    );
+
+
+    if(!confirmDelete){
+        return;
+    }
+
+
+
+    try{
+
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "orders",
+                orderID
+            )
+
+        );
+
+
+        alert(
+            "🗑️ Order Deleted"
+        );
+
+
+        loadOrders();
+
+
+    }
+
+
+    catch(error){
+
+
+        console.error(
+            "Delete Error:",
+            error
+        );
+
+
+        alert(
+            "❌ Could not delete order"
+        );
+
+
+    }
+
+
+};
 
 console.log(
 "🔥 Admin Dashboard Loaded"
