@@ -31,3 +31,6 @@ window.db = db;
 window.collection = collection;
 window.addDoc = addDoc;
 window.serverTimestamp = serverTimestamp;
+
+
+console.log("🔥 Firebase Connected");
