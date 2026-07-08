@@ -2,19 +2,14 @@ import { initializeApp }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 
-import {
-
-getFirestore,
-collection,
-getDocs
-
-}
-
+import { 
+    getFirestore,
+    collection,
+    getDocs
+} 
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 
-
-// Firebase Configuration
 
 const firebaseConfig = {
 
@@ -36,102 +31,147 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-
 const db = getFirestore(app);
 
 
 
-const ordersDiv =
+const ordersDiv = 
 document.getElementById("orders");
 
 
 
-const snapshot =
-await getDocs(
-    collection(db,"orders")
-);
+async function loadOrders(){
+
+
+    try {
+
+
+        const snapshot = await getDocs(
+            collection(db,"orders")
+        );
+
+
+        ordersDiv.innerHTML = "";
 
 
 
-ordersDiv.innerHTML = "";
+        if(snapshot.empty){
+
+
+            ordersDiv.innerHTML = `
+
+            <div class="product-card">
+
+                <h3>
+                No Orders Yet
+                </h3>
+
+                <p>
+                Orders will appear here after payment.
+                </p>
+
+            </div>
+
+            `;
+
+
+            return;
+
+        }
 
 
 
-if(snapshot.empty){
+        snapshot.forEach((doc)=>{
 
-    ordersDiv.innerHTML = `
 
-    <div class="product-card">
+            const order = doc.data();
 
-    <h3>
-    No Orders Yet
-    </h3>
 
-    <p>
-    Orders will appear here after a successful PayPal payment.
-    </p>
 
-    </div>
+            ordersDiv.innerHTML += `
 
-    `;
+
+            <div class="product-card">
+
+
+                <h3>
+                🎮 ${order.customerName || "Unknown"}
+                </h3>
+
+
+                <p>
+                📧 ${order.email || "No Email"}
+                </p>
+
+
+                <p>
+                💰 Total:
+                $${order.total}
+                </p>
+
+
+                <p>
+                📦 Status:
+                ${order.status}
+                </p>
+
+
+                <h4>
+                Items:
+                </h4>
+
+
+                ${order.items.map(item => `
+
+                    <p>
+                    ${item.name}
+                    x${item.quantity}
+
+                    ${
+                    item.size 
+                    ? " | Size: " + item.size 
+                    : ""
+                    }
+
+                    ${
+                    item.color 
+                    ? " | Color: " + item.color 
+                    : ""
+                    }
+
+                    </p>
+
+                `).join("")}
+
+
+            </div>
+
+
+            `;
+
+
+        });
+
+
+
+    }
+    catch(error){
+
+
+        console.error(
+            "❌ Admin Firebase Error:",
+            error
+        );
+
+
+        ordersDiv.innerHTML =
+        "Error loading orders.";
+
+    }
+
 
 }
 
 
 
-
-snapshot.forEach((doc)=>{
-
-
-const order = doc.data();
-
-
-
-ordersDiv.innerHTML += `
-
-
-<div class="product-card">
-
-
-<h3>
-🎮 ${order.customerName}
-</h3>
-
-
-<p>
-📧 ${order.email}
-</p>
-
-
-<p>
-💰 Total:
-$${order.total}
-</p>
-
-
-<p>
-📦 Status:
-${order.status}
-</p>
-
-
-<h4>
-Items:
-</h4>
-
-
-<p>
-
-${JSON.stringify(order.items)}
-
-</p>
-
-
-</div>
-
-
-`;
-
-
-
-});
+loadOrders();
