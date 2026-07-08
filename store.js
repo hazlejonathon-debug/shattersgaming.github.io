@@ -492,50 +492,51 @@ function loadPayPal(){
 
 
 
-     onApprove:function(data, actions){
+    function loadPayPal() {
 
-    return actions.order.capture().then(function(details){
+    const paypalContainer = document.getElementById("paypal-button-container");
 
-        console.log("PAYMENT APPROVED");
+    // Prevent duplicate PayPal buttons
+    paypalContainer.innerHTML = "";
 
-        alert("Payment Approved!");
+    paypal.Buttons({
 
-     paypal.Buttons({
+        createOrder: function (data, actions) {
 
-    createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: getCartTotal()
+                    }
+                }]
+            });
 
-        return actions.order.create({
-            purchase_units: [{
-                amount: {
-                    value: getCartTotal()
-                }
-            }]
-        });
+        },
 
-    },
+        onApprove: function (data, actions) {
 
-    onApprove: function(data, actions) {
+            return actions.order.capture().then(function (details) {
 
-        return actions.order.capture().then(function(details) {
+                console.log("PAYMENT APPROVED");
+                alert("Payment Approved!");
 
-            console.log("PAYMENT APPROVED");
-            alert("Payment Approved!");
+                checkoutPopup.classList.remove("active");
 
-            checkoutPopup.classList.remove("active");
+                document
+                    .getElementById("payment-success-popup")
+                    .classList.add("active");
 
-            document
-                .getElementById("payment-success-popup")
-                .classList.add("active");
+                cart = [];
+                saveCart();
+                updateCart();
 
-            cart = [];
-            saveCart();
-            updateCart();
+            });
 
-        });
+        }
 
-    }
+    }).render("#paypal-button-container");
 
-}).render("#paypal-button-container");  
+}
 
                 // Close checkout popup
                 checkoutPopup.classList.remove("active");
