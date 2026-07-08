@@ -601,7 +601,7 @@ function getCartTotal() {
 
     cart.forEach(item => {
 
-        total += item.price;
+        total += item.price * item.quantity;
 
     });
 
