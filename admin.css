@@ -288,3 +288,24 @@ select option{
     box-shadow:0 0 15px #8a2be2;
 
 }
+/* ==========================
+   DELETE ORDER BUTTON
+========================== */
+
+.order-card button.delete-btn{
+
+    background:#ff3131;
+
+    color:white;
+
+}
+
+
+.order-card button.delete-btn:hover{
+
+    background:#b30000;
+
+    box-shadow:
+    0 0 15px #ff3131;
+
+}
