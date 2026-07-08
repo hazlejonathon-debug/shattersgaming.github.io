@@ -420,3 +420,37 @@ function(){
 
 });
 
+// ==========================
+// CONFIRM CHECKOUT BUTTON
+// ==========================
+
+const confirmCheckout =
+document.getElementById("confirm-checkout");
+
+
+if(confirmCheckout){
+
+
+    confirmCheckout.onclick = function(){
+
+
+        // Close checkout popup
+        checkoutPopup.classList.remove("active");
+
+
+        // Open payment success popup
+        const paymentPopup =
+        document.getElementById("payment-success-popup");
+
+
+        if(paymentPopup){
+
+            paymentPopup.classList.add("active");
+
+        }
+
+
+    };
+
+
+}
