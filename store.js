@@ -176,7 +176,7 @@ function addTeeToCart(){
 
         color:color,
 
-        price:29.99,
+        price:28.00,
 
         quantity:1,
 
@@ -211,7 +211,7 @@ function addCapToCart(){
 
         color:color,
 
-        price:24.99,
+        price:30.00,
 
         quantity:1,
 
@@ -246,7 +246,7 @@ function addMugToCart(){
 
         color:color,
 
-        price:16.99,
+        price:25.00,
 
         quantity:1,
 
