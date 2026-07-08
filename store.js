@@ -517,14 +517,11 @@ function loadPayPal() {
 
         },
 
-        onApprove: function(data, actions){
+       onApprove: function(data, actions){
 
-            return actions.order.capture().then(function(details){
-               
-             // SAVE REAL ORDER TO FIREBASE
+    return actions.order.capture().then(async function(details){
 
-await window.addDoc(
-
+        await window.addDoc(
     window.collection(
         window.db,
         "orders"
