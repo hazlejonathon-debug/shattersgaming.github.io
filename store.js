@@ -429,11 +429,6 @@ const confirmCheckout =
 document.getElementById("confirm-checkout");
 
 
-const checkoutPopup =
-document.getElementById("checkout-popup");
-
-
-
 if(confirmCheckout){
 
 
