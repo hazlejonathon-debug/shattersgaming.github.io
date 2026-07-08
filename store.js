@@ -2,7 +2,10 @@
    SHATTER'S GAMING STORE.JS
    CLEAN VERSION
 ========================================== */
+window.addEventListener("load", () => {
 
+    console.log("Firebase check:");
+    console.log(window.db);
 
 /* ==========================================
    CART DATA
