@@ -174,3 +174,92 @@ font-weight:bold;
 
 }
 
+/* ==========================
+   ADMIN CONTROLS
+========================== */
+
+
+select{
+
+    background:#050505;
+
+    color:#39ff14;
+
+    border:2px solid #39ff14;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    font-family:'Orbitron', sans-serif;
+
+    cursor:pointer;
+
+    margin:10px 0;
+
+}
+
+
+select:hover{
+
+    box-shadow:
+    0 0 15px #39ff14;
+
+}
+
+
+
+select option{
+
+    background:#111;
+
+    color:white;
+
+}
+
+
+
+.order-card button{
+
+    background:#39ff14;
+
+    color:black;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:8px;
+
+    font-family:'Orbitron', sans-serif;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+
+.order-card button:hover{
+
+    background:#8a2be2;
+
+    color:white;
+
+    box-shadow:
+    0 0 15px #8a2be2;
+
+}
+
+
+
+.status{
+
+    color:#39ff14;
+
+    font-weight:bold;
+
+}
