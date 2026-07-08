@@ -578,233 +578,159 @@ container.innerHTML="";
 
 paypal.Buttons({
 
-
-
 createOrder:function(data,actions){
 
+    return actions.order.create({
 
-return actions.order.create({
+        purchase_units:[{
 
+            amount:{
+                value:getCartTotal()
+            }
 
-purchase_units:[{
+        }]
 
-
-amount:{
-
-
-value:getCartTotal()
-
-
-}
-
-
-}]
-
-
-});
-
+    });
 
 },
 
 
 onApprove:function(data,actions){
 
+    return actions.order.capture()
 
-return actions.order.capture()
-
-.then(async function(details){
-
-
-console.log(
-"Payment completed",
-details
-);
+    .then(async function(details){
 
 
-/* FIREBASE SAVE */
-
-if(
-window.db &&
-window.addDoc &&
-window.collection
-){
+        console.log(
+            "Payment completed",
+            details
+        );
 
 
-await window.addDoc(
+        /* FIREBASE SAVE */
 
-window.collection(
-window.db,
-"orders"
-),
+        if(
+            window.db &&
+            window.addDoc &&
+            window.collection
+        ){
 
-{
+            await window.addDoc(
 
-customerName:"Test Customer",
+                window.collection(
+                    window.db,
+                    "orders"
+                ),
 
-email:"test@email.com",
+                {
 
-items:cart,
+                    customerName:"Test Customer",
 
-total:getCartTotal(),
+                    email:"test@email.com",
 
-paypalOrderID:data.orderID,
+                    items:cart,
 
-status:"Ready for Printify",
+                    total:getCartTotal(),
 
-createdAt:
-window.serverTimestamp()
+                    paypalOrderID:data.orderID,
 
-}
+                    status:"Ready for Printify",
 
-);
+                    createdAt:
+                    window.serverTimestamp()
+
+                }
+
+            );
 
 
-console.log(
-"🔥 Order saved to Firebase"
-);
+            console.log(
+                "🔥 Order saved to Firebase"
+            );
 
-
-}
+        }
 
 
 
-/* SUCCESS POPUP */
+        /* SUCCESS POPUP */
 
-
-document
-.getElementById(
-"checkout-popup"
-)
-.classList.remove("active");
-
-
-
-document
-.getElementById(
-"payment-success-popup"
-)
-.classList.add("active");
+        document
+        .getElementById(
+            "checkout-popup"
+        )
+        .classList.remove("active");
 
 
 
-cart=[];
+        document
+        .getElementById(
+            "payment-success-popup"
+        )
+        .classList.add("active");
 
 
-saveCart();
 
-updateCart();
+        cart=[];
 
+        saveCart();
 
-container.innerHTML="";
-
-
-confirmCheckout.disabled=false;
+        updateCart();
 
 
-confirmCheckout.innerHTML=
-"Continue";
+
+        container.innerHTML="";
 
 
-});
+        confirmCheckout.disabled=false;
 
+
+        confirmCheckout.innerHTML=
+        "Continue";
+
+
+    });
 
 },
-}
-
-
-
-
-
-document
-.getElementById(
-"checkout-popup"
-)
-.classList.remove("active");
-
-
-
-document
-.getElementById(
-"payment-success-popup"
-)
-.classList.add("active");
-
-
-
-cart=[];
-
-
-saveCart();
-
-updateCart();
-
-
-
-container.innerHTML="";
-
-
-confirmCheckout.disabled=false;
-
-
-confirmCheckout.innerHTML=
-"Continue";
-
-
-
-});
-
-
-},
-
 
 
 onCancel:function(){
 
+    container.innerHTML="";
 
-container.innerHTML="";
+    actions.style.display="flex";
 
+    confirmCheckout.disabled=false;
 
-actions.style.display="flex";
-
-
-confirmCheckout.disabled=false;
-
-
-confirmCheckout.innerHTML=
-"Continue";
-
+    confirmCheckout.innerHTML=
+    "Continue";
 
 },
 
 
-
 onError:function(error){
 
-
-console.error(
-"PayPal Error:",
-error
-);
-
-
-alert(
-"PayPal encountered an error."
-);
+    console.error(
+        "PayPal Error:",
+        error
+    );
 
 
-
-container.innerHTML="";
-
-
-confirmCheckout.disabled=false;
+    alert(
+        "PayPal encountered an error."
+    );
 
 
-confirmCheckout.innerHTML=
-"Continue";
+    container.innerHTML="";
 
+
+    confirmCheckout.disabled=false;
+
+
+    confirmCheckout.innerHTML=
+    "Continue";
 
 }
-
 
 
 })
@@ -812,7 +738,7 @@ confirmCheckout.innerHTML=
 
 .render(
 "#paypal-button-container"
-)
+);
 
 .then(()=>{
 
