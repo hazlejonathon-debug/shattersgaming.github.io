@@ -517,43 +517,60 @@ function loadPayPal() {
             });
 
         },
+onApprove: function (data, actions) {
 
-        onApprove: function (data, actions) {
+    return actions.order.capture().then(function (details) {
 
-            return actions.order.capture().then(function (details) {
+        console.log("Payment Complete");
 
-                console.log("Payment Complete");
+        // Customer information
+        console.log("Customer:", details.payer.name.given_name + " " + details.payer.name.surname);
+        console.log("Email:", details.payer.email_address);
 
-                // Close checkout popup
-                document
-                    .getElementById("checkout-popup")
-                    .classList.remove("active");
+        if (details.purchase_units[0].shipping) {
 
-                // Show success popup
-                document
-                    .getElementById("payment-success-popup")
-                    .classList.add("active");
+            const shipping = details.purchase_units[0].shipping;
 
-                // Reset PayPal area
-                document
-                    .getElementById("paypal-button-container")
-                    .innerHTML = "";
+            console.log("Ship To:", shipping.name.full_name);
+            console.log("Address:", shipping.address.address_line_1);
+            console.log("City:", shipping.address.admin_area_2);
+            console.log("State:", shipping.address.admin_area_1);
+            console.log("ZIP:", shipping.address.postal_code);
+            console.log("Country:", shipping.address.country_code);
 
-                // Show buttons again for next checkout
-                document
-                    .querySelector(".checkout-actions")
-                    .style.display = "flex";
+        }
 
-                // Empty cart
-                cart = [];
+        console.log("Items Ordered:", cart);
 
-                saveCart();
+        // Close checkout popup
+        document
+            .getElementById("checkout-popup")
+            .classList.remove("active");
 
-                updateCart();
+        // Show success popup
+        document
+            .getElementById("payment-success-popup")
+            .classList.add("active");
 
-            });
+        // Reset PayPal area
+        document
+            .getElementById("paypal-button-container")
+            .innerHTML = "";
 
-        },
+        // Show buttons again
+        document
+            .querySelector(".checkout-actions")
+            .style.display = "flex";
+
+        // Empty cart
+        cart = [];
+
+        saveCart();
+        updateCart();
+
+    });
+
+},
 
         onCancel: function () {
 
