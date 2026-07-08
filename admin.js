@@ -245,8 +245,10 @@ async function loadOrders(){
 </button>
 
 
-<button onclick="deleteOrder('${orderID}')">
-    🗑️ Delete Order
+<button class="delete-btn" onclick="deleteOrder('${orderID}')">
+
+🗑️ Delete Order
+
 </button>
 
               
