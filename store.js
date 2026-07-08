@@ -538,7 +538,9 @@ onApprove: function (data, actions) {
         console.log("Payment Complete");
        
 // SAVE ORDER TO FIREBASE
+console.log("Firebase test:", db, collection, addDoc);
 
+        
 addDoc(
     collection(db, "orders"),
     {
