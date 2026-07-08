@@ -156,7 +156,113 @@ function addHoodieToCart(){
 
 }
 
+/* ==========================================
+   ADD CLASSIC TEE
+========================================== */
 
+function addTeeToCart(){
+
+    const size =
+    document.getElementById("tee-size").value;
+
+    const color =
+    document.getElementById("tee-color").value;
+
+    cart.push({
+
+        name:"Classic Tee",
+
+        size:size,
+
+        color:color,
+
+        price:29.99,
+
+        quantity:1,
+
+        provider:"Printify"
+
+    });
+
+    saveCart();
+
+    updateCart();
+
+    showNotification(
+        "Classic Tee added!"
+    );
+
+}
+
+
+
+/* ==========================================
+   ADD PRO CAP
+========================================== */
+
+function addCapToCart(){
+
+    const color =
+    document.getElementById("cap-color").value;
+
+    cart.push({
+
+        name:"Pro Cap",
+
+        color:color,
+
+        price:24.99,
+
+        quantity:1,
+
+        provider:"Printify"
+
+    });
+
+    saveCart();
+
+    updateCart();
+
+    showNotification(
+        "Pro Cap added!"
+    );
+
+}
+
+
+
+/* ==========================================
+   ADD STREAMER MUG
+========================================== */
+
+function addMugToCart(){
+
+    const color =
+    document.getElementById("mug-color").value;
+
+    cart.push({
+
+        name:"Streamer Mug",
+
+        color:color,
+
+        price:16.99,
+
+        quantity:1,
+
+        provider:"Printify"
+
+    });
+
+    saveCart();
+
+    updateCart();
+
+    showNotification(
+        "Streamer Mug added!"
+    );
+
+}
 
 /* ==========================================
    REMOVE ITEM
@@ -1164,26 +1270,26 @@ console.log(
    MAKE HTML BUTTONS WORK
 ========================================== */
 
-
 window.addToCart =
 addToCart;
-
-
 
 window.addHoodieToCart =
 addHoodieToCart;
 
+window.addTeeToCart =
+addTeeToCart;
 
+window.addCapToCart =
+addCapToCart;
+
+window.addMugToCart =
+addMugToCart;
 
 window.clearCart =
 clearCart;
 
-
-
 window.changeQuantity =
 changeQuantity;
-
-
 
 window.removeFromCart =
 removeFromCart;
