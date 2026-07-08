@@ -46,23 +46,29 @@ function saveCart(){
 
 function addToCart(name, price){
 
-
-    const item = {
-
-        name: name,
-        price: price
-
-    };
+    const existingItem = cart.find(item => item.name === name);
 
 
-    cart.push(item);
+    if(existingItem){
+
+        existingItem.quantity++;
+
+    } else {
+
+        cart.push({
+
+            name: name,
+            price: price,
+            quantity: 1
+
+        });
+
+    }
 
 
     saveCart();
 
-
     updateCart();
-
 
 
     showNotification(
@@ -89,7 +95,23 @@ function removeFromCart(index){
     updateCart();
 
 }
+function changeQuantity(index, amount){
 
+    cart[index].quantity += amount;
+
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    saveCart();
+
+    updateCart();
+
+}
 
 
 /* ==========================================
@@ -139,54 +161,75 @@ function updateCart(){
 
 
 
-    let total = 0;
+  let total = 0;
 
 
+if(cart.length === 0){
 
-    cart.forEach((item,index)=>{
+    cartItems.innerHTML =
+    "Your cart is empty";
 
-
-        total += item.price;
-
-
-
-        cartItems.innerHTML += `
-
-        <div class="cart-item">
-
-            <span>
-            ${item.name}
-            </span>
+} else {
 
 
-            <span>
-            $${item.price.toFixed(2)}
-            </span>
+cart.forEach((item,index)=>{
 
+    if(!item.quantity){
 
-            <button onclick="removeFromCart(${index})">
-            ❌
-            </button>
-
-
-        </div>
-
-        `;
-
-
-    });
-
-
-
-    if(cart.length === 0){
-
-        cartItems.innerHTML =
-        "Your cart is empty";
+        item.quantity = 1;
 
     }
 
 
+    total += item.price * item.quantity;
 
+
+    cartItems.innerHTML += `
+
+    <div class="cart-item">
+
+        <span>
+        ${item.name}
+        </span>
+
+
+        <span>
+        $${(item.price * item.quantity).toFixed(2)}
+        </span>
+
+
+        <div class="quantity-controls">
+
+            <button onclick="changeQuantity(${index}, -1)">
+                -
+            </button>
+
+
+            <span>
+                ${item.quantity}
+            </span>
+
+
+            <button onclick="changeQuantity(${index}, 1)">
+                +
+            </button>
+
+        </div>
+
+
+        <button onclick="removeFromCart(${index})">
+            ❌
+        </button>
+
+
+    </div>
+
+    `;
+
+
+});
+
+}  
     cartTotal.innerHTML =
     total.toFixed(2);
 
