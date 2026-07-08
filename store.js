@@ -709,12 +709,13 @@ document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("firebase-test");
 
 
-    if(firebaseTest){
+   if(firebaseTest){
 
-        firebaseTest.onclick = async function(){
+    firebaseTest.onclick = async function(){
 
-            console.log("Firebase test clicked");
+        alert("Button works!");
 
+        // rest of Firebase code below
 
             try{
 
