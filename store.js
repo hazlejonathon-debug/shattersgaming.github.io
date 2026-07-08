@@ -2,12 +2,6 @@
    SHATTER'S GAMING STORE.JS
 ========================================== */
 
-console.log("Firebase Objects:", {
-    db,
-    collection,
-    addDoc,
-    serverTimestamp
-});
 
 /* ==========================================
    LOAD SAVED CART
