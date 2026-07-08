@@ -25,12 +25,15 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 
-export const db = getFirestore(app);
+const db = getFirestore(app);
+
+window.firebaseReady = true;
 
 window.db = db;
 window.collection = collection;
 window.addDoc = addDoc;
 window.serverTimestamp = serverTimestamp;
 
+console.log("🔥 Firebase ready");
 
-console.log("🔥 Firebase Connected");
+console.log("🔥 Firebase connected");
