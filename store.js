@@ -422,6 +422,7 @@ function(){
 
 // ==========================
 // CONFIRM CHECKOUT BUTTON
+// LOAD PAYPAL
 // ==========================
 
 const confirmCheckout =
@@ -432,10 +433,6 @@ const checkoutPopup =
 document.getElementById("checkout-popup");
 
 
-const paymentPopup =
-document.getElementById("payment-success-popup");
-
-
 
 if(confirmCheckout){
 
@@ -443,20 +440,115 @@ if(confirmCheckout){
     confirmCheckout.onclick = function(){
 
 
-        // Close checkout popup
-        checkoutPopup.classList.remove("active");
+        // Hide the Continue / Cancel buttons
+        document.querySelector(".checkout-actions").style.display = "none";
+
+
+        // Load PayPal
+        loadPayPal();
+
+
+    };
+
+
+}
 
 
 
-        // Open payment complete popup
-        if(paymentPopup){
+function loadPayPal(){
 
-            paymentPopup.classList.add("active");
+
+    const paypalContainer =
+    document.getElementById("paypal-button-container");
+
+
+
+    // Prevent duplicate PayPal buttons
+    paypalContainer.innerHTML = "";
+
+
+
+    paypal.Buttons({
+
+        createOrder: function(data, actions){
+
+
+            return actions.order.create({
+
+                purchase_units:[{
+
+                    amount:{
+
+                        value:getCartTotal()
+
+                    }
+
+                }]
+
+            });
+
+
+        },
+
+
+
+        onApprove:function(data, actions){
+
+
+            return actions.order.capture().then(function(details){
+
+
+                // Close checkout popup
+                checkoutPopup.classList.remove("active");
+
+
+
+                // Show success popup
+                document
+                .getElementById("payment-success-popup")
+                .classList.add("active");
+
+
+
+                // Clear cart
+                cart = [];
+
+                saveCart();
+
+                updateCart();
+
+
+
+            });
+
 
         }
 
 
-    };
+
+    }).render("#paypal-button-container");
+
+
+}
+
+
+
+function getCartTotal(){
+
+
+    let total = 0;
+
+
+    cart.forEach(item=>{
+
+
+        total += item.price;
+
+
+    });
+
+
+    return total.toFixed(2);
 
 
 }
