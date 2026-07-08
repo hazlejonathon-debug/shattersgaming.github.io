@@ -675,10 +675,10 @@ function addHoodieToCart(){
     const hoodieName =
     "Elite Hoodie - " + size + " / " + color;
 
-
-    addToCart(
-        hoodieName,
-        45
-    );
-
-}
+addToCart(
+"Elite Hoodie",
+59.99,
+"Gildan 18000",
+"Printify Hoodie ID"
+)
+  
