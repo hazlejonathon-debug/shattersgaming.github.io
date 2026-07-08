@@ -1,5 +1,15 @@
 /* ==========================================
    SHATTER'S GAMING ADMIN DASHBOARD
+   FEATURES:
+   - Load Firebase Orders
+   - Search Orders
+   - Update Order Status
+   - Delete Orders
+========================================== */
+
+
+/* ==========================================
+   FIREBASE IMPORTS
 ========================================== */
 
 
@@ -8,13 +18,16 @@ from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 
 import {
+
     getFirestore,
     collection,
     getDocs,
     doc,
     updateDoc,
-   deleteDoc
+    deleteDoc
+
 }
+
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 
@@ -49,13 +62,25 @@ const db = getFirestore(app);
 
 
 
+/* ==========================================
+   GLOBAL VARIABLES
+========================================== */
+
+
 const ordersDiv =
 document.getElementById("orders");
 
 
+const searchBox =
+document.getElementById("order-search");
+
+
+let allOrders = [];
+
+
 
 /* ==========================================
-   LOAD ORDERS
+   LOAD ORDERS FROM FIREBASE
 ========================================== */
 
 
@@ -72,197 +97,27 @@ async function loadOrders(){
 
 
 
-        ordersDiv.innerHTML = "";
-
-
-
-        if(snapshot.empty){
-
-
-            ordersDiv.innerHTML = `
-
-            <div class="order-card">
-
-                <h2>
-                No Orders Yet
-                </h2>
-
-                <p>
-                Orders will appear here after payment.
-                </p>
-
-            </div>
-
-            `;
-
-
-            return;
-
-
-        }
+        allOrders = [];
 
 
 
         snapshot.forEach((document)=>{
 
 
-            const order =
-            document.data();
+            allOrders.push({
 
+                id: document.id,
 
-            const orderID =
-            document.id;
+                ...document.data()
 
-
-
-            ordersDiv.innerHTML += `
-
-
-            <div class="order-card">
-
-
-                <h2>
-                🎮 ${order.customerName || "Unknown Customer"}
-                </h2>
-
-
-                <p>
-                📧 ${order.email || "No Email"}
-                </p>
-
-
-                <p>
-                💰 Total:
-                $${order.total}
-                </p>
-
-
-                <p>
-                🆔 PayPal:
-                ${order.paypalOrderID || "N/A"}
-                </p>
-
-
-
-                <p>
-                📦 Status:
-                <span class="status">
-                ${order.status || "Pending"}
-                </span>
-                </p>
-
-
-
-                <h3>
-                Items
-                </h3>
-
-
-
-                ${
-                order.items.map(item=>`
-
-                <div class="item">
-
-                    🎮 ${item.name}
-
-                    <br>
-
-                    Quantity:
-                    ${item.quantity}
-
-
-                    ${
-                    item.size
-                    ?
-                    `<br>Size: ${item.size}`
-                    :
-                    ""
-                    }
-
-
-                    ${
-                    item.color
-                    ?
-                    `<br>Color: ${item.color}`
-                    :
-                    ""
-                    }
-
-
-                </div>
-
-
-                `).join("")
-                }
-
-
-
-                <br>
-
-
-
-                <label>
-                Update Status:
-                </label>
-
-
-
-                <select id="status-${orderID}">
-
-
-                    <option value="Ready for Printify"
-                    ${order.status==="Ready for Printify"?"selected":""}>
-                    Ready for Printify
-                    </option>
-
-
-
-                    <option value="Printing"
-                    ${order.status==="Printing"?"selected":""}>
-                    Printing
-                    </option>
-
-
-
-                    <option value="Shipped"
-                    ${order.status==="Shipped"?"selected":""}>
-                    Shipped
-                    </option>
-
-
-
-                    <option value="Complete"
-                    ${order.status==="Complete"?"selected":""}>
-                    Complete
-                    </option>
-
-
-                </select>
-
-<button onclick="updateOrderStatus('${orderID}')">
-    💾 Save Status
-</button>
-
-
-<button class="delete-btn" onclick="deleteOrder('${orderID}')">
-
-🗑️ Delete Order
-
-</button>
-
-              
-
-
-
-            </div>
-
-
-            `;
-
+            });
 
 
         });
+
+
+
+        displayOrders(allOrders);
 
 
 
@@ -273,13 +128,13 @@ async function loadOrders(){
 
 
         console.error(
-            "Firebase Admin Error:",
+            "Firebase Load Error:",
             error
         );
 
 
         ordersDiv.innerHTML =
-        "Error loading orders.";
+        "❌ Error loading orders";
 
 
     }
@@ -291,13 +146,304 @@ async function loadOrders(){
 
 
 /* ==========================================
+   DISPLAY ORDERS
+========================================== */
+
+
+function displayOrders(orders){
+
+
+
+    ordersDiv.innerHTML = "";
+
+
+
+    if(orders.length === 0){
+
+
+        ordersDiv.innerHTML = `
+
+        <div class="order-card">
+
+            <h2>
+            No Orders Found
+            </h2>
+
+            <p>
+            Try another search.
+            </p>
+
+        </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+
+    orders.forEach((order)=>{
+
+
+
+        ordersDiv.innerHTML += `
+
+
+        <div class="order-card">
+
+
+            <h2>
+            🎮 ${order.customerName || "Unknown"}
+            </h2>
+
+
+
+            <p>
+            📧 ${order.email || "No Email"}
+            </p>
+
+
+
+            <p>
+            💰 Total:
+            $${order.total || "0.00"}
+            </p>
+
+
+
+            <p>
+            🆔 PayPal:
+            ${order.paypalOrderID || "N/A"}
+            </p>
+
+
+
+            <p>
+            📦 Status:
+
+            <span class="status">
+            ${order.status || "Pending"}
+            </span>
+
+            </p>
+
+
+
+            <h3>
+            Items
+            </h3>
+
+
+
+            ${
+            order.items?.map(item=>`
+
+                <div class="item">
+
+                🎮 ${item.name}
+
+                <br>
+
+                Quantity:
+                ${item.quantity}
+
+
+                ${
+                item.size
+                ?
+                `<br>Size: ${item.size}`
+                :
+                ""
+                }
+
+
+                ${
+                item.color
+                ?
+                `<br>Color: ${item.color}`
+                :
+                ""
+                }
+
+
+                </div>
+
+
+            `).join("")
+            ||
+            "No Items"
+
+            }
+
+
+
+            <br>
+
+
+            <label>
+            Update Status:
+            </label>
+
+
+
+            <select id="status-${order.id}">
+
+
+                <option value="Ready for Printify"
+                ${order.status==="Ready for Printify"?"selected":""}>
+
+                Ready for Printify
+
+                </option>
+
+
+
+                <option value="Printing"
+                ${order.status==="Printing"?"selected":""}>
+
+                Printing
+
+                </option>
+
+
+
+                <option value="Shipped"
+                ${order.status==="Shipped"?"selected":""}>
+
+                Shipped
+
+                </option>
+
+
+
+                <option value="Complete"
+                ${order.status==="Complete"?"selected":""}>
+
+                Complete
+
+                </option>
+
+
+            </select>
+
+
+
+            <br>
+
+
+
+            <button onclick="updateOrderStatus('${order.id}')">
+
+            💾 Save Status
+
+            </button>
+
+
+
+            <button class="delete-btn"
+            onclick="deleteOrder('${order.id}')">
+
+            🗑️ Delete Order
+
+            </button>
+
+
+
+        </div>
+
+
+        `;
+
+
+
+    });
+
+
+
+}
+
+
+
+
+/* ==========================================
+   SEARCH ORDERS
+========================================== */
+
+
+if(searchBox){
+
+
+    searchBox.addEventListener(
+    "input",
+    function(){
+
+
+        const search =
+        this.value.toLowerCase();
+
+
+
+        const filtered =
+        allOrders.filter(order=>{
+
+
+            return (
+
+                order.customerName
+                ?.toLowerCase()
+                .includes(search)
+
+
+                ||
+
+                order.email
+                ?.toLowerCase()
+                .includes(search)
+
+
+                ||
+
+                order.status
+                ?.toLowerCase()
+                .includes(search)
+
+
+                ||
+
+                JSON.stringify(order.items)
+                .toLowerCase()
+                .includes(search)
+
+
+            );
+
+
+        });
+
+
+
+        displayOrders(filtered);
+
+
+
+    });
+
+
+}
+
+
+
+
+
+/* ==========================================
    UPDATE ORDER STATUS
 ========================================== */
 
 
 window.updateOrderStatus =
 async function(orderID){
-
 
 
     const newStatus =
@@ -345,13 +491,12 @@ async function(orderID){
 
 
         console.error(
-            "Update Error:",
             error
         );
 
 
         alert(
-            "❌ Could not update order"
+            "❌ Update failed"
         );
 
 
@@ -365,23 +510,23 @@ async function(orderID){
 
 
 /* ==========================================
-   START DASHBOARD
+   DELETE ORDER
 ========================================== */
 
 
-loadOrders();
-   
-window.deleteOrder = async function(orderID){
+window.deleteOrder =
+async function(orderID){
 
 
-    const confirmDelete =
-    confirm(
-        "Are you sure you want to delete this order?"
-    );
 
+    if(
+        !confirm(
+        "Delete this order?"
+        )
+    ){
 
-    if(!confirmDelete){
         return;
+
     }
 
 
@@ -400,12 +545,15 @@ window.deleteOrder = async function(orderID){
         );
 
 
+
         alert(
             "🗑️ Order Deleted"
         );
 
 
+
         loadOrders();
+
 
 
     }
@@ -415,13 +563,12 @@ window.deleteOrder = async function(orderID){
 
 
         console.error(
-            "Delete Error:",
             error
         );
 
 
         alert(
-            "❌ Could not delete order"
+            "❌ Delete failed"
         );
 
 
@@ -430,6 +577,18 @@ window.deleteOrder = async function(orderID){
 
 };
 
+
+
+
+
+/* ==========================================
+   START DASHBOARD
+========================================== */
+
+
+loadOrders();
+
+
 console.log(
-"🔥 Admin Dashboard Loaded"
+"🔥 Shatter's Gaming Admin Dashboard Loaded"
 );
