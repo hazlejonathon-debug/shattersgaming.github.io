@@ -500,22 +500,42 @@ function loadPayPal(){
 
         alert("Payment Approved!");
 
-        // Close checkout popup
-        checkoutPopup.classList.remove("active");
+     paypal.Buttons({
 
-        // Show success popup
-        document
-            .getElementById("payment-success-popup")
-            .classList.add("active");
+    createOrder: function(data, actions) {
 
-        // Clear cart
-        cart = [];
-        saveCart();
-        updateCart();
+        return actions.order.create({
+            purchase_units: [{
+                amount: {
+                    value: getCartTotal()
+                }
+            }]
+        });
 
-    });
+    },
 
-}
+    onApprove: function(data, actions) {
+
+        return actions.order.capture().then(function(details) {
+
+            console.log("PAYMENT APPROVED");
+            alert("Payment Approved!");
+
+            checkoutPopup.classList.remove("active");
+
+            document
+                .getElementById("payment-success-popup")
+                .classList.add("active");
+
+            cart = [];
+            saveCart();
+            updateCart();
+
+        });
+
+    }
+
+}).render("#paypal-button-container");  
 
                 // Close checkout popup
                 checkoutPopup.classList.remove("active");
