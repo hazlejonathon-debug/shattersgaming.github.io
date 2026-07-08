@@ -706,3 +706,63 @@ function addHoodieToCart(){
 
 }
   
+/* ==========================================
+   FIREBASE TEST BUTTON
+========================================== */
+
+const firebaseTest =
+document.getElementById("firebase-test");
+
+if(firebaseTest){
+
+    firebaseTest.onclick = async function(){
+
+        try{
+
+            await window.addDoc(
+
+                window.collection(window.db,"orders"),
+
+                {
+
+                    customerName:"Test Customer",
+
+                    email:"test@shattersgaming.com",
+
+                    items:[
+                        {
+                            name:"Elite Hoodie",
+                            size:"Medium",
+                            color:"Black",
+                            quantity:1,
+                            price:59.99
+                        }
+                    ],
+
+                    total:59.99,
+
+                    paypalOrderID:"TEST123456",
+
+                    status:"Ready for Printify",
+
+                    createdAt:window.serverTimestamp()
+
+                }
+
+            );
+
+            alert("🔥 Test order saved!");
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            alert("Firebase Error: " + error.message);
+
+        }
+
+    };
+
+}
