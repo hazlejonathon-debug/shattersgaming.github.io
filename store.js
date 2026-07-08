@@ -662,3 +662,23 @@ function getCartTotal() {
     return total.toFixed(2);
 
 }
+function addHoodieToCart(){
+
+    const size =
+    document.getElementById("hoodie-size").value;
+
+
+    const color =
+    document.getElementById("hoodie-color").value;
+
+
+    const hoodieName =
+    "Elite Hoodie - " + size + " / " + color;
+
+
+    addToCart(
+        hoodieName,
+        45
+    );
+
+}
