@@ -705,64 +705,84 @@ function addHoodieToCart(){
     );
 
 }
-  
 /* ==========================================
    FIREBASE TEST BUTTON
 ========================================== */
 
-const firebaseTest =
-document.getElementById("firebase-test");
+document.addEventListener("DOMContentLoaded", function(){
 
-if(firebaseTest){
+    const firebaseTest =
+    document.getElementById("firebase-test");
 
-    firebaseTest.onclick = async function(){
 
-        try{
+    if(firebaseTest){
 
-            await window.addDoc(
+        firebaseTest.onclick = async function(){
 
-                window.collection(window.db,"orders"),
+            console.log("Firebase test clicked");
 
-                {
 
-                    customerName:"Test Customer",
+            try{
 
-                    email:"test@shattersgaming.com",
+                await window.addDoc(
 
-                    items:[
-                        {
-                            name:"Elite Hoodie",
-                            size:"Medium",
-                            color:"Black",
-                            quantity:1,
-                            price:59.99
-                        }
-                    ],
+                    window.collection(
+                        window.db,
+                        "orders"
+                    ),
 
-                    total:59.99,
+                    {
 
-                    paypalOrderID:"TEST123456",
+                        customerName:"Test Customer",
 
-                    status:"Ready for Printify",
+                        email:"test@shattersgaming.com",
 
-                    createdAt:window.serverTimestamp()
+                        items:[
+                            {
+                                name:"Elite Hoodie",
+                                size:"Medium",
+                                color:"Black",
+                                quantity:1,
+                                price:59.99
+                            }
+                        ],
 
-                }
+                        total:59.99,
 
-            );
+                        paypalOrderID:"TEST123",
 
-            alert("🔥 Test order saved!");
+                        status:"Ready for Printify",
 
-        }
+                        createdAt:
+                        window.serverTimestamp()
 
-        catch(error){
+                    }
 
-            console.error(error);
+                );
 
-            alert("Firebase Error: " + error.message);
 
-        }
+                alert("🔥 Test order saved!");
 
-    };
+            }
 
-}
+
+            catch(error){
+
+                console.error(
+                    "Firebase test error:",
+                    error
+                );
+
+
+                alert(
+                    "Firebase Error: " +
+                    error.message
+                );
+
+            }
+
+        };
+
+    }
+
+});  
