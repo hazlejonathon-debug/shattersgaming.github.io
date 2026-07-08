@@ -1,17 +1,16 @@
 /* ==========================================
    SHATTER'S GAMING STORE.JS
-   CLEAN VERSION
+   CLEAN REBUILD
 ========================================== */
-window.addEventListener("load", () => {
 
-    console.log("Firebase check:");
-    console.log(window.db);
 
 /* ==========================================
    CART DATA
 ========================================== */
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart = JSON.parse(
+    localStorage.getItem("cart")
+) || [];
 
 
 
@@ -31,41 +30,73 @@ function saveCart(){
 
 
 /* ==========================================
+   GET CART TOTAL
+========================================== */
+
+function getCartTotal(){
+
+    let total = 0;
+
+
+    cart.forEach(item => {
+
+        total += item.price * item.quantity;
+
+    });
+
+
+    return total.toFixed(2);
+
+}
+
+
+
+/* ==========================================
    ADD NORMAL PRODUCT
 ========================================== */
 
 function addToCart(name, price){
+
 
     let existing = cart.find(
         item => item.name === name
     );
 
 
+
     if(existing){
 
         existing.quantity++;
 
-    } 
-    else {
+    }
+
+    else{
+
 
         cart.push({
 
             name:name,
-            price:price,
+
+            price:Number(price),
+
             quantity:1
 
         });
 
+
     }
+
 
 
     saveCart();
 
     updateCart();
 
+
     showNotification(
         name + " added!"
     );
+
 
 }
 
@@ -77,12 +108,18 @@ function addToCart(name, price){
 
 function addHoodieToCart(){
 
+
     const size =
-    document.getElementById("hoodie-size").value;
+    document.getElementById(
+        "hoodie-size"
+    ).value;
+
 
 
     const color =
-    document.getElementById("hoodie-color").value;
+    document.getElementById(
+        "hoodie-color"
+    ).value;
 
 
 
@@ -90,11 +127,11 @@ function addHoodieToCart(){
 
         name:"Elite Hoodie",
 
+        price:59.99,
+
         size:size,
 
         color:color,
-
-        price:59.99,
 
         quantity:1,
 
@@ -105,14 +142,17 @@ function addHoodieToCart(){
     });
 
 
+
     saveCart();
 
     updateCart();
 
 
+
     showNotification(
         "Elite Hoodie added!"
     );
+
 
 }
 
@@ -124,11 +164,17 @@ function addHoodieToCart(){
 
 function removeFromCart(index){
 
-    cart.splice(index,1);
+
+    cart.splice(
+        index,
+        1
+    );
+
 
     saveCart();
 
     updateCart();
+
 
 }
 
@@ -138,22 +184,32 @@ function removeFromCart(index){
    CHANGE QUANTITY
 ========================================== */
 
-function changeQuantity(index,amount){
+function changeQuantity(index, amount){
+
+
+    if(!cart[index]) return;
+
 
 
     cart[index].quantity += amount;
 
 
+
     if(cart[index].quantity <= 0){
 
-        cart.splice(index,1);
+        cart.splice(
+            index,
+            1
+        );
 
     }
+
 
 
     saveCart();
 
     updateCart();
+
 
 }
 
@@ -165,11 +221,15 @@ function changeQuantity(index,amount){
 
 function clearCart(){
 
+
     cart = [];
+
 
     saveCart();
 
+
     updateCart();
+
 
 }
 
@@ -183,15 +243,21 @@ function updateCart(){
 
 
     const items =
-    document.getElementById("cart-items");
+    document.getElementById(
+        "cart-items"
+    );
 
 
     const totalBox =
-    document.getElementById("cart-total");
+    document.getElementById(
+        "cart-total"
+    );
 
 
     const count =
-    document.getElementById("cart-count");
+    document.getElementById(
+        "cart-count"
+    );
 
 
 
@@ -199,7 +265,8 @@ function updateCart(){
 
 
 
-    items.innerHTML="";
+    items.innerHTML = "";
+
 
 
     let total = 0;
@@ -214,6 +281,7 @@ function updateCart(){
 
 
     }
+
     else{
 
 
@@ -221,7 +289,8 @@ function updateCart(){
 
 
             total +=
-            item.price * item.quantity;
+            item.price *
+            item.quantity;
 
 
 
@@ -235,21 +304,31 @@ function updateCart(){
 
 ${item.name}
 
-${item.size ?
-"<br>Size: "+item.size
-:""}
+${
+item.size
+?
+"<br>Size: " + item.size
+:
+""
+}
 
-${item.color ?
-"<br>Color: "+item.color
-:""}
+${
+item.color
+?
+"<br>Color: " + item.color
+:
+""
+}
 
 </span>
+
 
 
 <span>
 
 $${(
-item.price * item.quantity
+item.price *
+item.quantity
 ).toFixed(2)}
 
 </span>
@@ -277,8 +356,11 @@ ${item.quantity}
 </div>
 
 
+
 <button onclick="removeFromCart(${index})">
+
 ❌
+
 </button>
 
 
@@ -287,26 +369,39 @@ ${item.quantity}
 
 `;
 
+
+
         });
+
 
 
     }
 
 
 
-    totalBox.innerHTML =
-    total.toFixed(2);
+    if(totalBox){
+
+        totalBox.innerHTML =
+        total.toFixed(2);
+
+    }
 
 
 
-    count.innerHTML =
-    cart.reduce(
-        (sum,item)=>sum+item.quantity,
-        0
-    );
+    if(count){
+
+        count.innerHTML =
+        cart.reduce(
+            (sum,item)=>
+            sum + item.quantity,
+            0
+        );
+
+    }
 
 
 }
+ 
 /* ==========================================
    CART SIDEBAR CONTROLS
 ========================================== */
@@ -317,68 +412,122 @@ document.addEventListener(
 function(){
 
 
-updateCart();
+
+    updateCart();
 
 
 
-const openCart =
-document.getElementById("open-cart");
-
-
-const closeCart =
-document.getElementById("close-cart");
-
-
-const cartSidebar =
-document.querySelector(".cart-sidebar");
-
-
-const cartOverlay =
-document.getElementById("cart-overlay");
+    const openCart =
+    document.getElementById(
+        "open-cart"
+    );
 
 
 
-if(openCart){
-
-openCart.onclick = function(e){
-
-    e.preventDefault();
-
-    cartSidebar.classList.add("active");
-
-    cartOverlay.classList.add("active");
-
-};
-
-}
+    const closeCart =
+    document.getElementById(
+        "close-cart"
+    );
 
 
 
-if(closeCart){
-
-closeCart.onclick = function(){
-
-    cartSidebar.classList.remove("active");
-
-    cartOverlay.classList.remove("active");
-
-};
-
-}
+    const cartSidebar =
+    document.querySelector(
+        ".cart-sidebar"
+    );
 
 
 
-if(cartOverlay){
+    const cartOverlay =
+    document.getElementById(
+        "cart-overlay"
+    );
 
-cartOverlay.onclick = function(){
 
-    cartSidebar.classList.remove("active");
 
-    cartOverlay.classList.remove("active");
 
-};
+    if(openCart && cartSidebar){
 
-}
+
+        openCart.onclick = function(e){
+
+
+            e.preventDefault();
+
+
+            cartSidebar.classList.add(
+                "active"
+            );
+
+
+            if(cartOverlay){
+
+                cartOverlay.classList.add(
+                    "active"
+                );
+
+            }
+
+
+        };
+
+
+    }
+
+
+
+
+
+    if(closeCart && cartSidebar){
+
+
+        closeCart.onclick = function(){
+
+
+            cartSidebar.classList.remove(
+                "active"
+            );
+
+
+            if(cartOverlay){
+
+                cartOverlay.classList.remove(
+                    "active"
+                );
+
+            }
+
+
+        };
+
+
+    }
+
+
+
+
+
+    if(cartOverlay){
+
+
+        cartOverlay.onclick = function(){
+
+
+            cartSidebar.classList.remove(
+                "active"
+            );
+
+
+            cartOverlay.classList.remove(
+                "active"
+            );
+
+
+        };
+
+
+    }
+
 
 
 
@@ -388,66 +537,99 @@ cartOverlay.onclick = function(){
 
 
 const checkoutButton =
-document.querySelector(".checkout-btn");
+document.querySelector(
+    ".checkout-btn"
+);
+
 
 
 const checkoutPopup =
-document.getElementById("checkout-popup");
+document.getElementById(
+    "checkout-popup"
+);
+
 
 
 
 if(checkoutButton && checkoutPopup){
 
 
-checkoutButton.onclick=function(){
+    checkoutButton.onclick=function(){
 
 
-    checkoutPopup.classList.add("active");
+        checkoutPopup.classList.add(
+            "active"
+        );
 
 
-};
+    };
 
 
 }
 
 
 
+
+
 const cancelCheckout =
-document.getElementById("cancel-checkout");
+document.getElementById(
+    "cancel-checkout"
+);
+
 
 
 const closeCheckout =
-document.getElementById("close-checkout-popup");
+document.getElementById(
+    "close-checkout-popup"
+);
+
 
 
 
 function closeCheckoutPopup(){
 
-    checkoutPopup.classList.remove("active");
+
+    if(checkoutPopup){
+
+        checkoutPopup.classList.remove(
+            "active"
+        );
+
+    }
+
 
 }
+
+
 
 
 
 if(cancelCheckout){
 
-cancelCheckout.onclick =
-closeCheckoutPopup;
+
+    cancelCheckout.onclick =
+    closeCheckoutPopup;
+
 
 }
+
 
 
 
 if(closeCheckout){
 
-closeCheckout.onclick =
-closeCheckoutPopup;
+
+    closeCheckout.onclick =
+    closeCheckoutPopup;
+
 
 }
 
 
 
+
 });
+
 
 
 
@@ -459,68 +641,54 @@ closeCheckoutPopup;
 function showNotification(message){
 
 
-const box =
-document.getElementById("cart-notification");
 
-
-const text =
-document.getElementById("notification-text");
-
-
-
-if(!box) return;
+    const box =
+    document.getElementById(
+        "cart-notification"
+    );
 
 
 
-text.innerHTML = message;
+    const text =
+    document.getElementById(
+        "notification-text"
+    );
 
 
 
-box.classList.add("show");
+    if(!box || !text){
+
+        return;
+
+    }
 
 
 
-setTimeout(()=>{
+    text.innerHTML =
+    message;
 
 
-box.classList.remove("show");
+
+    box.classList.add(
+        "show"
+    );
 
 
-},2000);
+
+    setTimeout(()=>{
+
+
+        box.classList.remove(
+            "show"
+        );
+
+
+    },2000);
 
 
 
 }
 
-
-
-/* ==========================================
-   GET CART TOTAL
-========================================== */
-
-
-function getCartTotal(){
-
-
-let total = 0;
-
-
-
-cart.forEach(item=>{
-
-
-total +=
-item.price * item.quantity;
-
-
-});
-
-
-
-return total.toFixed(2);
-
-
-}
 
 
 
@@ -530,45 +698,67 @@ return total.toFixed(2);
 
 
 const confirmCheckout =
-document.getElementById("confirm-checkout");
+document.getElementById(
+    "confirm-checkout"
+);
+
 
 
 
 if(confirmCheckout){
 
 
+
 confirmCheckout.onclick=function(){
 
 
-confirmCheckout.disabled=true;
 
-confirmCheckout.innerHTML =
-"Loading...";
+    confirmCheckout.disabled=true;
 
 
-loadPayPal();
+
+    confirmCheckout.innerHTML =
+    "Loading...";
+
+
+
+    startPayPal();
+
 
 
 };
+
 
 
 }
 
 
 
-function loadPayPal(){
+
+function startPayPal(){
+
 
 
 const container =
 document.getElementById(
-"paypal-button-container"
+    "paypal-button-container"
 );
 
 
-const actions =
+
+const actionsBox =
 document.querySelector(
-".checkout-actions"
+    ".checkout-actions"
 );
+
+
+
+if(!container){
+
+    return;
+
+}
+
 
 
 
@@ -576,139 +766,263 @@ container.innerHTML="";
 
 
 
+if(typeof paypal === "undefined"){
+
+
+    console.error(
+        "PayPal not loaded"
+    );
+
+
+    return;
+
+
+}
+
+
+
+
+
 paypal.Buttons({
+
+
 
 createOrder:function(data,actions){
 
-    return actions.order.create({
 
-        purchase_units:[{
 
-            amount:{
-                value:getCartTotal()
-            }
+return actions.order.create({
 
-        }]
 
-    });
+purchase_units:[{
+
+amount:{
+
+
+value:getCartTotal()
+
+
+}
+
+
+}]
+
+
+});
+
+
 
 },
+
 
 
 onApprove:function(data,actions){
 
-    return actions.order.capture()
-
-    .then(async function(details){
 
 
-        console.log(
-            "Payment completed",
-            details
-        );
+return actions.order.capture()
+
+.then(async function(details){
 
 
-        /* FIREBASE SAVE */
 
-        if(
-            window.db &&
-            window.addDoc &&
-            window.collection
-        ){
+console.log(
+    "Payment completed",
+    details
+);
 
-            await window.addDoc(
-
-                window.collection(
-                    window.db,
-                    "orders"
-                ),
-
-                {
-
-                    customerName:"Test Customer",
-
-                    email:"test@email.com",
-
-                    items:cart,
-
-                    total:getCartTotal(),
-
-                    paypalOrderID:data.orderID,
-
-                    status:"Ready for Printify",
-
-                    createdAt:
-                    window.serverTimestamp()
-
-                }
-
-            );
+ 
+/* ==========================================
+   FIREBASE ORDER SAVE
+========================================== */
 
 
-            console.log(
-                "🔥 Order saved to Firebase"
-            );
+if(
+    window.db &&
+    window.addDoc &&
+    window.collection
+){
+
+
+    await window.addDoc(
+
+        window.collection(
+            window.db,
+            "orders"
+        ),
+
+
+        {
+
+
+            customerName:
+            "Test Customer",
+
+
+            email:
+            "test@shattersgaming.com",
+
+
+            items:
+            cart,
+
+
+            total:
+            Number(getCartTotal()),
+
+
+            paypalOrderID:
+            data.orderID,
+
+
+            status:
+            "Ready for Printify",
+
+
+            createdAt:
+            window.serverTimestamp()
+
 
         }
 
 
-
-        /* SUCCESS POPUP */
-
-        document
-        .getElementById(
-            "checkout-popup"
-        )
-        .classList.remove("active");
+    );
 
 
 
-        document
-        .getElementById(
-            "payment-success-popup"
-        )
-        .classList.add("active");
+    console.log(
+        "🔥 Order saved to Firebase"
+    );
+
+
+}
+
+else{
+
+
+    console.warn(
+        "⚠️ Firebase not ready"
+    );
+
+
+}
 
 
 
-        cart=[];
-
-        saveCart();
-
-        updateCart();
 
 
-
-        container.innerHTML="";
-
-
-        confirmCheckout.disabled=false;
+/* ==========================================
+   PAYMENT SUCCESS
+========================================== */
 
 
-        confirmCheckout.innerHTML=
-        "Continue";
+const checkoutPopup =
+document.getElementById(
+    "checkout-popup"
+);
 
 
-    });
+
+const successPopup =
+document.getElementById(
+    "payment-success-popup"
+);
+
+
+
+if(checkoutPopup){
+
+
+    checkoutPopup.classList.remove(
+        "active"
+    );
+
+
+}
+
+
+
+if(successPopup){
+
+
+    successPopup.classList.add(
+        "active"
+    );
+
+
+}
+
+
+
+
+
+cart = [];
+
+
+saveCart();
+
+
+updateCart();
+
+
+
+container.innerHTML="";
+
+
+
+confirmCheckout.disabled=false;
+
+
+
+confirmCheckout.innerHTML =
+"Continue";
+
+
+
+});
+
+
 
 },
+
+
 
 
 onCancel:function(){
 
+
+
     container.innerHTML="";
 
-    actions.style.display="flex";
+
+
+    if(actionsBox){
+
+
+        actionsBox.style.display =
+        "flex";
+
+
+    }
+
+
 
     confirmCheckout.disabled=false;
 
-    confirmCheckout.innerHTML=
+
+
+    confirmCheckout.innerHTML =
     "Continue";
+
 
 },
 
 
+
+
 onError:function(error){
+
+
 
     console.error(
         "PayPal Error:",
@@ -716,42 +1030,47 @@ onError:function(error){
     );
 
 
+
     alert(
         "PayPal encountered an error."
     );
 
 
+
     container.innerHTML="";
+
 
 
     confirmCheckout.disabled=false;
 
 
-    confirmCheckout.innerHTML=
+
+    confirmCheckout.innerHTML =
     "Continue";
 
+
+
 }
+
 
 
 })
 
 
+
 .render(
-"#paypal-button-container"
+    "#paypal-button-container"
 );
 
-.then(()=>{
-
-
-actions.style.display="none";
-
-
-});
 
 
 }
+
+
+
+
 /* ==========================================
-   PAYMENT SUCCESS POPUP
+   PAYMENT SUCCESS BUTTON
 ========================================== */
 
 
@@ -760,15 +1079,17 @@ document.addEventListener(
 function(){
 
 
+
 const successButton =
 document.getElementById(
-"close-payment-success"
+    "close-payment-success"
 );
+
 
 
 const successPopup =
 document.getElementById(
-"payment-success-popup"
+    "payment-success-popup"
 );
 
 
@@ -776,15 +1097,19 @@ document.getElementById(
 if(successButton && successPopup){
 
 
+
 successButton.onclick=function(){
 
 
-successPopup.classList.remove(
-"active"
-);
+
+    successPopup.classList.remove(
+        "active"
+    );
+
 
 
 };
+
 
 
 }
@@ -795,35 +1120,46 @@ successPopup.classList.remove(
 
 
 
+
+
 /* ==========================================
-   FIREBASE DEBUG CHECK
+   DEBUG
 ========================================== */
 
 
 console.log(
-"🔥 Store.js loaded"
+    "🔥 Store.js loaded"
 );
+
 
 
 if(window.db){
 
+
 console.log(
-"🔥 Firebase connection available"
+    "🔥 Firebase connection available"
 );
 
+
 }
+
 else{
 
+
 console.log(
-"⚠️ Waiting for Firebase connection"
+    "⚠️ Waiting for Firebase connection"
 );
 
+
 }
+
+
+
 
 
 
 /* ==========================================
-   MAKE FUNCTIONS AVAILABLE TO HTML
+   MAKE HTML BUTTONS WORK
 ========================================== */
 
 
@@ -831,18 +1167,21 @@ window.addToCart =
 addToCart;
 
 
+
 window.addHoodieToCart =
 addHoodieToCart;
+
 
 
 window.clearCart =
 clearCart;
 
 
+
 window.changeQuantity =
 changeQuantity;
 
 
+
 window.removeFromCart =
 removeFromCart;
-
