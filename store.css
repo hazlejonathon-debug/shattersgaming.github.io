@@ -919,3 +919,65 @@ nav a:hover{
     z-index: 200002;
     pointer-events: auto;
 }
+/* ==========================================
+   CART QUANTITY CONTROLS
+   SHATTER'S GAMING STYLE
+========================================== */
+
+.quantity-controls{
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    margin-top:10px;
+
+}
+
+
+.quantity-controls button{
+
+    width:32px;
+    height:32px;
+
+    background:#39ff14;
+    color:#050505;
+
+    border:2px solid #39ff14;
+    border-radius:8px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:0.25s ease;
+
+}
+
+
+.quantity-controls button:hover{
+
+    background:#9b00ff;
+    border-color:#9b00ff;
+
+    color:white;
+
+    transform:scale(1.1);
+
+}
+
+
+.quantity-controls span{
+
+    min-width:30px;
+
+    text-align:center;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:white;
+
+}
