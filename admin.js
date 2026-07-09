@@ -23,6 +23,18 @@ import {
 }
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
+import {
+
+getFirestore,
+collection,
+getDocs,
+doc,
+updateDoc,
+deleteDoc
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 /* ==========================================
    FIREBASE CONFIG
@@ -45,7 +57,18 @@ const firebaseConfig = {
 
 };
 
+/* ==========================================
+   INITIALIZE FIREBASE
+========================================== */
 
+
+const app = initializeApp(firebaseConfig);
+
+
+const auth = getAuth(app);
+
+
+const db = getFirestore(app);
 
 
 /* ==========================================
