@@ -594,7 +594,7 @@ async function(orderID){
 
 
 const ADMIN_EMAIL =
-"hazlejonathon@gmail.com";
+"shatters.gaming26@gmail.com";
 
 
 onAuthStateChanged(auth,(user)=>{
