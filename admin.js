@@ -592,3 +592,129 @@ loadOrders();
 console.log(
 "🔥 Shatter's Gaming Admin Dashboard Loaded"
 );
+/* ==========================================
+   SHATTER'S GAMING ADMIN SECURITY
+   FIREBASE AUTH PROTECTION
+========================================== */
+
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
+
+
+import {
+
+getAuth,
+onAuthStateChanged,
+signOut
+
+}
+
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+
+
+/* ==========================================
+   FIREBASE CONFIG
+========================================== */
+
+
+const firebaseConfig = {
+
+apiKey: "AIzaSyDWtyteQ1nli-d6fOlUqd5Rj9O7wmE8O-U",
+
+authDomain: "shattersgamingstore.firebaseapp.com",
+
+projectId: "shattersgamingstore",
+
+storageBucket: "shattersgamingstore.firebasestorage.app",
+
+messagingSenderId: "1064932478413",
+
+appId: "1:1064932478413:web:4620aa3228ae9728b58884"
+
+};
+
+
+
+const app = initializeApp(firebaseConfig);
+
+
+const auth = getAuth(app);
+
+
+
+/* ==========================================
+   ADMIN PAGE SECURITY CHECK
+========================================== */
+
+
+onAuthStateChanged(auth,(user)=>{
+
+
+if(user){
+
+
+console.log(
+"🔥 Admin verified:",
+user.email
+);
+
+
+}
+
+else{
+
+
+console.log(
+"⚠️ No admin session found"
+);
+
+
+
+window.location.href =
+"login.html";
+
+
+}
+
+
+});
+
+
+
+
+/* ==========================================
+   LOGOUT BUTTON
+========================================== */
+
+
+const logoutButton =
+document.getElementById("logout-btn");
+
+
+
+if(logoutButton){
+
+
+logoutButton.onclick = async()=>{
+
+
+await signOut(auth);
+
+
+
+window.location.href =
+"login.html";
+
+
+};
+
+
+}
+
+
+
+console.log(
+"🔥 Admin Security Loaded"
+);
