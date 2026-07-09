@@ -7,28 +7,23 @@
    - Delete Orders
 ========================================== */
 
-
 /* ==========================================
-   FIREBASE IMPORTS
+   SHATTER'S GAMING ADMIN SECURITY
 ========================================== */
-
-
-import { initializeApp } 
-from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 
 import {
 
-    getFirestore,
-    collection,
-    getDocs,
-    doc,
-    updateDoc,
-    deleteDoc
+getAuth,
+onAuthStateChanged,
+signOut
 
 }
 
-from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
+
+
+const auth = getAuth();
 
 
 
