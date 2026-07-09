@@ -93,15 +93,19 @@ let allOrders = [];
 ========================================== */
 
 
-async function loadOrders(){
 
 
-    try{
+  async function loadOrders(){
+
+console.log("🔥 Loading orders started");
+
+   try{
 
 
         const snapshot =
         await getDocs(
             collection(db,"orders")
+         console.log("🔥 Firestore returned:", snapshot.size, "orders"); 
         );
 
 
