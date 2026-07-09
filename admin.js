@@ -293,17 +293,25 @@ function displayOrders(orders){
 </div>
 
 
-            <p>
-            📧 ${order.email || "No Email"}
-            </p>
+           <div class="info-grid">
 
+<div>
 
+<strong>📧 Customer Email</strong>
 
-            <p>
-            💰 Total:
-            $${order.total || "0.00"}
-            </p>
+<p>${order.email || "No Email"}</p>
 
+</div>
+
+<div>
+
+<strong>💰 Order Total</strong>
+
+<p>$${Number(order.total || 0).toFixed(2)}</p>
+
+</div>
+
+</div>
 
 
             <p>
