@@ -328,7 +328,8 @@ function displayOrders(orders){
 
 
       
-            order.items?.map(item=>`
+           ${
+order.items?.map(item=>`
 
                 <div class="item">
 
