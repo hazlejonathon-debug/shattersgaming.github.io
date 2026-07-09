@@ -256,10 +256,41 @@ function displayOrders(orders){
         <div class="order-card">
 
 
-            <h2>
-            🎮 ${order.customerName || "Unknown"}
-            </h2>
+          <div class="order-header">
 
+    <div>
+
+        <h2>
+        🎮 ${order.customerName || "Unknown Customer"}
+        </h2>
+
+        <p class="order-id">
+        Order #${order.id.substring(0,8).toUpperCase()}
+        </p>
+
+    </div>
+
+    <div>
+
+        <span class="status ${
+            order.status==="Ready for Printify"
+                ?"ready"
+            :order.status==="Printing"
+                ?"printing"
+            :order.status==="Shipped"
+                ?"shipped"
+            :order.status==="Complete"
+                ?"complete"
+                :"pending"
+        }">
+
+        ${order.status || "Pending"}
+
+        </span>
+
+    </div>
+
+</div>
 
 
             <p>
