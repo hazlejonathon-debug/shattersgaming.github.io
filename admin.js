@@ -47,12 +47,6 @@ const firebaseConfig = {
 
 
 
-const app = initializeApp(firebaseConfig);
-
-
-const db = getFirestore(app);
-
-
 
 /* ==========================================
    GLOBAL VARIABLES
@@ -586,28 +580,6 @@ console.log(
 );
 
 
-
-
-/* ==========================================
-   FIREBASE CONFIG
-========================================== */
-
-
-const firebaseConfig = {
-
-apiKey: "AIzaSyDWtyteQ1nli-d6fOlUqd5Rj9O7wmE8O-U",
-
-authDomain: "shattersgamingstore.firebaseapp.com",
-
-projectId: "shattersgamingstore",
-
-storageBucket: "shattersgamingstore.firebasestorage.app",
-
-messagingSenderId: "1064932478413",
-
-appId: "1:1064932478413:web:4620aa3228ae9728b58884"
-
-};
 
 
 
