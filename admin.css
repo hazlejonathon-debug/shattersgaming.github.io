@@ -635,3 +635,30 @@ select option{
     margin-top:5px;
 
 }
+/* ==========================================
+   INFO GRID
+========================================== */
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+    margin:20px 0;
+
+}
+
+.info-grid strong{
+
+    color:#b86cff;
+
+}
+
+.info-grid p{
+
+    margin-top:6px;
+
+}
