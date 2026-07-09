@@ -1,0 +1,1208 @@
+/* ==========================================
+   SHATTER'S GAMING ADMIN LOGIN V2.0
+   CORE DESIGN
+========================================== */
+
+
+/* RESET */
+
+*{
+
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Orbitron',sans-serif;
+
+}
+
+
+
+body{
+
+    min-height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+
+    background:
+
+    radial-gradient(
+        circle at top,
+        #1b1b1b,
+        #050505 70%
+    );
+
+    color:white;
+
+}
+
+
+
+/* ==========================================
+   ANIMATED GRID BACKGROUND
+========================================== */
+
+
+.background-grid{
+
+    position:fixed;
+
+    inset:0;
+
+    background-image:
+
+    linear-gradient(
+        rgba(57,255,20,.08) 1px,
+        transparent 1px
+    ),
+
+    linear-gradient(
+        90deg,
+        rgba(138,43,226,.08) 1px,
+        transparent 1px
+    );
+
+
+    background-size:
+
+    50px 50px;
+
+
+    animation:
+
+    gridMove 15s linear infinite;
+
+
+    z-index:-2;
+
+}
+
+
+
+@keyframes gridMove{
+
+
+from{
+
+    transform:translateY(0);
+
+}
+
+
+to{
+
+    transform:translateY(50px);
+
+}
+
+
+}
+
+
+
+/* ==========================================
+   PARTICLES
+========================================== */
+
+
+.particles span{
+
+
+position:absolute;
+
+
+width:6px;
+
+height:6px;
+
+
+background:#39ff14;
+
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 15px #39ff14;
+
+
+animation:
+
+floatParticles 12s linear infinite;
+
+
+opacity:.7;
+
+
+}
+
+
+
+.particles span:nth-child(1){
+
+left:10%;
+
+animation-delay:0s;
+
+}
+
+
+.particles span:nth-child(2){
+
+left:30%;
+
+animation-delay:3s;
+
+}
+
+
+.particles span:nth-child(3){
+
+left:55%;
+
+animation-delay:5s;
+
+}
+
+
+.particles span:nth-child(4){
+
+left:75%;
+
+animation-delay:2s;
+
+}
+
+
+.particles span:nth-child(5){
+
+left:90%;
+
+animation-delay:7s;
+
+}
+
+
+
+@keyframes floatParticles{
+
+
+0%{
+
+transform:
+
+translateY(100vh);
+
+opacity:0;
+
+}
+
+
+20%{
+
+opacity:1;
+
+}
+
+
+100%{
+
+transform:
+
+translateY(-20vh);
+
+opacity:0;
+
+}
+
+
+}
+
+
+
+/* ==========================================
+   LOGIN WRAPPER
+========================================== */
+
+
+.login-wrapper{
+
+
+width:100%;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+
+padding:20px;
+
+
+}
+/* ==========================================
+   LOGIN CARD / GLASS PANEL
+========================================== */
+
+
+.login-card{
+
+
+width:450px;
+
+
+padding:45px;
+
+
+background:
+
+rgba(17,17,17,.85);
+
+
+border:
+
+1px solid rgba(57,255,20,.5);
+
+
+border-radius:25px;
+
+
+backdrop-filter:
+
+blur(15px);
+
+
+
+box-shadow:
+
+
+0 0 40px rgba(57,255,20,.25),
+
+
+0 0 80px rgba(138,43,226,.15);
+
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+animation:
+
+cardFloat 5s ease-in-out infinite;
+
+
+}
+
+
+
+
+.login-card::before{
+
+
+content:"";
+
+
+position:absolute;
+
+
+inset:-2px;
+
+
+background:
+
+linear-gradient(
+
+45deg,
+
+#39ff14,
+
+#8a2be2,
+
+#39ff14
+
+);
+
+
+z-index:-1;
+
+
+filter:
+
+blur(20px);
+
+
+opacity:.35;
+
+
+}
+
+
+
+@keyframes cardFloat{
+
+
+0%,
+100%{
+
+transform:
+
+translateY(0);
+
+}
+
+
+50%{
+
+transform:
+
+translateY(-8px);
+
+}
+
+
+}
+
+
+
+/* ==========================================
+   BRAND AREA
+========================================== */
+
+
+.brand{
+
+text-align:center;
+
+margin-bottom:30px;
+
+}
+
+
+
+.logo-glow{
+
+
+font-size:55px;
+
+
+animation:
+
+logoPulse 2s infinite;
+
+
+}
+
+
+
+@keyframes logoPulse{
+
+
+0%{
+
+filter:
+
+drop-shadow(0 0 5px #39ff14);
+
+}
+
+
+50%{
+
+filter:
+
+drop-shadow(0 0 25px #39ff14);
+
+}
+
+
+100%{
+
+filter:
+
+drop-shadow(0 0 5px #39ff14);
+
+}
+
+
+}
+
+
+
+.brand h1{
+
+
+font-size:32px;
+
+
+color:#39ff14;
+
+
+letter-spacing:2px;
+
+
+text-shadow:
+
+0 0 15px #39ff14;
+
+
+}
+
+
+
+.brand h2{
+
+
+margin-top:10px;
+
+
+font-size:18px;
+
+
+color:white;
+
+
+}
+
+
+
+.brand p{
+
+
+margin-top:12px;
+
+
+color:#aaa;
+
+
+font-size:13px;
+
+
+}
+
+
+
+/* ==========================================
+   SECURITY PANEL
+========================================== */
+
+
+.security-panel{
+
+
+display:flex;
+
+
+flex-direction:column;
+
+
+gap:12px;
+
+
+background:#050505;
+
+
+border-radius:15px;
+
+
+padding:15px;
+
+
+margin-bottom:30px;
+
+
+border-left:
+
+3px solid #39ff14;
+
+
+}
+
+
+
+.security-item{
+
+
+display:flex;
+
+
+align-items:center;
+
+
+gap:10px;
+
+
+font-size:13px;
+
+
+color:#ddd;
+
+
+}
+
+
+
+.security-item i{
+
+
+color:#8a2be2;
+
+
+}
+
+
+
+.status-dot{
+
+
+width:10px;
+
+
+height:10px;
+
+
+background:#39ff14;
+
+
+border-radius:50%;
+
+
+box-shadow:
+
+0 0 15px #39ff14;
+
+
+animation:
+
+statusPulse 1.5s infinite;
+
+
+}
+
+
+
+@keyframes statusPulse{
+
+
+50%{
+
+opacity:.4;
+
+}
+
+
+}
+
+
+
+/* ==========================================
+   INPUTS
+========================================== */
+
+
+.input-group{
+
+
+position:relative;
+
+
+margin-bottom:20px;
+
+
+}
+
+
+
+.input-group i{
+
+
+position:absolute;
+
+
+left:15px;
+
+
+top:50%;
+
+
+transform:
+
+translateY(-50%);
+
+
+color:#39ff14;
+
+
+}
+
+
+
+.input-group input{
+
+
+width:100%;
+
+
+padding:
+
+15px 45px;
+
+
+background:#050505;
+
+
+border:
+
+1px solid #333;
+
+
+border-radius:12px;
+
+
+color:white;
+
+
+outline:none;
+
+
+transition:.3s;
+
+
+}
+
+
+
+.input-group input:focus{
+
+
+border-color:#39ff14;
+
+
+box-shadow:
+
+0 0 20px rgba(57,255,20,.4);
+
+
+}
+/* ==========================================
+   PASSWORD TOGGLE BUTTON
+========================================== */
+
+
+#show-password{
+
+
+position:absolute;
+
+
+right:15px;
+
+
+top:50%;
+
+
+transform:
+
+translateY(-50%);
+
+
+background:none;
+
+
+border:none;
+
+
+color:#8a2be2;
+
+
+cursor:pointer;
+
+
+font-size:16px;
+
+
+}
+
+
+
+#show-password:hover{
+
+
+color:#39ff14;
+
+
+}
+
+
+
+
+
+/* ==========================================
+   LOGIN OPTIONS
+========================================== */
+
+
+.login-options{
+
+
+display:flex;
+
+
+justify-content:space-between;
+
+
+align-items:center;
+
+
+margin-bottom:25px;
+
+
+font-size:13px;
+
+
+}
+
+
+
+.login-options label{
+
+
+color:#aaa;
+
+
+cursor:pointer;
+
+
+}
+
+
+
+.login-options input{
+
+
+accent-color:#39ff14;
+
+
+}
+
+
+
+.login-options a{
+
+
+color:#39ff14;
+
+
+text-decoration:none;
+
+
+transition:.3s;
+
+
+}
+
+
+
+.login-options a:hover{
+
+
+color:#8a2be2;
+
+
+}
+
+
+
+
+/* ==========================================
+   LOGIN BUTTON
+========================================== */
+
+
+#login-btn{
+
+
+width:100%;
+
+
+padding:16px;
+
+
+border:none;
+
+
+border-radius:12px;
+
+
+background:
+
+linear-gradient(
+
+90deg,
+
+#39ff14,
+
+#8a2be2
+
+);
+
+
+color:#050505;
+
+
+font-size:16px;
+
+
+font-weight:bold;
+
+
+cursor:pointer;
+
+
+position:relative;
+
+
+overflow:hidden;
+
+
+transition:.3s;
+
+
+}
+
+
+
+#login-btn:hover{
+
+
+transform:
+
+translateY(-3px);
+
+
+box-shadow:
+
+0 0 30px #39ff14;
+
+
+}
+
+
+
+#login-btn:active{
+
+
+transform:
+
+scale(.98);
+
+
+}
+
+
+
+
+.button-loader{
+
+
+display:none;
+
+
+}
+
+
+
+.button-loader i{
+
+
+animation:
+
+spin 1s linear infinite;
+
+
+}
+
+
+
+@keyframes spin{
+
+
+from{
+
+transform:
+
+rotate(0deg);
+
+}
+
+
+to{
+
+transform:
+
+rotate(360deg);
+
+}
+
+
+}
+
+
+
+
+
+/* ==========================================
+   LOGIN MESSAGE
+========================================== */
+
+
+#login-message{
+
+
+margin-top:20px;
+
+
+text-align:center;
+
+
+min-height:25px;
+
+
+font-size:14px;
+
+
+color:#ff4d4d;
+
+
+}
+
+
+
+
+/* ==========================================
+   ACCESS STATUS
+========================================== */
+
+
+.access-status{
+
+
+margin-top:25px;
+
+
+padding:12px;
+
+
+background:#050505;
+
+
+border-radius:10px;
+
+
+text-align:center;
+
+
+color:#777;
+
+
+font-size:12px;
+
+
+}
+
+
+
+.access-status i{
+
+
+margin-right:8px;
+
+
+}
+
+
+
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+
+.login-footer{
+
+
+margin-top:25px;
+
+
+text-align:center;
+
+
+font-size:12px;
+
+
+color:#666;
+
+
+}
+
+
+
+.login-footer i{
+
+
+color:#39ff14;
+
+
+}
+
+
+
+
+
+/* ==========================================
+   SUCCESS OVERLAY
+========================================== */
+
+
+.success-overlay{
+
+
+position:fixed;
+
+
+inset:0;
+
+
+background:
+
+rgba(0,0,0,.85);
+
+
+display:none;
+
+
+justify-content:center;
+
+
+align-items:center;
+
+
+z-index:100;
+
+
+}
+
+
+
+.success-box{
+
+
+background:#111;
+
+
+border:
+
+2px solid #39ff14;
+
+
+border-radius:20px;
+
+
+padding:40px;
+
+
+text-align:center;
+
+
+box-shadow:
+
+0 0 40px #39ff14;
+
+
+}
+
+
+
+.success-box i{
+
+
+font-size:60px;
+
+
+color:#39ff14;
+
+
+margin-bottom:20px;
+
+
+}
+
+
+
+.success-box h2{
+
+
+color:#39ff14;
+
+
+}
+
+
+
+
+
+/* ==========================================
+   RESPONSIVE MOBILE
+========================================== */
+
+
+@media(max-width:520px){
+
+
+.login-card{
+
+
+width:95%;
+
+
+padding:30px;
+
+
+}
+
+
+
+.brand h1{
+
+
+font-size:25px;
+
+
+}
+
+
+
+.login-options{
+
+
+flex-direction:column;
+
+
+gap:15px;
+
+
+}
+
+
+
+}
