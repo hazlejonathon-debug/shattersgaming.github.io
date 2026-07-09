@@ -102,12 +102,17 @@ console.log("🔥 Loading orders started");
    try{
 
 
-        const snapshot =
-        await getDocs(
-            collection(db,"orders")
-         console.log("🔥 Firestore returned:", snapshot.size, "orders"); 
-        );
+     const snapshot =
+await getDocs(
+    collection(db,"orders")
+);
 
+
+console.log(
+    "🔥 Firestore returned:",
+    snapshot.size,
+    "orders"
+);
 
 
         allOrders = [];
