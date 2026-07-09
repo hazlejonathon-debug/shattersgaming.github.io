@@ -424,3 +424,185 @@ select option{
     color:#39ff14;
 
 }
+/* ==========================================
+   PROFESSIONAL ORDER CARDS
+========================================== */
+
+.order-card{
+
+    background:#111;
+
+    border:2px solid #39ff14;
+
+    border-radius:16px;
+
+    padding:25px;
+
+    margin:25px 0;
+
+    box-shadow:0 0 20px rgba(57,255,20,.18);
+
+    transition:.3s;
+
+}
+
+.order-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 0 28px rgba(57,255,20,.35);
+
+}
+
+.order-card h2{
+
+    color:#39ff14;
+
+    font-family:'Orbitron',sans-serif;
+
+    margin-bottom:15px;
+
+}
+
+.order-card h3{
+
+    color:#b86cff;
+
+    margin:20px 0 10px;
+
+    border-bottom:1px solid #333;
+
+    padding-bottom:8px;
+
+}
+
+.order-card p{
+
+    margin:10px 0;
+
+    line-height:1.6;
+
+}
+
+.item{
+
+    background:#181818;
+
+    border-left:4px solid #39ff14;
+
+    padding:12px;
+
+    margin:12px 0;
+
+    border-radius:8px;
+
+}
+
+.order-card select{
+
+    width:100%;
+
+    margin-top:10px;
+
+    margin-bottom:18px;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    border:none;
+
+    background:#222;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.order-card button{
+
+    padding:12px 20px;
+
+    border:none;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    margin-right:12px;
+
+    transition:.3s;
+
+}
+
+.order-card button:hover{
+
+    transform:scale(1.05);
+
+}
+
+.order-card button:first-of-type{
+
+    background:#39ff14;
+
+    color:#000;
+
+}
+
+.delete-btn{
+
+    background:#ff3333;
+
+    color:white;
+
+}
+.status{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:30px;
+
+    font-weight:bold;
+
+    color:white;
+
+}
+
+.status.ready{
+
+    background:#ffc107;
+
+    color:#000;
+
+}
+
+.status.printing{
+
+    background:#2196f3;
+
+}
+
+.status.shipped{
+
+    background:#9c27b0;
+
+}
+
+.status.complete{
+
+    background:#39ff14;
+
+    color:#000;
+
+}
+
+.status.pending{
+
+    background:#666;
+
+}
