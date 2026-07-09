@@ -41,25 +41,60 @@ SHATTER'S GAMING ADMIN
 </header>
 
 
-
 <section class="dashboard">
-
 
 <h1>
 🔥 Order Dashboard
 </h1>
-
 
 <p>
 Manage Shatter's Gaming orders and fulfillment.
 </p>
 
 
+<!-- Dashboard Stats -->
+
+<div class="dashboard-stats">
+
+    <div class="stat-card">
+
+        <h3>Total Orders</h3>
+
+        <span id="total-orders">0</span>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3>Total Revenue</h3>
+
+        <span id="total-revenue">$0.00</span>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3>Pending Orders</h3>
+
+        <span id="pending-orders">0</span>
+
+    </div>
+
+    <div class="stat-card">
+
+        <h3>Completed Orders</h3>
+
+        <span id="completed-orders">0</span>
+
+    </div>
+
+</div>
+
 
 <div class="admin-search">
 
-    <input 
-    type="text" 
+    <input
+    type="text"
     id="order-search"
     placeholder="🔍 Search orders..."
     >
@@ -73,9 +108,7 @@ Loading orders...
 
 </div>
 
-
 </section>
-
 
 
 <script type="module" src="admin.js"></script>
