@@ -586,55 +586,41 @@ async function(orderID){
 
 };
 
-
-
 /* ==========================================
    ADMIN PAGE SECURITY CHECK
 ========================================== */
 
 
-const ADMIN_EMAIL =
-"shatters.gaming26@gmail.com";
-
-
 onAuthStateChanged(auth,(user)=>{
 
 
-if(user && user.email === ADMIN_EMAIL){
+console.log("AUTH USER:", user);
+
+
+if(user){
 
 
 console.log(
-"🔥 Admin verified:",
+"EMAIL FROM FIREBASE:",
 user.email
 );
 
 
-loadOrders();
-
-
 }
-
 
 else{
 
 
 console.log(
-"⚠️ Unauthorized access attempt"
+"No user logged in"
 );
-
-
-
-signOut(auth);
-
-
-window.location.href =
-"login.html";
 
 
 }
 
 
 });
+
 
 
 console.log(
