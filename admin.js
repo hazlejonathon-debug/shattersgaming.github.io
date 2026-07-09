@@ -86,7 +86,51 @@ document.getElementById("order-search");
 
 let allOrders = [];
 
+/* ==========================================
+   DASHBOARD STATISTICS
+========================================== */
 
+function updateDashboardStats(){
+
+    const totalOrders = allOrders.length;
+
+    let totalRevenue = 0;
+
+    let pendingOrders = 0;
+
+    let completedOrders = 0;
+
+    allOrders.forEach(order=>{
+
+        totalRevenue += Number(order.total || 0);
+
+        if(!order.status || order.status === "Pending"){
+
+            pendingOrders++;
+
+        }
+
+        if(order.status === "Complete"){
+
+            completedOrders++;
+
+        }
+
+    });
+
+    document.getElementById("total-orders").textContent =
+    totalOrders;
+
+    document.getElementById("total-revenue").textContent =
+    "$" + totalRevenue.toFixed(2);
+
+    document.getElementById("pending-orders").textContent =
+    pendingOrders;
+
+    document.getElementById("completed-orders").textContent =
+    completedOrders;
+
+}
 
 /* ==========================================
    LOAD ORDERS FROM FIREBASE
@@ -136,7 +180,7 @@ console.log(
 
 
         displayOrders(allOrders);
-
+updateDashboardStats();
 
 
     }
