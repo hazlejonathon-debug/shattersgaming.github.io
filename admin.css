@@ -606,3 +606,32 @@ select option{
     background:#666;
 
 }
+/* ==========================================
+   ORDER HEADER
+========================================== */
+
+.order-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    border-bottom:1px solid #333;
+
+    padding-bottom:15px;
+
+}
+
+.order-id{
+
+    color:#888;
+
+    font-size:14px;
+
+    margin-top:5px;
+
+}
