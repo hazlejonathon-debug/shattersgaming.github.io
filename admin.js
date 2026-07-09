@@ -588,33 +588,19 @@ async function(orderID){
 
 
 
-
-
-/* ==========================================
-   START DASHBOARD
-========================================== */
-
-
-loadOrders();
-
-
-console.log(
-"🔥 Shatter's Gaming Admin Dashboard Loaded"
-);
-
-
-
-
-
 /* ==========================================
    ADMIN PAGE SECURITY CHECK
 ========================================== */
 
 
+const ADMIN_EMAIL =
+"hazlejonathon@gmail.com";
+
+
 onAuthStateChanged(auth,(user)=>{
 
 
-if(user){
+if(user && user.email === ADMIN_EMAIL){
 
 
 console.log(
@@ -623,15 +609,22 @@ user.email
 );
 
 
+loadOrders();
+
+
 }
+
 
 else{
 
 
 console.log(
-"⚠️ No admin session found"
+"⚠️ Unauthorized access attempt"
 );
 
+
+
+signOut(auth);
 
 
 window.location.href =
@@ -644,6 +637,9 @@ window.location.href =
 });
 
 
+console.log(
+"🔥 Shatter's Gaming Admin Dashboard Loaded"
+);
 
 
 /* ==========================================
