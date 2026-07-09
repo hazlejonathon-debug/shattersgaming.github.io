@@ -285,9 +285,19 @@ function displayOrders(orders){
             <p>
             📦 Status:
 
-            <span class="status">
-            ${order.status || "Pending"}
-            </span>
+            <span class="status ${
+    order.status==="Ready for Printify"
+        ?"ready"
+    :order.status==="Printing"
+        ?"printing"
+    :order.status==="Shipped"
+        ?"shipped"
+    :order.status==="Complete"
+        ?"complete"
+        :"pending"
+}">
+${order.status || "Pending"}
+</span>
 
             </p>
 
