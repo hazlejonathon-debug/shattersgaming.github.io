@@ -9,22 +9,19 @@
 
 /* ==========================================
    SHATTER'S GAMING ADMIN SECURITY
+   FIREBASE AUTH PROTECTION
 ========================================== */
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
 
 
 import {
-
-getAuth,
-onAuthStateChanged,
-signOut
-
+    getAuth,
+    onAuthStateChanged,
+    signOut
 }
-
 from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
-
-
-const auth = getAuth();
-
 
 
 /* ==========================================
@@ -587,25 +584,7 @@ loadOrders();
 console.log(
 "🔥 Shatter's Gaming Admin Dashboard Loaded"
 );
-/* ==========================================
-   SHATTER'S GAMING ADMIN SECURITY
-   FIREBASE AUTH PROTECTION
-========================================== */
 
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.15.0/firebase-app.js";
-
-
-import {
-
-getAuth,
-onAuthStateChanged,
-signOut
-
-}
-
-from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
 
 
@@ -629,13 +608,6 @@ messagingSenderId: "1064932478413",
 appId: "1:1064932478413:web:4620aa3228ae9728b58884"
 
 };
-
-
-
-const app = initializeApp(firebaseConfig);
-
-
-const auth = getAuth(app);
 
 
 
