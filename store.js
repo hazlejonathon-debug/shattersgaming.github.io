@@ -246,7 +246,7 @@ function addMugToCart(){
 
         color:color,
 
-        price:25.00,
+        price:39.99,
 
         quantity:1,
 
