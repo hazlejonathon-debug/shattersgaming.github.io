@@ -176,7 +176,7 @@ function addTeeToCart(){
 
         color:color,
 
-        price:28.00,
+        price:29.00,
 
         quantity:1,
 
