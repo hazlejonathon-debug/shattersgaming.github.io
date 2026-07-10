@@ -211,7 +211,7 @@ function addCapToCart(){
 
         color:color,
 
-        price:30.00,
+        price:34.99,
 
         quantity:1,
 
