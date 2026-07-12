@@ -960,13 +960,11 @@ if(
 
         {
 
+customerName:
+`${details.payer.name.given_name} ${details.payer.name.surname}`,
 
-            customerName:
-            "Test Customer",
-
-
-            email:
-            "test@shattersgaming.com",
+email:
+details.payer.email_address,
 
 
             items:
