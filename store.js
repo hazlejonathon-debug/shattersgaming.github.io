@@ -232,21 +232,21 @@ function addCapToCart(){
 
 
 /* ==========================================
-   ADD STREAMER MUG
+   ADD Phone Wallet
 ========================================== */
 
 function addMugToCart(){
 
     const color =
-    document.getElementById("mug-color").value;
+    document.getElementById("wallet-color").value;
 
     cart.push({
 
-        name:"Streamer Mug",
+        name:"Phone Wallet",
 
         color:color,
 
-        price:39.99,
+        price:34.99,
 
         quantity:1,
 
@@ -259,7 +259,7 @@ function addMugToCart(){
     updateCart();
 
     showNotification(
-        "Streamer Mug added!"
+        "Phone Wallet added!"
     );
 
 }
