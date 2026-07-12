@@ -235,7 +235,7 @@ function addCapToCart(){
    ADD Phone Wallet
 ========================================== */
 
-function addMugToCart(){
+function addWalletToCart(){
 
     const color =
     document.getElementById("wallet-color").value;
