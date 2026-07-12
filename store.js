@@ -961,11 +961,12 @@ if(
         {
 
 customerName:
-`${details.payer.name.given_name} ${details.payer.name.surname}`,
+details.payer?.name
+    ? `${details.payer.name.given_name} ${details.payer.name.surname}`
+    : "Unknown Customer",
 
 email:
-details.payer.email_address,
-
+details.payer?.email_address || "No Email",
 
             items:
             cart,
