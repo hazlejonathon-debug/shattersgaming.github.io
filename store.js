@@ -1281,8 +1281,8 @@ addTeeToCart;
 window.addCapToCart =
 addCapToCart;
 
-window.addMugToCart =
-addMugToCart;
+window.addWalletToCart =
+addWalletToCart;
 
 window.clearCart =
 clearCart;
